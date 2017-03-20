@@ -1,0 +1,222 @@
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs pull-right">
+        <li><a href="#tab_sucursales" data-toggle="tab">Sucursales</a></li>
+        <li class="active"><a href="#tab_data" data-toggle="tab">Cliente</a></li>
+        <li class="pull-left header"><i class="fa fa-inbox"></i> Datos de Cliente</li>        
+    </ul>
+    <div class="tab-content no-padding">
+        <!-- TAB CLIENTE-->
+        <div class="tab-pane active" id="tab_data">
+            <mcui-box data-box-title="Cliente">
+
+                <div class="row">
+                    
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.nombre_completo" 
+                            data-label="Nombre completo" 
+                            data-input="{placeholder:'Nombre completo'}">                
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div data-mcui-form-input 
+                             ng-model="vm.cliente.nombre_corto" 
+                             data-label="Nombre Corto" 
+                             data-input="{placeholder:'Nombre corto'}">                 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.descripcion_completa" 
+                            data-label="Descripción completa" 
+                            data-input="{placeholder:'Descripción completa'}">
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.descripcion_corta" 
+                            data-label="Descripción corta" 
+                            data-input="{placeholder:'Descripción corta'}">
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.fecha_alta" 
+                            data-label="Fecha alta" 
+                            data-input="{placeholder:'Facha alta'}">            
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.fecha_inicio" 
+                            data-label="Fecha inicio" 
+                            data-input="{placeholder:'Facha inicio'}">            
+                        </mcui-form-input>
+                    </div>    
+                </div> 
+
+                <mcui-box-footer-slot>
+                    <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
+                </mcui-box-footer-slot>    
+            </mcui-box>
+        </div>
+        <!-- /TAB-CLIENTE -->
+
+        <!-- TAB-SUCURSALES -->
+        <div class="tab-pane" id="tab_sucursales" ng-controller="ClienteSucursalController as vm">           
+
+            <!-- NUEVA SUCURSAL-->
+            <mcui-box data-box-title="Nueva Sucursal" data-box-body-class="table-responsive" ng-show="vm.display_sucursal.create">
+
+                <div class="row-fluid">
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.create_sucursal.nombreSucursal" 
+                            data-label="Nombre" 
+                            data-input="{'required':'required', placeholder:'Nombre Sucursal'}">                
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.create_sucursal.direccionFisica" 
+                            data-label="Dirección física" 
+                            data-input="{'required':'required', placeholder:'Dirección física'}">                
+                        </mcui-form-input>
+                    </div> 
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.create_sucursal.coordenadas" 
+                            data-label="Coordenadas" 
+                            data-input="{placeholder:'Coordenadas'}">                
+                        </mcui-form-input>
+                    </div>                    
+                </div> 
+
+                <mcui-box-footer-slot>
+                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.displayView('list')">Guardar</a>   
+                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('list')">Cancelar</a>    
+                </mcui-box-footer-slot>                  
+
+            </mcui-box>
+            <!-- /NUEVA SUCURSAL-->
+
+            <!-- EDIT SUCURSAL-->
+            <mcui-box data-box-title="Editar Sucursal" data-box-body-class="table-responsive" ng-show="vm.display_sucursal.edit">
+
+                <div class="row-fluid">
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.edit_sucursal.nombreSucursal" 
+                            data-label="Nombre" 
+                            data-input="{'required':'required', placeholder:'Nombre Sucursal'}">                
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.edit_sucursal.direccionFisica" 
+                            data-label="Dirección física" 
+                            data-input="{'required':'required', placeholder:'Dirección física'}">                
+                        </mcui-form-input>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.edit_sucursal.coordenadas" 
+                            data-label="Coordenadas" 
+                            data-input="{placeholder:'Coordenadas'}">                
+                        </mcui-form-input>
+                    </div>                     
+                </div> 
+
+                <mcui-box-footer-slot>
+                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.displayView('list')">Guardar</a>    
+                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('list')">Cancelar</a>    
+                </mcui-box-footer-slot>                  
+
+            </mcui-box>
+            <!-- /EDIT SUCURSAL-->  
+
+            <!-- VIEW SUCURSAL-->
+            <mcui-box data-box-title="Detalle Sucursal" data-box-body-class="table-responsive" ng-show="vm.display_sucursal.view">
+
+                <fieldset disabled="disabled">
+                    <div class="row-fluid">
+                        <div class="col-sm-4">
+                            <mcui-form-input 
+                                ng-model="vm.view_sucursal.nombreSucursal" 
+                                data-label="Nombre">                
+                            </mcui-form-input>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <mcui-form-input 
+                                ng-model="vm.view_sucursal.direccionFisica" 
+                                data-label="Dirección física">                
+                            </mcui-form-input>
+                        </div> 
+
+                        <div class="col-sm-4">
+                            <mcui-form-input 
+                                ng-model="vm.view_sucursal.coordenadas" 
+                                data-label="Dirección física">                
+                            </mcui-form-input>
+                        </div>                         
+                    </div>                     
+                </fieldset>
+
+                <mcui-box-footer-slot>
+                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('list')">Cancelar</a>       
+                </mcui-box-footer-slot>                  
+
+            </mcui-box>
+            <!-- /VIEW SUCURSAL-->            
+
+            <!-- LIST SUCURSAL-->
+            <mcui-box data-box-title="Sucursales" data-box-body-class="table-responsive no-padding" ng-show="vm.display_sucursal.list">
+
+                <mcui-box-tool-slot>
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search">
+                    </div>        
+                </mcui-box-tool-slot>  
+
+                <mcui-box-footer-slot>
+                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('create')">Nueva Sucursal</a>       
+                </mcui-box-footer-slot>                 
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>COD</th>
+                            <th>Nombre</th>
+                            <th>Dirección física</th>
+                            <th style="width:280px; text-align: center">Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in vm.data.sucursales| filter:vm.filter.search">
+                            <td>{{ item.id}}</td>
+                            <td>{{ item.nombreSucursal}}</td>
+                            <td>{{ item.direccionFisica}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEditSucursal(item.id)"><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToViewSucursal(item.id)"><i class="fa fa-eye"></i> Detalle</button>
+                                <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDeleteSucursal(item.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </mcui-box>
+            <!-- /LIST SUCURSAL-->
+        </div>    
+        <!--/TAB-SUCURSALES-->
+    </div>
+</div>

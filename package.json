@@ -1,0 +1,23 @@
+{
+  "name": "admin-web",
+  "version": "1.0.0",
+  "description": "Frontend Info Guia Admin Web",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://sunny25market@bitbucket.org/minicubic/infoguia-admin-web.git"
+  },
+  "keywords": [
+    "informacion",
+    "guia",
+    "web"
+  ],
+  "author": "Adrian Gomez",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/minicubic/infoguia-admin-web#readme"
+}

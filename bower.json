@@ -1,0 +1,36 @@
+{
+  "name": "admin-web",
+  "description": "Frontend Info Guia Admin Web",
+  "main": "index.js",
+  "authors": [
+    "Adrian Gomez"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "informacion",
+    "guia",
+    "web"
+  ],
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-ui-router": "ui-route#^0.4.2",
+    "angular-cookies": "^1.6.3",
+    "angular-messages": "^1.6.3",
+    "angular-bootstrap": "^2.5.0",
+    "font-awesome": "font-awsome#^4.7.0",
+    "angular-route": "^1.6.3",
+    "angular-sanitize": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-touch": "^1.6.3",
+    "angular-resource": "^1.6.3",
+    "angular-local-storage": "^0.5.2"
+  }
+}
