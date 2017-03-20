@@ -105,6 +105,30 @@
 
                 return $q(promise);
             },
+            getById: function (id) {
+
+                var modelID = id || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_CLIENTE + 'find/' + modelID;
+
+                    $http({
+                        method: "GET",
+                        url: url
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject(response.statusText + " Err obteniendo cliente...");
+                    }
+                }
+
+                return $q(promise);
+            },            
             update: function (model) {
 
                 function promise(resolve, reject) {

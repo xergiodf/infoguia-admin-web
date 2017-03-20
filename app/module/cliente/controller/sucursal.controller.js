@@ -6,7 +6,7 @@
             .controller('ClienteSucursalController', ClienteSucursalController);
 
     /*@ngInject*/
-    function ClienteSucursalController($stateParams, SucursalSvc) {
+    function ClienteSucursalController($scope, $stateParams, SucursalSvc, ClienteSvc) {
 
         var vm = this;
 
@@ -19,9 +19,13 @@
         vm.fn = {
             saveModel: saveModel,
             displayView: displayView,
+            goToCreateSucursal: goToCreateSucursal,
             goToEditSucursal: goToEditSucursal,
             goToViewSucursal: goToViewSucursal,
-            goToDeleteSucursal: goToDeleteSucursal
+            goToDeleteSucursal: goToDeleteSucursal,
+            createSucursal: createSucursal,
+            deleteSucursal: deleteSucursal,
+            editSucursal: editSucursal
         };
 
         vm.display_sucursal = {
@@ -33,7 +37,12 @@
 
         vm.edit_sucursal = {};
 
-        vm.create_sucursal = {};
+        vm.create_sucursal = {
+            nombreSucursal: '',
+            direccionFisica: '',
+            coordenadas: '',
+            clienteDto: {}
+        };
 
         vm.view_sucursal = {};
 
@@ -94,8 +103,55 @@
         }
 
         function goToDeleteSucursal(id) {
-            alert('delete');
+            var msg = confirm("Esta seguro que desea eliminar esta sucursal?");
+            if(!msg)
+                return;
+            
+            vm.fn.deleteSucursal(id);
         }
+
+        function goToCreateSucursal() {
+
+            vm.fn.displayView('create');
+            
+            var idcliente = $scope.$parent.vm.cliente.id;            
+
+            ClienteSvc.getById(idcliente).then(function (data) {                
+                vm.create_sucursal['clienteDto'] = data;                   
+            }, function (err) {
+                alert("Err (" + err + ")");
+            })
+        }
+        
+        //ok
+        function createSucursal(){           
+
+            SucursalSvc.create(vm.create_sucursal).then(function (data) {
+                vm.fn.displayView('list');
+                vm.init();
+            }, function (err) {
+                alert(err);
+            })            
+        }
+        
+        function editSucursal(){           
+
+            SucursalSvc.update(vm.edit_sucursal).then(function (data) {
+                vm.fn.displayView('list');
+                vm.init();
+            }, function (err) {
+                alert(err);
+            })            
+        }        
+        
+        function deleteSucursal(id){           
+
+            SucursalSvc.delete(id).then(function (data) {
+                vm.init();
+            }, function (err) {
+                alert(err);
+            })            
+        }        
 
     }
 

@@ -100,7 +100,7 @@
                 </div> 
 
                 <mcui-box-footer-slot>
-                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.displayView('list')">Guardar</a>   
+                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.createSucursal()">Guardar</a>   
                     <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('list')">Cancelar</a>    
                 </mcui-box-footer-slot>                  
 
@@ -137,7 +137,7 @@
                 </div> 
 
                 <mcui-box-footer-slot>
-                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.displayView('list')">Guardar</a>    
+                    <a href="#" class="btn btn-flat btn-primary" ng-click="vm.fn.editSucursal()">Guardar</a>    
                     <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('list')">Cancelar</a>    
                 </mcui-box-footer-slot>                  
 
@@ -189,7 +189,7 @@
                 </mcui-box-tool-slot>  
 
                 <mcui-box-footer-slot>
-                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.displayView('create')">Nueva Sucursal</a>       
+                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreateSucursal(vm.cliente.id)">Nueva Sucursal</a>       
                 </mcui-box-footer-slot>                 
 
                 <table class="table table-hover">

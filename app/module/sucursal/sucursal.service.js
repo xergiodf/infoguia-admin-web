@@ -12,6 +12,26 @@
         var service = {
             create: function (model) {
 
+                function promise(resolve, reject) {
+
+                    var url = API_SUCURSAL + 'add';
+
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: model
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se creaba la sucursal. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
             },
             query: function () {
 
@@ -102,10 +122,48 @@
 
                 return $q(promise);
             },
-            update: function (sucursal) {
+            update: function (model) {
+                function promise(resolve, reject) {
 
+                    var url = API_SUCURSAL + 'update';
+
+                    $http({
+                        method: 'PUT',
+                        url: url,
+                        data: model
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se actualizaba los datos de la sucursal. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
             },
-            remove: function (id) {
+            delete: function (id) {
+                function promise(resolve, reject) {
+
+                    var url = API_SUCURSAL + 'delete/' + id;
+
+                    $http({
+                        method: 'DELETE',
+                        url: url
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se eliminaba la sucursal. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);                
             }
         };
 
