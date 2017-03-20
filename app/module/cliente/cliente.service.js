@@ -139,6 +139,7 @@
                         method: 'PUT',
                         url: url,
                         data: {
+                            id: model.id,
                             coordenadas: model.coordenadas,
                             descripcionCompleta: model.descripcion_completa,
                             descripcionCorta: model.descripcion_corta,
