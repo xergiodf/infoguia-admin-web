@@ -1,0 +1,77 @@
+<mcui-box data-box-title="Publicación">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.titulo" 
+                data-label="Titulo" 
+                data-input="{placeholder:'Título'}">                
+            </mcui-form-input>
+        </div>
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.botonAccion" 
+                data-label="Botón acción" 
+                data-input="{placeholder:'Botón acción'}">
+            </mcui-form-input>
+        </div>
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.descripcionCorta" 
+                data-label="Descripción corta" 
+                data-input="{placeholder:'Descripción corta'}">
+            </mcui-form-input>
+        </div>
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.fechaCreacion" 
+                data-label="Fecha creación" 
+                data-input="{placeholder:'Facha creación'}">            
+            </mcui-form-input>
+        </div>
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.fechaDesde" 
+                data-label="Fecha inicio" 
+                data-input="{placeholder:'Facha inicio'}">            
+            </mcui-form-input>
+        </div> 
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.publicacion.fechaHasta" 
+                data-label="Fecha fin" 
+                data-input="{placeholder:'Facha fin'}">            
+            </mcui-form-input>
+        </div>  
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tipo</label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
+                        ng-model="vm.publicacion.tipoPublicacionDto">
+                </select>                
+            </div>
+        </div> 
+        
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select name="estadoPublicacion" id="estadoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
+                        ng-model="vm.publicacion.estadoPublicacionDto">
+                </select>                
+            </div>
+        </div>         
+
+    </div> 
+
+    <mcui-box-footer-slot>
+        <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
+    </mcui-box-footer-slot>    
+</mcui-box>

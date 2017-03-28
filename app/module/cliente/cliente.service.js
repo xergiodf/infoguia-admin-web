@@ -16,22 +16,24 @@
 
                     var url = API_CLIENTE + 'add';
 
+                    var data = {
+                        coordenadas: model.coordenadas || null,
+                        descripcionCompleta: model.descripcion_completa || null,
+                        descripcionCorta: model.descripcion_corta || null,
+                        direccionFisica: model.direccion_fisica || null,
+                        fechAlta: model.fech_alta || null,
+                        fechaInicio: model.fecha_inicio || null,
+                        horarios: model.horarios || null,
+                        nombreCompleto: model.nombre_completo || null,
+                        nombreCorto: model.nombre_corto || null,
+                        nombreSucursal: model.nombre_sucursal || null,
+                        telefono: model.telefono || null
+                    };                    
+
                     $http({
                         method: 'POST',
                         url: url,
-                        data: {
-                            coordenadas: model.coordenadas,
-                            descripcionCompleta: model.descripcion_completa,
-                            descripcionCorta: model.descripcion_corta,
-                            direccionFisica: model.direccion_fisica,
-                            fechAlta: model.fech_alta,
-                            fechaInicio: model.fecha_inicio,
-                            horarios: model.horarios,
-                            nombreCompleto: model.nombre_completo,
-                            nombreCorto: model.nombre_corto,
-                            nombreSucursal: model.nombre_sucursal,
-                            telefono: model.telefono
-                        }
+                        data: data
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -57,9 +59,13 @@
                     }
 
                     function doTransform(value) {
-                        return value.map(function (item) {
-                            return new CLIENTE(item);
-                        });
+                        if (value) {
+                            return value.map(function (item) {
+                                return new CLIENTE(item);
+                            });
+                        } else {
+                            return value;
+                        }
                     }
 
                     $http({
@@ -128,7 +134,7 @@
                 }
 
                 return $q(promise);
-            },            
+            },
             update: function (model) {
 
                 function promise(resolve, reject) {

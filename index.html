@@ -13,10 +13,16 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <!-- iCheck -->
-        <link rel="stylesheet" href="resources/plugins/iCheck/square/blue.css">        
+        <link rel="stylesheet" href="resources/plugins/iCheck/square/blue.css"> 
+        <!-- Ng-Tags -->
+        <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">  
+        <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.css">        
+        <!-- UI-Bootstrap -->
+        <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="resources/css/AdminLTE.min.css">
         <link rel="stylesheet" href="resources/css/skins/skin-red.min.css">
+       
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,7 +33,7 @@
     </head>
     <body class="hold-transition skin-red layout-boxed">
 
-    <div ui-view></div>
+        <div ui-view></div>
 
         <!-- REQUIRED JS SCRIPTS -->
 
@@ -48,11 +54,12 @@
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the
              fixed layout. -->
-	
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL0PUTe-pvWna_8WUYdcc75yELTeFcFCI"></script>
         <script src="resources/plugins/iCheck/icheck.min.js"></script>
-        
+
         <script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
         <script src="bower_components/angular-messages/angular-messages.min.js"></script>
@@ -61,20 +68,25 @@
         <script src="bower_components/angular-touch/angular-touch.min.js"></script>
         <script src="bower_components/angular-resource/angular-resource.min.js"></script> 
         <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script> 
-		
-	<script src="app/app.module.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script> 
+        <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+        <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+
+        <script src="app/app.module.js"></script>
         <script src="app/app.constant.js"></script>
         <script src="app/app.route.js"></script>
         <script src="app/app.directive.js"></script>
+        <script src="app/app.filter.js"></script>
+        <script src="app/app.service.js"></script>
         <script src="app/controller/home.controller.js"></script>
-        
+
         <!-- AUTH MODULE -->
         <script src="app/module/auth/auth.module.js"></script>
         <script src="app/module/auth/auth.controller.js"></script>
         <script src="app/module/auth/auth.service.js"></script>        
         <script src="app/module/auth/controller/login.controller.js"></script>
         <script src="app/module/auth/controller/logout.controller.js"></script>
-        
+
         <!-- CLIENTE MODULE -->
         <script src="app/module/cliente/cliente.module.js"></script>
         <script src="app/module/cliente/cliente.service.js"></script>
@@ -83,9 +95,23 @@
         <script src="app/module/cliente/controller/edit.controller.js"></script>
         <script src="app/module/cliente/controller/view.controller.js"></script>
         <script src="app/module/cliente/controller/sucursal.controller.js"></script>
-        
+        <script src="app/module/cliente/controller/publicacion.controller.js"></script>
+
         <!-- SUCURSAL MODULE -->
         <script src="app/module/sucursal/sucursal.module.js"></script>
-        <script src="app/module/sucursal/sucursal.service.js"></script>      
+        <script src="app/module/sucursal/sucursal.service.js"></script> 
+        <script src="app/module/sucursal/controller/init.controller.js"></script> 
+        <script src="app/module/sucursal/controller/create.controller.js"></script> 
+        <script src="app/module/sucursal/controller/edit.controller.js"></script>
+        <script src="app/module/sucursal/controller/view.controller.js"></script> 
+        
+        <!-- PUBLICACION MODULE -->
+        <script src="app/module/publicacion/publicacion.module.js"></script>
+        <script src="app/module/publicacion/publicacion.service.js"></script>
+        <script src="app/module/publicacion/controller/list.controller.js"></script>
+        <script src="app/module/publicacion/controller/create.controller.js"></script>
+        <script src="app/module/publicacion/controller/edit.controller.js"></script>
+        <script src="app/module/publicacion/controller/view.controller.js"></script>
+       
     </body>
 </html>

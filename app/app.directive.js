@@ -7,7 +7,8 @@
             .directive('mcuiBox', McuiBox)
             .directive('mcuiBoxFooterSlot', McuiBoxFooterSlot)
             .directive('mcuiBoxToolSlot', McuiBoxToolSlot)
-            .directive('mcuiBtnSearch', McuiBtnSearch);
+            .directive('mcuiBtnSearch', McuiBtnSearch)
+            .directive('mcuiShowHiddenPassword', McuiShowHiddenPassword);
     
     /*@ngInject*/
     function A() {
@@ -126,5 +127,26 @@
         };        
         return directive;        
     }    
+    
+    /*@ngInject*/
+    function McuiShowHiddenPassword(){
+        var directive = {
+            restrict:"A",
+            link: function(scope, element, attrs){
+                
+                var inputReference = attrs.inputReference || null;
+                
+                element.on('mouseenter', function(){
+                    console.log('in');
+                });
+                
+                element.on('mouseleave', function(){
+                    console.log('out');
+                })                
+            }
+        };
+        
+        return directive;
+    }
 
 })(jQuery);    

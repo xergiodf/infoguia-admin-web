@@ -44,7 +44,7 @@
             ClienteSvc.update(vm.cliente).then(function (data) {
                 $state.go('cliente.list');
             }, function (err) {
-                alert(err);
+                console.log(err);
             })            
         }
         
@@ -56,7 +56,7 @@
                 vm.cliente = data;
             },
             function(err){
-                alert("Err ("+ err +")");
+                console.log("Err ("+ err +")");
             })            
         }        
     }

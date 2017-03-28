@@ -1,0 +1,34 @@
+<!-- VIEW SUCURSAL-->
+<mcui-box data-box-title="Detalle Sucursal" data-box-body-class="table-responsive">
+
+    <fieldset disabled="disabled">
+        <div class="row-fluid">
+            <div class="col-sm-4">
+                <mcui-form-input 
+                    ng-model="vm.sucursal.nombreSucursal" 
+                    data-label="Nombre">                
+                </mcui-form-input>
+            </div>
+
+            <div class="col-sm-4">
+                <mcui-form-input 
+                    ng-model="vm.sucursal.direccionFisica" 
+                    data-label="Dirección física">                
+                </mcui-form-input>
+            </div> 
+
+            <div class="col-sm-4">
+                <mcui-form-input 
+                    ng-model="vm.sucursal.coordenadas" 
+                    data-label="Dirección física">                
+                </mcui-form-input>
+            </div>                         
+        </div>                     
+    </fieldset>
+
+    <mcui-box-footer-slot>
+        <a href="#" class="btn btn-flat btn-default">Cancelar</a>       
+    </mcui-box-footer-slot>                  
+
+</mcui-box>
+<!-- /VIEW SUCURSAL-->  

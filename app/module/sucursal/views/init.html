@@ -1,0 +1,46 @@
+<mcui-box data-box-title="Formulario de selección de Cliente" data-box-body-class="">
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label>Cliente</label>
+                <select class="form-control" ng-model="vm.cliente.nombre_completo">
+                    <option>Cliente a</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <fieldset disabled="disabled">
+        <div class="row">
+            <div class="col-sm-4">
+                <mcui-form-input 
+                    ng-model="vm.cliente.nombre_completo" 
+                    data-label="Nombre completo" 
+                    data-input="{placeholder:'Nombre completo'}">                
+                </mcui-form-input>
+            </div>
+
+            <div class="col-sm-4">
+                <div data-mcui-form-input 
+                     ng-model="vm.cliente.nombre_corto" 
+                     data-label="Nombre Corto" 
+                     data-input="{placeholder:'Nombre corto'}">                 
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <mcui-form-input 
+                    ng-model="vm.cliente.descripcion_completa" 
+                    data-label="Descripción completa" 
+                    data-input="{placeholder:'Descripción completa'}">
+                </mcui-form-input>
+            </div>
+        </div> 
+    </fieldset>    
+
+    <mcui-box-footer-slot>
+        <button ng-disabled="!vm.cliente.id" type="button" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreate(vm.cliente.id)"><i class="fa fa-plus"></i> Nueva Sucursal</button>
+    </mcui-box-footer-slot>             
+
+</mcui-box>  

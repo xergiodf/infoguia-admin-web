@@ -9,6 +9,17 @@
 
         var API_SUCURSAL = API_INFOGUIA + '/sucursales/';
 
+        function appendTransform(defaults, transform) {
+            defaults = angular.isArray(defaults) ? defaults : [defaults];
+            return defaults.concat(transform);
+        }
+
+        function doTransform(value) {
+            return value.map(function (item) {
+                return new SUCURSAL(item);
+            });
+        }
+
         var service = {
             create: function (model) {
 
@@ -74,9 +85,9 @@
                 var modelID = id || null;
 
                 function promise(resolve, reject) {
-                    
+
                     var url = API_SUCURSAL + 'find/' + modelID;
-                    
+
                     $http({
                         method: "GET",
                         url: url
@@ -98,25 +109,28 @@
                 var modelID = id || null;
 
                 function promise(resolve, reject) {
+
+                    var url = API_SUCURSAL + 'findByCliente/' + modelID;
+
+                    if(!modelID){
+                        reject("Id de cliente no establecido...");
+                        return;
+                    }                        
+
                     $http({
                         method: "GET",
-                        url: "data/sucursal.json"
+                        url: url,
+                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                            return doTransform(value);
+                        })
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        if (modelID !== null) {
-                            var resultado = $filter('filter')(response.data, {id_cliente: modelID});
-                            if (resultado !== null && resultado.length > 0)
-                                resolve(resultado);
-                            else
-                                resolve([]);
-                        } else {
-                            resolve(response.data);
-                        }
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {
-                        reject(response.statusText + " Err obteniendo sucursal por cliente...");
+                        reject(response.statusText + " Err obteniendo sucursal...");
                     }
                 }
 
@@ -163,15 +177,15 @@
                     }
                 }
 
-                return $q(promise);                
+                return $q(promise);
             }
         };
 
         return service;
 
     }
-    
-    function SUCURSAL(model){
+
+    function SUCURSAL(model) {
         this.id = model.id || null;
         this.nombreSucursal = model.nombreSucursal || null;
         this.direccionFisica = model.direccionFisica || null;

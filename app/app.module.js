@@ -18,10 +18,14 @@ angular
             'ngSanitize',
             'ngTouch',
             'ui.router',
+            'ui.bootstrap',
+            'ngMap',
+            'ngTagsInput',
             'LocalStorageModule',
             'app.auth',
             'cliente.module',
-            'sucursal.module'
+            'sucursal.module',
+            'publicacion.module'
         ]);
 
 angular.module('app')
@@ -36,6 +40,7 @@ function AppRun($rootScope, $filter, $state, $document, $location, $log) {
     $rootScope.$currentDate = new Date();
     $rootScope.$state = $state;
     $rootScope.$location = $location;
+    $rootScope.gmapref = 'https://maps.google.com/maps/api/js';
 
     var _allow = [
         'auth.login',
@@ -76,7 +81,8 @@ function TestingInterceptorConfig($httpProvider) {
                     config.headers = config.headers || {};
                     var token = localStorageService.get('bearer') || null;
                     if (token)
-                        config.headers.Authorization = 'Bearer ' + token;
+                        config.headers.Authorization = 'Bearer ' + token;                    
+                   
                     return config;
                 },
                 'responseError': function (response) {
