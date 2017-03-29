@@ -30,18 +30,19 @@ angular
 
 angular.module('app')
         .config(CompileProviderConfig)
-        .config(TestingInterceptorConfig) 
+        .config(TestingInterceptorConfig)
         .constant('APP_UAUTH', {key: 'uAuthInfoguia'})
         .run(AppRun);
 
 /*@ngInject*/
-function AppRun($rootScope, $filter, $state, $document, $location, $log) {
+function AppRun($rootScope, $filter, $state, $document, $location, $log, AuthSvc) {
 
     $rootScope.$currentDate = new Date();
     $rootScope.$state = $state;
     $rootScope.$location = $location;
-    $rootScope.gmapref = 'https://maps.google.com/maps/api/js';
-
+    $rootScope.$appGmapref = 'https://maps.googleapis.com/maps/api/js';
+    $rootScope.$appUser = AuthSvc.appUser();
+    
     var _allow = [
         'auth.login',
         'auth.logout',
@@ -81,8 +82,8 @@ function TestingInterceptorConfig($httpProvider) {
                     config.headers = config.headers || {};
                     var token = localStorageService.get('bearer') || null;
                     if (token)
-                        config.headers.Authorization = 'Bearer ' + token;                    
-                   
+                        config.headers.Authorization = 'Bearer ' + token;
+
                     return config;
                 },
                 'responseError': function (response) {

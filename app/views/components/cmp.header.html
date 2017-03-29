@@ -1,18 +1,55 @@
-            <header class="main-header">
+<header class="main-header">
+    <!-- Logo -->
+    <a data-ui-sref="home" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">I<b>G</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">Info <b>Gu&iacute;a</b></span>
+    </a>
 
-                <!-- Logo -->
-                <a data-ui-sref="home" class="logo">
-                    <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini">I<b>G</b></span>
-                    <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">Info <b>Gu&iacute;a</b></span>
-                </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
 
-                <!-- Header Navbar -->
-                <nav class="navbar navbar-static-top" role="navigation">
-                    <!-- Sidebar toggle button-->
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <img src="resources/img/myAvatar.png" class="user-image" alt="User Image">
+                        <!--<span class="hidden-xs">Alexander Pierce</span>-->
+                        <span class="hidden-xs">{{ $appUser.username }}</span>
                     </a>
-                </nav>
-            </header>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="resources/img/myAvatar.png" class="img-circle" alt="User Image">
+
+                            <p>
+                                {{ $appUser.username }} - {{ $appUser.rol.descripcion }}
+                                <!-- Alexander Pierce - Web Developer
+                                <small>Member since Nov. 2012</small> -->
+                                <small>Miembro desde {{ $appUser.fechaRegistro | date : 'MMMM-yyyy' }}</small>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-flat" disabled="disabled">Perfil</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" ui-sref="auth.login" class="btn btn-default btn-flat">Salir</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>        
+        <!-- /Navbar Right Menu -->
+
+    </nav>
+</header>

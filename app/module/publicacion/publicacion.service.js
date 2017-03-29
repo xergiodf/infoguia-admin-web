@@ -27,6 +27,8 @@
         var service = {
             create: function (model) {
 
+                console.log(model);
+                
                 function promise(resolve, reject) {
 
                     var url = API_PUBLICACION + 'add';

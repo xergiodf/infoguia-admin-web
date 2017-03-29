@@ -6,7 +6,7 @@
             .controller('SucursalClienteCreateController', SucursalClienteCreateController);
 
     /*@ngInject*/
-    function SucursalClienteCreateController($scope, $stateParams, SucursalSvc, ClienteSvc, AppGeoPositionSvc) {
+    function SucursalClienteCreateController($scope, $state, $stateParams, SucursalSvc, ClienteSvc, AppGeoPositionSvc) {
 
         var vm = this;
 
@@ -35,7 +35,7 @@
             }
 
             SucursalSvc.create(vm.sucursal).then(function (data) {
-                vm.init();
+                $state.go('cliente.edit', {id: vm.sucursal.clienteDto.id});
             }, function (err) {
                 alert(err);
             });

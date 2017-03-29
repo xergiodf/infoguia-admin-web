@@ -6,7 +6,7 @@
             .controller('LoginController', LoginController);
 
     /*@ngInject*/
-    function LoginController($state, $http, $q, localStorageService, AuthSvc, APP_UAUTH) {
+    function LoginController($state, $rootScope, $http, $q, localStorageService, AuthSvc, APP_UAUTH) {
 
         var vm = this;
 
@@ -26,10 +26,14 @@
             login: login
         };
 
-        Init();
+        vm.init();
 
         function Init() {
-
+            AuthSvc.logout().then(function(response){
+                
+            }, function(err){
+                
+            })
         }
 
         function login() {
@@ -39,13 +43,17 @@
 
                 var uAuthenticated = {
                     username: auth.username,
-                    rol: auth.rol,
+                    rol: auth.tipoUsuarioDto,
+                    fechaRegistro: auth.fechaRegistro,
                     nombres: auth.nombres,
                     apellidos: auth.apellidos
                 };
+                
+                console.log(uAuthenticated);
 
                 localStorageService.set('bearer', auth.tokenAuth);
                 localStorageService.set(APP_UAUTH.key, uAuthenticated);
+                $rootScope.$appUser = uAuthenticated;
                 $state.transitionTo('cliente.list', null, {reload: true, inherit: false, notify: true});
             }, function (reason) {
                 alert("Usuario o contraseña inválido");

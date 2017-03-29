@@ -6,7 +6,7 @@
             .controller('SucursalEditController', SucursalEditController);
 
     /*@ngInject*/
-    function SucursalEditController($scope, $stateParams, SucursalSvc) {
+    function SucursalEditController($scope, $state, $stateParams, SucursalSvc) {
 
         var vm = this;
 
@@ -35,7 +35,7 @@
             }
 
             SucursalSvc.update(vm.sucursal).then(function (data) {
-                vm.init();
+                $state.go('cliente.edit', {id: vm.sucursal.clienteDto.id})
             }, function (err) {
                 alert(err);
             })
