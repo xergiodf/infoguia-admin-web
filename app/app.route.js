@@ -28,10 +28,15 @@
                 base: 'app/module/auth/',
                 views: 'app/module/auth/views/',
                 layouts: 'app/module/auth/views/layouts/'
+            })
+            .constant('USUARIO_ROOT', {
+                base: 'app/module/usuario/',
+                views: 'app/module/usuario/views/',
+                layouts: 'app/module/usuario/views/layouts/'
             });
 
     /*@ngInject*/
-    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT) {
+    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT) {
 
         $urlRouterProvider
                 .when("/", "/auth/login")
@@ -251,7 +256,7 @@
                             controller: "SucursalInitCreateController as vm"
                         }
                     }
-                })                
+                })
                 .state('sucursal.create', {
                     parent: 'sucursal',
                     url: "/create/{id}",
@@ -370,7 +375,81 @@
                             controller: "PublicacionViewController as vm"
                         }
                     }
-                });
+                })
+                //
+                //USUARIO ROUTER
+                //                
+                .state('usuario', {
+                    abstract: true,
+                    parent: 'site.layout',
+                    url: "/usuario",
+                    data: {pageTitle: "Listado de Usuario"},
+                    views: {
+                        'content@site': {
+                            templateUrl: USUARIO_ROOT.layouts + "main.html"
+                        }
+                    }
+                })
+                .state('usuario.list', {
+                    parent: 'usuario',
+                    url: "/list",
+                    data: {
+                        pageTitle: "Usuarios",
+                        pageHeader: "Usuarios",
+                        pageDescription: "Búsqueda personalizada"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "list.html",
+                            controller: "UsuarioListController as vm"
+                        }
+                    }
+                })
+                .state('usuario.create', {
+                    parent: 'usuario',
+                    url: "/create",
+                    data: {
+                        pageTitle: "Nuevo Usuario",
+                        pageHeader: "Nuevo Usuario",
+                        pageDescription: "Formulario de creación de nuevo usuario"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "create.html",
+                            controller: "UsuarioCreateController as vm"
+                        }
+                    }
+                })
+                .state('usuario.edit', {
+                    parent: 'usuario',
+                    url: "/edit/{id}",
+                    data: {
+                        pageTitle: "Editar Usuario",
+                        pageHeader: "Editar Usuario",
+                        pageDescription: "Formulario de edición de usuario"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "edit.html",
+                            controller: "UsuarioEditController as vm"
+                        }
+                    }
+                })
+                .state('usuario.view', {
+                    parent: 'usuario',
+                    url: "/view/{id}",
+                    data: {
+                        pageTitle: "Detalle Usuario",
+                        pageHeader: "Detalle Usuario",
+                        pageDescription: "Detalle de Usuario"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "view.html",
+                            controller: "UsuarioViewController as vm"
+                        }
+                    }
+                });                
     }
 
 })();

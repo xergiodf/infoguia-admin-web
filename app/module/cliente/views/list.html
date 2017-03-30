@@ -57,7 +57,7 @@
                 <th>Nom. Corto</th>
                 <th>F. Alta</th>
                 <th>F. Inicio</th>
-                <th style="width:280px; text-align: center">Operaciones</th>
+                <th style="width:140px; text-align: center">Operaciones</th>
             </tr>
         </thead>
         <tbody>
@@ -68,9 +68,9 @@
                 <td>{{ item.fecha_alta}}</td>
                 <td>{{ item.fecha_inicio}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> Editar</button>
-                    <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i> Detalle</button>
-                    <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                    <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
+                    <button type="button" class="btn btn-flat" disabled="disabled" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i> </button>
+                    <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
                 </td>
             </tr>
         </tbody>

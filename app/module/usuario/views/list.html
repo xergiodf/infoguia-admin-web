@@ -1,0 +1,20 @@
+<mcui-box data-box-title="Búsqueda personalizada" ng-show="false">
+
+
+    <mcui-box-footer-slot>
+        <mcui-btn-search></mcui-btn-search>
+    </mcui-box-footer-slot>          
+</mcui-box>
+
+
+
+
+<mcui-box data-box-title="Resultados" data-box-body-class="table-responsive no-padding">
+
+    <mcui-box-tool-slot>
+        <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search">
+        </div>        
+    </mcui-box-tool-slot>    
+
+</mcui-box>

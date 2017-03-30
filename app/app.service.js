@@ -150,6 +150,14 @@
                     new NOMENCLADOR({id: 1, descripcion: "ACTIVO"}),
                     new NOMENCLADOR({id: 2, descripcion: "INACTIVO"})
                 ];
+                
+                var tipoUsuario = [
+                    new NOMENCLADOR({id: 1, descripcion: "Administrador"})
+                ];
+
+                var estadoUsuario = [
+                    new NOMENCLADOR({id: 1, descripcion: "ACTIVO"})
+                ];                
 
                 function promise(resolve, reject) {
 
@@ -162,6 +170,12 @@
                         case 'ESTADO_PUBLICACION':
                             collection = estadoPublicacion;
                             break;
+                        case 'TIPO_USUARIO':
+                            collection = tipoUsuario;
+                            break;
+                        case 'ESTADO_USUARIO':
+                            collection = estadoUsuario;
+                            break;                            
                         default:
                             collection = [];
                     }

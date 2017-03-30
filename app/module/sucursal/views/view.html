@@ -22,12 +22,26 @@
                     ng-model="vm.sucursal.coordenadas" 
                     data-label="Dirección física">                
                 </mcui-form-input>
-            </div>                         
+            </div> 
+
+            <div class="clear-fix"></div>
+
+            <div class="col-sm-12">
+                <ng-map center="{{ vm.sucursal.coordenadas | coordFilter  }}" zoom="15" on-click="vm.fn.addMarker()">
+                    <marker 
+                        position="{{ vm.sucursal.coordenadas | coordFilter }}"
+                        title="{{ vm.sucursal.nombreSucursal}} {{ vm.sucursal.direccionFisica}}"
+                        animation="Animation.BOUNCE"
+                        centered="true">                    
+                    </marker>          
+                </ng-map>
+            </div>            
+
         </div>                     
     </fieldset>
 
     <mcui-box-footer-slot>
-        <a href="#" class="btn btn-flat btn-default">Cancelar</a>       
+        <a href="#" data-ui-sref="cliente.edit({id:vm.sucursal.clienteDto.id})" class="btn btn-flat btn-default">Cancelar</a>    
     </mcui-box-footer-slot>                  
 
 </mcui-box>

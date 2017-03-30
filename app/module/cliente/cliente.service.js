@@ -187,7 +187,7 @@
                     }
 
                     function errorResponse(response) {
-                        reject("Ha ocurrido un error mientras se actualizaba el cliente. " + response.statusText);
+                        reject("Ha ocurrido un error mientras se eliminaba el cliente. " + response.statusText);
                     }
                 }
 

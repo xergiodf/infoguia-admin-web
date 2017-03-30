@@ -25,7 +25,8 @@ angular
             'app.auth',
             'cliente.module',
             'sucursal.module',
-            'publicacion.module'
+            'publicacion.module',
+            'usuario.module'
         ]);
 
 angular.module('app')

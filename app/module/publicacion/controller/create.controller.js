@@ -39,7 +39,7 @@
             }
             
             PublicacionSvc.create(vm.publicacion).then(function (data) {
-                vm.init();
+                $state.go('cliente.edit', {id: vm.publicacion.clienteDto.id});
             }, function (err) {
                 alert(err);
             });

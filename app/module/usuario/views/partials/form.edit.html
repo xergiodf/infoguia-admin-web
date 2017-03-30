@@ -1,0 +1,55 @@
+<mcui-box data-box-title="Usuario">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.usuario.username" 
+                data-label="Nombre de usuario" 
+                data-input="{placeholder:'Nombre de usuario'}">                
+            </mcui-form-input>
+        </div>
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.usuario.password" 
+                data-label="Contraseña" 
+                data-input="{placeholder:'Contraseña'}"
+                data-type="password">                
+            </mcui-form-input>
+        </div>
+        
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.usuario.password1" 
+                data-label="Repita Contraseña" 
+                data-input="{placeholder:'Repita Contraseña'}"
+                data-type="password">                
+            </mcui-form-input>
+        </div>      
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tipo</label>
+                <select name="tipoUsuario" id="tipoUsuario" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.tipoUsuario track by option.id"
+                        ng-model="vm.usuario.tipoUsuarioDto">
+                </select>                
+            </div>
+        </div> 
+        
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select name="estadoUsuario" id="estadoUsuario" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.estadoUsuario track by option.id"
+                        ng-model="vm.usuario.estadoUsuarioDto">
+                </select>                
+            </div>
+        </div>
+        
+    </div> 
+
+    <mcui-box-footer-slot>
+        <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
+    </mcui-box-footer-slot>    
+</mcui-box>

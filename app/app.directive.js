@@ -61,7 +61,8 @@
             scope:{
                 ngModel:"=",
                 label:"@",
-                input:"@"
+                input:"@",
+                type:"@"
             }
         };
         
