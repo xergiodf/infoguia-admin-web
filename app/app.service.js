@@ -133,6 +133,8 @@
                 //  
                 //  => TIPO_PUBLICACION 
                 //  => ESTADO_PUBLICACION
+                //  => TIPO_USUARIO
+                //  => ESTADO_USUARIO
 
                 var pid = id || null;
 
@@ -152,11 +154,15 @@
                 ];
                 
                 var tipoUsuario = [
-                    new NOMENCLADOR({id: 1, descripcion: "Administrador"})
+                    new NOMENCLADOR({id: 1, descripcion: "Administrador"}),
+                    new NOMENCLADOR({id: 2, descripcion: "Usuario"}),
+                    new NOMENCLADOR({id: 3, descripcion: "Cliente"})
                 ];
 
                 var estadoUsuario = [
-                    new NOMENCLADOR({id: 1, descripcion: "ACTIVO"})
+                    new NOMENCLADOR({id: 1, descripcion: "Activo"}),
+                    new NOMENCLADOR({id: 2, descripcion: "Inactivo"}),
+                    new NOMENCLADOR({id: 3, descripcion: "Pendiente de activación"})
                 ];                
 
                 function promise(resolve, reject) {

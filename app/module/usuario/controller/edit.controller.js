@@ -6,21 +6,18 @@
             .controller('UsuarioEditController', UsuarioEditController);
     
     /*@ngInject*/
-    function UsuarioEditController($state, $stateParams, ClienteSvc){
+    function UsuarioEditController($state, $stateParams, UsuarioSvc, AppNomenclatorSvc){
         
         var vm = this;
         
         vm.init = Init;
         
-        vm.cliente = {
-            codigo_cliente:"",
-            nombre_completo:"",
-            nombre_corto:"",
-            descripcion_completa:"",
-            descripcion_corta:"",
-            fecha_alta:"",
-            fecha_inicio:""            
-        };        
+        vm.usuario = {};   
+        
+        vm.data = {
+            tipoUsuario:[],
+            estadoUsuario:[]
+        };
         
         vm.fn = {
             saveModel: saveModel
@@ -41,7 +38,7 @@
                 return;
             }              
            
-            ClienteSvc.update(vm.cliente).then(function (data) {
+            UsuarioSvc.update(vm.usuario).then(function (data) {
                 $state.go('cliente.list');
             }, function (err) {
                 console.log(err);
@@ -52,8 +49,20 @@
             if(!id)
                 return;
             
-            ClienteSvc.get(id).then(function(data){
-                vm.cliente = data;
+            AppNomenclatorSvc.getNomenclador('TIPO_USUARIO').then(function(data){
+                vm.data.tipoUsuario = data;
+            }, function(err){
+                console.log(err);
+            });
+            
+            AppNomenclatorSvc.getNomenclador('ESTADO_USUARIO').then(function(data){
+                vm.data.estadoUsuario = data;
+            }, function(err){
+                console.log(err);
+            });            
+            
+            UsuarioSvc.getById(id).then(function(data){
+                vm.usuario = data;
             },
             function(err){
                 console.log("Err ("+ err +")");

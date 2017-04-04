@@ -41,7 +41,7 @@
             UsuarioSvc.create(vm.usuario).then(function (data) {
                 $state.go('usuario.edit', {id: data.id});
             }, function (err) {
-                alert(err);
+                $log.error(err);
             });
         }
         
@@ -69,8 +69,12 @@
     function USUARIO(model) {
         this.id = model.id || null;
         this.username = model.username || null;
-        this.usuarioEstadoDto = model.usuarioEstadoDto || null;
-        this.tipoUsuarioDto = model.tipoUsuarioDto || null;
+        this.estadoUsuarioDto = model.estadoUsuarioDto || {};
+        this.tipoUsuarioDto = model.tipoUsuarioDto || {};
+        this.clienteDto = model.clienteDto || {};
+        this.admin = model.admin || false;
+        this.email = model.email || null;
+        this.fechaRegistro = model.fechaRegistro || null;
     }    
 
 })();

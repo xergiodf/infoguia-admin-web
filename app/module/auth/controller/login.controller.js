@@ -49,7 +49,7 @@
                     apellidos: auth.apellidos
                 };
                 
-                console.log(uAuthenticated);
+                //console.log(uAuthenticated);
 
                 localStorageService.set('bearer', auth.tokenAuth);
                 localStorageService.set(APP_UAUTH.key, uAuthenticated);

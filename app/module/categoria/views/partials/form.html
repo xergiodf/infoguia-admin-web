@@ -1,0 +1,16 @@
+<mcui-box data-box-title="Categoría">
+
+<div class="row">
+    <div class="col-sm-6">
+        <mcui-form-input 
+            ng-model="vm.categoria.descripcion" 
+            data-label="Nombre" 
+            data-input="{'required':'required', placeholder:'Nombre Categoría'}">                
+        </mcui-form-input>
+    </div>
+</div>
+
+    <mcui-box-footer-slot>
+        <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
+    </mcui-box-footer-slot>    
+</mcui-box>

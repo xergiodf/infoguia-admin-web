@@ -26,7 +26,8 @@ angular
             'cliente.module',
             'sucursal.module',
             'publicacion.module',
-            'usuario.module'
+            'usuario.module',
+            'categoria.module'
         ]);
 
 angular.module('app')

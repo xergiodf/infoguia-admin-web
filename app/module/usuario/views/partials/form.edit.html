@@ -8,25 +8,15 @@
                 data-input="{placeholder:'Nombre de usuario'}">                
             </mcui-form-input>
         </div>
-
-        <div class="col-sm-4">
-            <mcui-form-input 
-                ng-model="vm.usuario.password" 
-                data-label="Contraseña" 
-                data-input="{placeholder:'Contraseña'}"
-                data-type="password">                
-            </mcui-form-input>
-        </div>
         
         <div class="col-sm-4">
             <mcui-form-input 
-                ng-model="vm.usuario.password1" 
-                data-label="Repita Contraseña" 
-                data-input="{placeholder:'Repita Contraseña'}"
-                data-type="password">                
+                ng-model="vm.usuario.email" 
+                data-label="Email" 
+                data-input="{placeholder:'Email', type:'email'}">                
             </mcui-form-input>
-        </div>      
-
+        </div>   
+        
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Tipo</label>
@@ -45,7 +35,23 @@
                         ng-model="vm.usuario.estadoUsuarioDto">
                 </select>                
             </div>
+        </div>        
+
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.usuario.password" 
+                data-label="Contraseña" 
+                data-input="{placeholder:'Contraseña', type:'password'}">                
+            </mcui-form-input>
         </div>
+        
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.usuario.password1" 
+                data-label="Repita Contraseña" 
+                data-input="{placeholder:'Repita Contraseña', type:'password'}">                
+            </mcui-form-input>
+        </div>  
         
     </div> 
 

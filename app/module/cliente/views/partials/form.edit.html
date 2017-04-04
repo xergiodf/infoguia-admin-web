@@ -1,10 +1,12 @@
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right">
+        <li><a href="#tab_categorías" data-toggle="tab">Categorías</a></li>
         <li><a href="#tab_publicaciones" data-toggle="tab">Publicaciones</a></li>
         <li><a href="#tab_sucursales" data-toggle="tab">Sucursales</a></li>
         <li class="active"><a href="#tab_data" data-toggle="tab">Cliente</a></li>
         <li class="pull-left header"><i class="fa fa-inbox"></i> Datos de Cliente</li>        
     </ul>
+
     <div class="tab-content no-padding">
         <!-- TAB CLIENTE-->
         <div class="tab-pane active" id="tab_data">
@@ -136,11 +138,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in vm.data.list | filter:vm.filter.search">
+                        <tr ng-repeat="item in vm.data.list| filter:vm.filter.search">
                             <td><img ng-src="{{ item.dirImagen}}" alt="{{ item.titulo}}" /></td>
                             <td>{{ item.titulo}}</td>                
-                            <td>{{ item.descripcionCorta }}</td>
-                            <td>{{ item.fechaCreacion }}</td>
+                            <td>{{ item.descripcionCorta}}</td>
+                            <td>{{ item.fechaCreacion}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i></button>
@@ -152,6 +154,91 @@
             </mcui-box>
             <!-- /LIST PUBLICACION-->
         </div>    
-        <!--/TAB-PUBLICACIONES-->        
+        <!--/TAB-PUBLICACIONES-->  
+
+        <!-- TAB-CATEGORIAS -->
+        <div class="tab-pane" id="tab_categorías" ng-controller="ClienteCategoriaController as vm">
+
+            <mcui-box data-box-title="Administración de categorías de Cliente" data-box-body-class="table-responsive no-padding">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- LIST CATEGORIAS CLIENTE -->
+                        <mcui-box data-box-title="Categorías Cliente" data-box-class="no-border" data-box-body-class="table-responsive no-padding">
+
+                            <mcui-box-tool-slot>
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search1">
+                                </div>        
+                            </mcui-box-tool-slot>  
+
+                            <mcui-box-footer-slot>
+                                <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreate()">Nueva Categoría</a>       
+                            </mcui-box-footer-slot>                 
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre categoría</th>
+                                        <th style="width:140px; text-align: center">Operaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in vm.data.clienteCategorias | filter:vm.filter.search1">
+                                        <td>{{ item.categoriaDto.id }}</td>
+                                        <td>{{ item.categoriaDto.descripcion}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit1(item)"><i class="fa fa-pencil"></i> </button>
+                                            <button type="button" class="btn btn-danger" data-ng-click="vm.fn.addRemove(item)"><i class="fa fa-minus"></i> </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>              
+                        </mcui-box>
+                        <!-- /LIST CATEGORIAS CLIENTE-->   
+                    </div>
+
+                    <div class="col-sm-6">
+                        <!-- LIST CATEGORIAS -->
+                        <mcui-box data-box-title="Categorías" data-box-class="no-border" data-box-body-class="table-responsive no-padding">
+
+                            <mcui-box-tool-slot>
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search">
+                                </div>        
+                            </mcui-box-tool-slot>  
+
+                            <mcui-box-footer-slot>
+                                <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreate()">Nueva Categoría</a>       
+                            </mcui-box-footer-slot>                 
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre categoría</th>
+                                        <th style="width:140px; text-align: center">Operaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in vm.data.categorias| filter:vm.filter.search">
+                                        <td>{{ item.id}}</td>
+                                        <td>{{ item.descripcion}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
+                                            <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>              
+                        </mcui-box>
+                        <!-- /LIST CATEGORIAS-->                
+                    </div>                       
+                </div>
+
+            </mcui-box>      
+        </div>    
+        <!--/TAB-CATEGORIAS-->          
     </div>
 </div>

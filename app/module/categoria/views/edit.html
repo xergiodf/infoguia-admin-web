@@ -1,0 +1,47 @@
+<div class="row-fluid">
+
+    <div class="col-sm-3 no-padding">
+        <mcui-box data-box-title="Datos del Cliente" data-box-body-class="">
+            <div class="box box-widget widget-user-2">
+                <div class="widget-user-header bg-red">
+                    <div class="widget-user-image">
+                        <img src="resources/img/160x160.png" class="img-circle" alt="Cliente picture">
+                    </div>
+                    <h3 class="widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
+                    <h5 class="widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">Fecha alta <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaAlta">...</span></a></li>
+                        <li><a href="#">Fecha inicio <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaInicio">...</span></a></li>
+                    </ul>
+                </div>
+            </div>  
+
+            <mcui-box-footer-slot>
+                <a data-ui-sref="cliente.edit({id:vm.sucursal.clienteDto.id})" href="#" class="btn btn-flat btn-default"><i class="fa fa-pencil"></i> Editar</a>   
+            </mcui-box-footer-slot>             
+
+        </mcui-box>   
+    </div>
+
+    <div class="col-sm-9">
+        <mcui-box data-box-title="Editar Sucursal" data-box-body-class="table-responsive">
+
+            <form 
+                novalidate 
+                ng-submit="vm.fn.saveModel(modelForm.$valid)" role="form"
+                name="modelForm" id="modelForm" 
+                data-ng-include="'app/module/sucursal/views/partials/form.html'">        
+            </form>
+
+            <mcui-box-footer-slot>
+                <button type="submit" class="btn btn-flat btn-primary" form="modelForm">Guardar</button>   
+                <a href="#" data-ui-sref="cliente.edit({id:vm.sucursal.clienteDto.id})" class="btn btn-flat btn-default">Cancelar</a>    
+            </mcui-box-footer-slot>     
+
+        </mcui-box>    
+    </div>
+
+</div>
+

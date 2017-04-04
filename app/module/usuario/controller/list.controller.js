@@ -6,7 +6,7 @@
             .controller('UsuarioListController', UsuarioListController);
 
     /*@ngInject*/
-    function UsuarioListController(ClienteSvc, $state) {
+    function UsuarioListController(UsuarioSvc, $state) {
 
         var vm = this;
 
@@ -31,7 +31,7 @@
         vm.init();
 
         function Init() {
-            ClienteSvc.query().then(function (data) {
+            UsuarioSvc.query().then(function (data) {
                 vm.list = data;               
             }, function (err) {
                 alert(err);
@@ -39,7 +39,7 @@
         }
         
         function goToEdit(id){
-            $state.go('cliente.edit', {id:id});
+            $state.go('usuario.edit', {id:id});
         }
         
         function goToView(id){
@@ -51,7 +51,7 @@
             if(!msg)
                 return;
             
-            ClienteSvc.delete(id).then(function (data) {
+            UsuarioSvc.delete(id).then(function (data) {
                 vm.init();
             }, function (err) {
                 alert(err);

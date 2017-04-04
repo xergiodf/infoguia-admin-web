@@ -3,7 +3,8 @@
     "use strict";
 
     angular.module('cliente.module')
-            .service('ClienteSvc', ClienteSvc);
+            .service('ClienteSvc', ClienteSvc)
+            .service('ClienteCategoriaSvc', ClienteCategoriaSvc);
 
     function ClienteSvc($http, $q, $filter, API_INFOGUIA) {
 
@@ -28,7 +29,7 @@
                         nombreCorto: model.nombre_corto || null,
                         nombreSucursal: model.nombre_sucursal || null,
                         telefono: model.telefono || null
-                    };                    
+                    };
 
                     $http({
                         method: 'POST',
@@ -199,6 +200,136 @@
 
     }
 
+    function ClienteCategoriaSvc($http, $q, $filter, API_INFOGUIA) {
+
+        var API_MODEL = API_INFOGUIA + '/clienteCategorias/';
+
+        function appendTransform(defaults, transform) {
+            defaults = angular.isArray(defaults) ? defaults : [defaults];
+            return defaults.concat(transform);
+        }
+
+        function doTransform(value) {
+            if (value) {
+                return value.map(function (item) {
+                    return new CLIENTE_CATEGORIA(item);
+                });
+            } else {
+                return value;
+            }
+        }
+
+        var service = {
+            create: function (model) {
+
+                function promise(resolve, reject) {
+
+                    var url = API_MODEL + 'add';
+
+                    var data = {
+                        categoriaDto: model.categoriaDto,
+                        clienteDto: model.clienteDto
+                    };
+
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: data
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se creaba una categoria de cliente. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            },
+            getByClienteId: function (id) {
+
+                var modelID = id || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_MODEL + 'findByCliente/' + modelID;
+
+                    $http({
+                        method: "GET",
+                        url: url,
+                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                            return doTransform(value);
+                        })                        
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject(response.statusText + " Err getByClienteId...");
+                    }
+                }
+
+                return $q(promise);
+            },
+            getByCategoriaId: function (id) {
+
+                var modelID = id || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_MODEL + 'findByCategoria/' + modelID;
+
+                    $http({
+                        method: "GET",
+                        url: url,
+                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                            return doTransform(value);
+                        })                        
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject(response.statusText + " Err getByCategoriaId...");
+                    }
+                }
+
+                return $q(promise);
+            },            
+            delete: function (id) {
+
+                function promise(resolve, reject) {
+
+                    var url = API_MODEL + 'delete/' + id;
+
+                    $http({
+                        method: 'DELETE',
+                        url: url
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            }
+        };
+
+        return service;
+
+    }
+
     function CLIENTE(model) {
         this.id = model.id || null;
         this.coordenadas = model.coordenadas || null;
@@ -212,6 +343,11 @@
         this.nombre_corto = model.nombreCorto || null;
         this.nombre_sucursal = model.nombreSucursal || null;
         this.telefono = model.telefono || null;
+    }
+
+    function CLIENTE_CATEGORIA(model) {
+        this.categoriaDto = model.categoriaDto || {};
+        this.clienteDto = model.clienteDto || {};
     }
 
 })();

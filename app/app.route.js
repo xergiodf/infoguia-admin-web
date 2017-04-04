@@ -33,10 +33,15 @@
                 base: 'app/module/usuario/',
                 views: 'app/module/usuario/views/',
                 layouts: 'app/module/usuario/views/layouts/'
-            });
+            })
+            .constant('CATEGORIA_ROOT', {
+                base: 'app/module/categoria/',
+                views: 'app/module/categoria/views/',
+                layouts: 'app/module/categoria/views/layouts/'
+            });            
 
     /*@ngInject*/
-    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT) {
+    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT, CATEGORIA_ROOT) {
 
         $urlRouterProvider
                 .when("/", "/auth/login")
@@ -449,7 +454,66 @@
                             controller: "UsuarioViewController as vm"
                         }
                     }
-                });                
+                })
+                //
+                //CATEGORIA ROUTER
+                //                
+                .state('categoria', {
+                    abstract: true,
+                    parent: 'site.layout',
+                    url: "/categoria",
+                    data: {pageTitle: "Listado de Categoría"},
+                    views: {
+                        'content@site': {
+                            templateUrl: CATEGORIA_ROOT.layouts + "main.html"
+                        }
+                    }
+                })
+                .state('categoria.list', {
+                    parent: 'categoria',
+                    url: "/list",
+                    data: {
+                        pageTitle: "Categorias",
+                        pageHeader: "Categorias",
+                        pageDescription: "Búsqueda personalizada"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: CATEGORIA_ROOT.views + "list.html",
+                            controller: "CategoriaListController as vm"
+                        }
+                    }
+                })
+                .state('categoria.create', {
+                    parent: 'categoria',
+                    url: "/create",
+                    data: {
+                        pageTitle: "Nueva Categoria",
+                        pageHeader: "Nueva Categoria",
+                        pageDescription: "Formulario de creación de nueva categoría"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: CATEGORIA_ROOT.views + "create.html",
+                            controller: "CategoriaCreateController as vm"
+                        }
+                    }
+                })
+                .state('categoria.edit', {
+                    parent: 'categoria',
+                    url: "/edit/{id}",
+                    data: {
+                        pageTitle: "Editar Categoría",
+                        pageHeader: "Editar Categoría",
+                        pageDescription: "Formulario de edición de categoría"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: CATEGORIA_ROOT.views + "edit.html",
+                            controller: "CategoriaEditController as vm"
+                        }
+                    }
+                });                 
     }
 
 })();

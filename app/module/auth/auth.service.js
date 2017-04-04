@@ -9,7 +9,7 @@
     function AuthSvc($q, localStorageService, $http, API_INFOGUIA, APP_UAUTH) {
 
         var AUTHSERVICEBASE = {
-            LOGIN: API_INFOGUIA + '/usuarios/login'
+            LOGIN: API_INFOGUIA + '/auth/login'
         };
 
         var service = {

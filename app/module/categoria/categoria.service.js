@@ -2,31 +2,35 @@
 
     "use strict";
 
-    angular.module('usuario.module')
-            .service('UsuarioSvc', UsuarioSvc);
+    angular.module('categoria.module')
+            .service('CategoriaSvc', CategoriaSvc);
 
-    function UsuarioSvc($http, $q, $filter, API_INFOGUIA) {
+    function CategoriaSvc($http, $q, API_INFOGUIA) {
 
-        var API_USUARIO = API_INFOGUIA + '/usuarios/';
+        var API_MODEL_URL = API_INFOGUIA + '/categorias/';
+
+        function appendTransform(defaults, transform) {
+            defaults = angular.isArray(defaults) ? defaults : [defaults];
+            return defaults.concat(transform);
+        }
+
+        function doTransform(value) {
+            return value.map(function (item) {
+                return new CATEGORIA(item);
+            });
+        }
 
         var service = {
             create: function (model) {
 
                 function promise(resolve, reject) {
 
-                    var url = API_USUARIO + 'add';
-
-                    var data = {
-                        username: model.username || null,
-                        password: model.password || null,
-                        estadoUsuarioDto: model.estadoUsuarioDto || null,
-                        tipoUsuarioDto: model.tipoUsuarioDto || null
-                    };
+                    var url = API_MODEL_URL + 'add';
 
                     $http({
                         method: 'POST',
                         url: url,
-                        data: data
+                        data: model
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -34,7 +38,7 @@
                     }
 
                     function errorResponse(response) {
-                        reject("Ha ocurrido un error mientras se creaba el usuario. " + response.statusText);
+                        reject("Ha ocurrido un error mientras se creaba la categoría. " + response.statusText);
                     }
                 }
 
@@ -44,22 +48,7 @@
 
                 function promise(resolve, reject) {
 
-                    var url = API_USUARIO + 'find/all';
-
-                    function appendTransform(defaults, transform) {
-                        defaults = angular.isArray(defaults) ? defaults : [defaults];
-                        return defaults.concat(transform);
-                    }
-
-                    function doTransform(value) {
-                        if (value) {
-                            return value.map(function (item) {
-                                return new USUARIO(item);
-                            });
-                        } else {
-                            return value;
-                        }
-                    }
+                    var url = API_MODEL_URL + 'find/all';
 
                     $http({
                         method: "GET",
@@ -74,7 +63,7 @@
                     }
 
                     function errorResponse(response) {
-                        reject(response.statusText + " Error obteniendo listado de clientes...");
+                        reject(response.statusText + " Error obteniendo listado de categorias...");
                     }
                 }
 
@@ -86,7 +75,7 @@
 
                 function promise(resolve, reject) {
 
-                    var url = API_USUARIO + 'find/' + modelID;
+                    var url = API_MODEL_URL + 'find/' + modelID;
 
                     $http({
                         method: "GET",
@@ -94,36 +83,25 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new USUARIO(response.data));
+                        resolve(new CATEGORIA(response.data));
                     }
 
                     function errorResponse(response) {
-                        reject(response.statusText + " Err obteniendo usuario...");
+                        reject(response.statusText + " Err obteniendo categoria...");
                     }
                 }
 
                 return $q(promise);
             },
             update: function (model) {
-
                 function promise(resolve, reject) {
 
-                    var url = API_USUARIO + 'update';
-
-                    console.log(model);
-                    
-                    var data = {
-                            id: model.id || null,
-                            username: model.username || null,
-                            password: model.password || null,
-                            estadoUsuarioDto: model.estadoUsuarioDto || null,
-                            tipoUsuarioDto: model.tipoUsuarioDto || null
-                    };                    
+                    var url = API_MODEL_URL + 'update';
 
                     $http({
                         method: 'PUT',
                         url: url,
-                        data: data
+                        data: model
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -131,17 +109,16 @@
                     }
 
                     function errorResponse(response) {
-                        reject("Ha ocurrido un error mientras se actualizaba el usuario. " + response.statusText);
+                        reject("Ha ocurrido un error mientras se actualizaba los datos de la Categoría. " + response.statusText);
                     }
                 }
 
                 return $q(promise);
             },
             delete: function (id) {
-
                 function promise(resolve, reject) {
 
-                    var url = API_USUARIO + 'delete/' + id;
+                    var url = API_MODEL_URL + 'delete/' + id;
 
                     $http({
                         method: 'DELETE',
@@ -153,7 +130,7 @@
                     }
 
                     function errorResponse(response) {
-                        reject("Ha ocurrido un error mientras se eliminaba el usuario. " + response.statusText);
+                        reject("Ha ocurrido un error mientras se eliminaba la Categoria. " + response.statusText);
                     }
                 }
 
@@ -165,15 +142,9 @@
 
     }
 
-    function USUARIO(model) {
+    function CATEGORIA(model) {
         this.id = model.id || null;
-        this.username = model.username || null;
-        this.estadoUsuarioDto = model.estadoUsuarioDto || {};
-        this.tipoUsuarioDto = model.tipoUsuarioDto || {};
-        this.clienteDto = model.clienteDto || {};
-        this.admin = model.admin || false;
-        this.email = model.email || null;
-        this.fechaRegistro = model.fechaRegistro || null;
+        this.descripcion = model.descripcion || null;
     }
 
 })();
