@@ -2,7 +2,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <mcui-form-input 
-                    ng-model="vm.filter.nombre_completo" 
+                    ng-model="vm.filter.nombreCompleto" 
                     data-label="Nombre completo" 
                     data-input="{placeholder:'Nombre completo'}">                
                 </mcui-form-input>
@@ -10,7 +10,7 @@
 
             <div class="col-sm-3">
                 <div data-mcui-form-input 
-                     ng-model="vm.filter.nombre_corto" 
+                     ng-model="vm.filter.nombreCorto" 
                      data-label="Nombre Corto" 
                      data-input="{placeholder:'Nombre corto'}">                 
                 </div>
@@ -18,7 +18,7 @@
 
             <div class="col-sm-3">
                 <mcui-form-input 
-                    ng-model="vm.filter.fecha_alta" 
+                    ng-model="vm.filter.fechaAlta" 
                     data-label="Fecha alta" 
                     data-input="{placeholder:'Facha alta'}">            
                 </mcui-form-input>
@@ -26,7 +26,7 @@
 
             <div class="col-sm-3">
                 <mcui-form-input 
-                    ng-model="vm.filter.fecha_inicio" 
+                    ng-model="vm.filter.fechaInicio" 
                     data-label="Fecha inicio" 
                     data-input="{placeholder:'Facha inicio'}">            
                 </mcui-form-input>
@@ -63,10 +63,10 @@
         <tbody>
             <tr ng-repeat="item in vm.list | filter:vm.filter.search">
                 <td>{{ item.id}}</td>
-                <td>{{ item.nombre_completo}}</td>
-                <td>{{ item.nombre_corto}}</td>
-                <td>{{ item.fecha_alta}}</td>
-                <td>{{ item.fecha_inicio}}</td>
+                <td>{{ item.nombreCompleto}}</td>
+                <td>{{ item.nombreCorto}}</td>
+                <td>{{ item.fechaAlta}}</td>
+                <td>{{ item.fechaInicio}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
                     <button type="button" class="btn btn-flat" disabled="disabled" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i> </button>

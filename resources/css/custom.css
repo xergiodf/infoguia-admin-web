@@ -2,9 +2,33 @@
     border-top:none;
 }
 
-.mt-15{
+/*MARGIN TOP*/
+.mt15{
     margin-top: 15px;
 }
-.mt-20{
+.mt20{
     margin-top: 20px;
+}
+
+/*HEIGH*/
+.h300{
+   height: 350px; overflow-y: scroll; 
+}
+.h350{
+   height: 350px; overflow-y: scroll; 
+}
+
+.h500{
+   height: 500px; overflow-y: scroll; 
+}
+
+/*WIDTH*/
+.th-operation{
+    width:140px;
+    text-align: center;
+}
+
+.th-operation-1{
+    width:50px;
+    text-align: center;
 }

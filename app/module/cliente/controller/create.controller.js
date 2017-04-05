@@ -12,15 +12,7 @@
 
         vm.init = Init;
 
-        vm.cliente = {
-            codigo_cliente: "",
-            nombre_completo: "",
-            nombre_corto: "",
-            description_completa: "",
-            descripcion_corta: "",
-            fecha_alta: "",
-            fecha_inicio: ""
-        };
+        vm.cliente = {};
 
         vm.fn = {
             saveModel: saveModel
@@ -32,7 +24,7 @@
         //Functions
 
         function Init() {
-
+            vm.cliente = new CLIENTE({});
         }
 
         function saveModel(isValid) {
@@ -47,6 +39,18 @@
                 alert(err);
             })
         }
+    }
+
+    function CLIENTE(model) {
+        this.id = model.id || null;
+        this.descripcionCompleta = model.descripcionCompleta || null;
+        this.descripcionCorta = model.descripcionCorta || null;
+        this.direccionFisica = model.direccionFisica || null;
+        this.fechAlta = model.fechAlta || null;
+        this.fechaInicio = model.fechaInicio || null;
+        this.horarios = model.horarios || null;
+        this.nombreCompleto = model.nombreCompleto || null;
+        this.nombreCorto = model.nombreCorto || null;
     }
 
 })();

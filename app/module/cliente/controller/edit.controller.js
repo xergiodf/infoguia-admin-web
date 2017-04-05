@@ -12,15 +12,7 @@
         
         vm.init = Init;
         
-        vm.cliente = {
-            codigo_cliente:"",
-            nombre_completo:"",
-            nombre_corto:"",
-            descripcion_completa:"",
-            descripcion_corta:"",
-            fecha_alta:"",
-            fecha_inicio:""            
-        };        
+        vm.cliente = {};        
         
         vm.fn = {
             saveModel: saveModel

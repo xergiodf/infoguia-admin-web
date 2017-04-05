@@ -6,7 +6,7 @@
             .service('ClienteSvc', ClienteSvc)
             .service('ClienteCategoriaSvc', ClienteCategoriaSvc);
 
-    function ClienteSvc($http, $q, $filter, API_INFOGUIA) {
+    function ClienteSvc($http, $q, API_INFOGUIA) {
 
         var API_CLIENTE = API_INFOGUIA + '/clientes/';
 
@@ -18,17 +18,13 @@
                     var url = API_CLIENTE + 'add';
 
                     var data = {
-                        coordenadas: model.coordenadas || null,
-                        descripcionCompleta: model.descripcion_completa || null,
-                        descripcionCorta: model.descripcion_corta || null,
-                        direccionFisica: model.direccion_fisica || null,
-                        fechAlta: model.fech_alta || null,
-                        fechaInicio: model.fecha_inicio || null,
-                        horarios: model.horarios || null,
-                        nombreCompleto: model.nombre_completo || null,
-                        nombreCorto: model.nombre_corto || null,
-                        nombreSucursal: model.nombre_sucursal || null,
-                        telefono: model.telefono || null
+                        descripcionCompleta: model.descripcionCompleta || null,
+                        descripcionCorta: model.descripcionCorta || null,
+                        direccionFisica: model.direccionFisica || null,
+                        fechAlta: model.fechAlta || null,
+                        fechaInicio: model.fechaInicio || null,
+                        nombreCompleto: model.nombreCompleto || null,
+                        nombreCorto: model.nombreCorto || null
                     };
 
                     $http({
@@ -148,15 +144,15 @@
                         data: {
                             id: model.id,
                             coordenadas: model.coordenadas,
-                            descripcionCompleta: model.descripcion_completa,
-                            descripcionCorta: model.descripcion_corta,
-                            direccionFisica: model.direccion_fisica,
-                            fechAlta: model.fech_alta,
-                            fechaInicio: model.fecha_inicio,
+                            descripcionCompleta: model.descripcionCompleta,
+                            descripcionCorta: model.descripcionCorta,
+                            direccionFisica: model.direccionFisica,
+                            fechAlta: model.fechAlta,
+                            fechaInicio: model.fechaInicio,
                             horarios: model.horarios,
-                            nombreCompleto: model.nombre_completo,
-                            nombreCorto: model.nombre_corto,
-                            nombreSucursal: model.nombre_sucursal,
+                            nombreCompleto: model.nombreCompleto,
+                            nombreCorto: model.nombreCorto,
+                            nombreSucursal: model.nombreSucursal,
                             telefono: model.telefono
                         }
                     }).then(successResponse, errorResponse);
@@ -200,7 +196,7 @@
 
     }
 
-    function ClienteCategoriaSvc($http, $q, $filter, API_INFOGUIA) {
+    function ClienteCategoriaSvc($http, $q, $filter, API_INFOGUIA, CategoriaSvc) {
 
         var API_MODEL = API_INFOGUIA + '/clienteCategorias/';
 
@@ -261,7 +257,7 @@
                         url: url,
                         transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
                             return doTransform(value);
-                        })                        
+                        })
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -288,7 +284,7 @@
                         url: url,
                         transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
                             return doTransform(value);
-                        })                        
+                        })
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -301,16 +297,17 @@
                 }
 
                 return $q(promise);
-            },            
-            delete: function (id) {
+            },
+            delete: function (model) {
 
                 function promise(resolve, reject) {
 
-                    var url = API_MODEL + 'delete/' + id;
+                    var url = API_MODEL + 'delete';
 
                     $http({
                         method: 'DELETE',
-                        url: url
+                        url: url,
+                        data: model
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -323,6 +320,54 @@
                 }
 
                 return $q(promise);
+            },
+            getByClienteIdResume: function (id) {
+
+                function promise(resolve, reject) {
+
+                    service.getByClienteId(id)
+                            .then(function (data) {
+                                return $q(function (res, rej) {
+                                    res(data);
+                                });
+                            }).then(function (data) {
+
+                        CategoriaSvc.query().then(function (rcategories) {
+                            var categories = rcategories;
+                            var ccliente = data;
+
+                            var arrCategories = [];
+
+                            for (var i = 0; i < categories.length; i++) {
+
+                                var found = false;
+                                var cat = categories[i];
+
+                                for (var j = 0; i < ccliente.length; i++) {
+                                    var catCliente = ccliente[j];
+
+                                    var catClienteID = catCliente['categoriaDto']['id'];
+                                    var catID = cat['id'];
+
+                                    if (catClienteID === catID)
+                                        found = true;
+                                }
+                                
+                                if (!found) {
+                                    arrCategories.push(cat);
+                                }
+                            }
+
+                            resolve({categorias: arrCategories, clienteCategorias: ccliente});
+
+                        });
+
+                    }, function (err) {
+                        reject(err);
+                    });
+                }
+
+                return $q(promise);
             }
         };
 
@@ -332,17 +377,13 @@
 
     function CLIENTE(model) {
         this.id = model.id || null;
-        this.coordenadas = model.coordenadas || null;
-        this.descripcion_completa = model.descripcionCompleta || null;
-        this.descripcion_corta = model.descripcionCorta || null;
-        this.direccion_fisica = model.direccionFisica || null;
-        this.fech_alta = model.fechAlta || null;
-        this.fecha_inicio = model.fechaInicio || null;
-        this.horarios = model.horarios || null;
-        this.nombre_completo = model.nombreCompleto || null;
-        this.nombre_corto = model.nombreCorto || null;
-        this.nombre_sucursal = model.nombreSucursal || null;
-        this.telefono = model.telefono || null;
+        this.descripcionCompleta = model.descripcionCompleta || null;
+        this.descripcionCorta = model.descripcionCorta || null;
+        this.direccionFisica = model.direccionFisica || null;
+        this.fechAlta = model.fechAlta || null;
+        this.fechaInicio = model.fechaInicio || null;
+        this.nombreCompleto = model.nombreCompleto || null;
+        this.nombreCorto = model.nombreCorto || null;
     }
 
     function CLIENTE_CATEGORIA(model) {

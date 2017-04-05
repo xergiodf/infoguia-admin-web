@@ -16,7 +16,7 @@
 
                     <div class="col-sm-4">
                         <mcui-form-input 
-                            ng-model="vm.cliente.nombre_completo" 
+                            ng-model="vm.cliente.nombreCompleto" 
                             data-label="Nombre completo" 
                             data-input="{placeholder:'Nombre completo'}">                
                         </mcui-form-input>
@@ -24,7 +24,7 @@
 
                     <div class="col-sm-4">
                         <div data-mcui-form-input 
-                             ng-model="vm.cliente.nombre_corto" 
+                             ng-model="vm.cliente.nombreCorto" 
                              data-label="Nombre Corto" 
                              data-input="{placeholder:'Nombre corto'}">                 
                         </div>
@@ -32,7 +32,7 @@
 
                     <div class="col-sm-4">
                         <mcui-form-input 
-                            ng-model="vm.cliente.descripcion_completa" 
+                            ng-model="vm.cliente.descripcionCompleta" 
                             data-label="Descripción completa" 
                             data-input="{placeholder:'Descripción completa'}">
                         </mcui-form-input>
@@ -40,7 +40,7 @@
 
                     <div class="col-sm-4">
                         <mcui-form-input 
-                            ng-model="vm.cliente.descripcion_corta" 
+                            ng-model="vm.cliente.descripcionCorta" 
                             data-label="Descripción corta" 
                             data-input="{placeholder:'Descripción corta'}">
                         </mcui-form-input>
@@ -48,7 +48,7 @@
 
                     <div class="col-sm-4">
                         <mcui-form-input 
-                            ng-model="vm.cliente.fecha_alta" 
+                            ng-model="vm.cliente.fechaAlta" 
                             data-label="Fecha alta" 
                             data-input="{placeholder:'Facha alta'}">            
                         </mcui-form-input>
@@ -56,7 +56,7 @@
 
                     <div class="col-sm-4">
                         <mcui-form-input 
-                            ng-model="vm.cliente.fecha_inicio" 
+                            ng-model="vm.cliente.fechaInicio" 
                             data-label="Fecha inicio" 
                             data-input="{placeholder:'Facha inicio'}">            
                         </mcui-form-input>
@@ -161,40 +161,38 @@
 
             <mcui-box data-box-title="Administración de categorías de Cliente" data-box-body-class="table-responsive no-padding">
 
-                <div class="row">
+                <div class="row-fluid">
                     <div class="col-sm-6">
                         <!-- LIST CATEGORIAS CLIENTE -->
-                        <mcui-box data-box-title="Categorías Cliente" data-box-class="no-border" data-box-body-class="table-responsive no-padding">
+                        <mcui-box data-box-title="Categorías Cliente" data-box-class="no-border" data-box-body-class="table-responsive no-padding" data-footer-slot="false">
 
                             <mcui-box-tool-slot>
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search1">
                                 </div>        
-                            </mcui-box-tool-slot>  
+                            </mcui-box-tool-slot>                  
 
-                            <mcui-box-footer-slot>
-                                <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreate()">Nueva Categoría</a>       
-                            </mcui-box-footer-slot>                 
-
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre categoría</th>
-                                        <th style="width:140px; text-align: center">Operaciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in vm.data.clienteCategorias | filter:vm.filter.search1">
-                                        <td>{{ item.categoriaDto.id }}</td>
-                                        <td>{{ item.categoriaDto.descripcion}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit1(item)"><i class="fa fa-pencil"></i> </button>
-                                            <button type="button" class="btn btn-danger" data-ng-click="vm.fn.addRemove(item)"><i class="fa fa-minus"></i> </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>              
+                            <div class="h300">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre categoría</th>
+                                            <th class="th-operation-1">Operaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in vm.data.clienteCategorias| filter:vm.filter.search1">
+                                            <td>{{ item.categoriaDto.id}}</td>
+                                            <td>{{ item.categoriaDto.descripcion}}</td>
+                                            <td>
+                                                <button ng-show="false" type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit1(item)"><i class="fa fa-pencil"></i> </button>
+                                                <button type="button" class="btn btn-success" data-ng-click="vm.fn.deleteCategoriaCliente(item)"><i class="fa fa-exchange"></i> </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>              
                         </mcui-box>
                         <!-- /LIST CATEGORIAS CLIENTE-->   
                     </div>
@@ -213,25 +211,29 @@
                                 <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreate()">Nueva Categoría</a>       
                             </mcui-box-footer-slot>                 
 
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre categoría</th>
-                                        <th style="width:140px; text-align: center">Operaciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in vm.data.categorias| filter:vm.filter.search">
-                                        <td>{{ item.id}}</td>
-                                        <td>{{ item.descripcion}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
-                                            <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>              
+                            <div class="h300">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre categoría</th>
+                                            <th class="th-operation">Operaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in vm.data.categorias| filter:vm.filter.search">
+                                            <td>{{ item.id}}</td>
+                                            <td>{{ item.descripcion}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-success" data-ng-click="vm.fn.addCategoriaCliente(item)"><i class="fa fa-exchange"></i> </button>
+                                                <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
+                                                <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </mcui-box>
                         <!-- /LIST CATEGORIAS-->                
                     </div>                       

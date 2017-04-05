@@ -33,6 +33,7 @@ angular
 angular.module('app')
         .config(CompileProviderConfig)
         .config(TestingInterceptorConfig)
+        .config(Others)
         .constant('APP_UAUTH', {key: 'uAuthInfoguia'})
         .run(AppRun);
 
@@ -44,7 +45,7 @@ function AppRun($rootScope, $filter, $state, $document, $location, $log, AuthSvc
     $rootScope.$location = $location;
     $rootScope.$appGmapref = 'https://maps.googleapis.com/maps/api/js';
     $rootScope.$appUser = AuthSvc.appUser();
-    
+
     var _allow = [
         'auth.login',
         'auth.logout',
@@ -73,6 +74,7 @@ function AppRun($rootScope, $filter, $state, $document, $location, $log, AuthSvc
         console.log(unfoundState.toParams);
         console.log(unfoundState.options);
     });
+
 }
 
 /*@ngInject*/
@@ -105,5 +107,10 @@ function CompileProviderConfig($compileProvider, ENV) {
         $compileProvider.debugInfoEnabled(true);
     else
         $compileProvider.debugInfoEnabled(false);
+}
+
+function Others($httpProvider) {
+
+    $httpProvider.defaults.headers.common = "Accept: application/json, text/plain, *﻿/﻿*";
 }
 

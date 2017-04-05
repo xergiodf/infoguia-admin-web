@@ -83,7 +83,7 @@
                 '       <div class="box-tools" ng-transclude="boxToolSlot"></div>'+
                 '    </div>'+
                 '    <div class="box-body" ng-class="boxBodyClass"><ng-transclude></ng-transclude></div>'+
-                '    <div class="box-footer" ng-transclude="boxFooterSlot"></div>'+
+                '    <div class="box-footer" ng-if="!footerSlot" ng-transclude="boxFooterSlot"></div>'+
                 '</div>';                
                 return template;
             },
@@ -93,7 +93,8 @@
             scope:{
                 boxTitle:"@",
                 boxClass:"@",
-                boxBodyClass:"@"
+                boxBodyClass:"@",
+                footerSlot:"@"
             }
         };
         

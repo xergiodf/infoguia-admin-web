@@ -13,17 +13,35 @@
         vm.init = Init;
 
         vm.fn = {
-
+            saveModel: saveModel
         };
 
-        vm.categoria = {};
+        vm.model = {};
 
         vm.init();
 
         //Functions
 
         function Init() {
+            CategoriaSvc.getById($stateParams.id).then(function (data) {
+                vm.model = data;
+            }, function (err) {
+                alert(err);
+            });            
+        }
 
+        function saveModel(isValid) {
+
+            if (!isValid) {
+                alert('Revise los datos dle formulario...');
+                return;
+            }
+
+            CategoriaSvc.update(vm.model).then(function (data) {
+                $state.go('cliente.list');
+            }, function (err) {
+                alert(err);
+            });
         }
     }
 

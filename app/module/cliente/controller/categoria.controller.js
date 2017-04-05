@@ -6,7 +6,7 @@
             .controller('ClienteCategoriaController', ClienteCategoriaController);
 
     /*@ngInject*/
-    function ClienteCategoriaController($scope, $state, $stateParams, CategoriaSvc, ClienteSvc, ClienteCategoriaSvc) {
+    function ClienteCategoriaController($log, $scope, $state, $stateParams, CategoriaSvc, ClienteCategoriaSvc) {
 
         var vm = this;
 
@@ -14,14 +14,16 @@
 
         vm.data = {
             categorias: [],
-            clienteCategorias:[]
+            clienteCategorias: []
         };
 
         vm.fn = {
             goToCreate: goToCreate,
             goToEdit: goToEdit,
             goToDelete: goToDelete,
-            deleteModel: deleteModel
+            deleteModel: deleteModel,
+            addCategoriaCliente: addCategoriaCliente,
+            deleteCategoriaCliente: deleteCategoriaCliente
         };
 
         vm.init();
@@ -36,17 +38,11 @@
             if (!clienteID)
                 return;
 
-            ClienteCategoriaSvc.getByClienteId(clienteID).then(function(data){
-                vm.data.clienteCategorias = data;
-            }, function(err){
-                console.log(err);
-            });    
-
-            CategoriaSvc.query().then(function (data) {
-                console.log(data);
-                vm.data.categorias = data;
+            ClienteCategoriaSvc.getByClienteIdResume(clienteID).then(function (data) {
+               vm.data.clienteCategorias = data.clienteCategorias;
+               vm.data.categorias = data.categorias;
             }, function (err) {
-                console.log("Err (" + err + ")");
+                $log.error(err);
             });
         }
 
@@ -55,7 +51,7 @@
         }
 
         function goToEdit(id) {
-            $state.go('sucursal.edit', {id: id});
+            $state.go('categoria.edit', {id: id});
         }
 
         function goToDelete(id) {
@@ -67,11 +63,38 @@
         }
 
         function deleteModel(id) {
-            ClienteSvc.deleteCategoria(id).then(function (data) {
+            CategoriaSvc.delete(id).then(function (data) {
                 vm.init();
             }, function (err) {
                 alert(err);
             });
+        }
+
+        function addCategoriaCliente(item) {
+
+            var data = {
+                categoriaDto: item,
+                clienteDto: $scope.$parent.vm.cliente
+            };
+            
+            ClienteCategoriaSvc.create(data).then(function (result) {
+                console.log(result);
+            }, function (err) {
+                console.log(err);
+            });
+        }
+
+        function deleteCategoriaCliente(item) {
+            console.log(item);   
+            
+            return;
+           
+            ClienteCategoriaSvc.delete(item).then(function (data) {
+                console.log(data);
+            }, function (err) {
+                console.log(err);
+            });            
+            
         }
     }
 
