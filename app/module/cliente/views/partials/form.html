@@ -1,6 +1,15 @@
 <mcui-box data-box-title="Cliente">
 
     <div class="row">
+        
+        <div class="col-sm-4">
+            <mcui-form-input 
+                ng-model="vm.cliente.codigoCliente" 
+                data-label="Código" 
+                data-input="{placeholder:'Código cliente'}">                
+            </mcui-form-input>
+        </div>        
+        
         <div class="col-sm-4">
             <mcui-form-input 
                 ng-model="vm.cliente.nombreCompleto" 
@@ -30,14 +39,6 @@
                 ng-model="vm.cliente.descripcionCorta" 
                 data-label="Descripción corta" 
                 data-input="{placeholder:'Descripción corta'}">
-            </mcui-form-input>
-        </div>
-
-        <div class="col-sm-4">
-            <mcui-form-input 
-                ng-model="vm.cliente.fechaAlta" 
-                data-label="Fecha alta" 
-                data-input="{placeholder:'Facha alta'}">            
             </mcui-form-input>
         </div>
 

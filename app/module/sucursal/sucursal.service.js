@@ -5,7 +5,7 @@
     angular.module('sucursal.module')
             .service('SucursalSvc', SucursalSvc);
 
-    function SucursalSvc($http, $q, $filter, API_INFOGUIA) {
+    function SucursalSvc($http, $q, API_INFOGUIA) {
 
         var API_SUCURSAL = API_INFOGUIA + '/sucursales/';
 
@@ -190,6 +190,8 @@
         this.nombreSucursal = model.nombreSucursal || null;
         this.direccionFisica = model.direccionFisica || null;
         this.coordenadas = model.coordenadas || null;
+        this.telefonos = model.telefonos || null;
+        this.emails = model.emails || null;
         this.clienteDto = model.clienteDto || {};
     }
 

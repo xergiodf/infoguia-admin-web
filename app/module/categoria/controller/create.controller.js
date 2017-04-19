@@ -6,7 +6,7 @@
             .controller('CategoriaCreateController', CategoriaCreateController);
 
     /*@ngInject*/
-    function CategoriaCreateController($scope, $state, $stateParams, CategoriaSvc) {
+    function CategoriaCreateController($scope, $state, $stateParams, CategoriaSvc, AppNomenclatorSvc) {
 
         var vm = this;
 
@@ -15,6 +15,10 @@
         vm.fn = {
             saveModel: saveModel
         };
+        
+        vm.data = {
+            grupoCategorias: []
+        }
 
         vm.model = {};
 
@@ -23,7 +27,11 @@
         //Functions
 
         function Init() {
-            vm.model = new CATEGORIA({});
+            AppNomenclatorSvc.getNomenclador('GRUPO_CATEGORIA').then(function(data){                
+                vm.data.grupoCategorias = data;                
+            }, function(err){
+                console.log(err);
+            })
         }
 
         function saveModel(isValid) {
@@ -41,10 +49,5 @@
         }
     }
     
-    function CATEGORIA(model) {
-        this.id = model.id || null;
-        this.descripcion = model.descripcion || null;
-    }    
-
 })();
 

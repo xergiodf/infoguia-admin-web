@@ -13,10 +13,10 @@
         vm.init = Init;
 
         vm.filter = {
-            nombre_completo: "",
-            nombre_corto: "",
-            fecha_alta: "",
-            fecha_inicio: "",
+            nombreCompleto: "",
+            nombreCorto: "",
+            fechaAlta: "",
+            fechaInicio: "",
             search:""
         };
 
@@ -48,7 +48,7 @@
         
         function goToDelete(id){
             var msg = confirm("Está seguro que desea eliminar este cliente");
-            if(!msg)
+            if(!msg || !id)
                 return;
             
             ClienteSvc.delete(id).then(function (data) {

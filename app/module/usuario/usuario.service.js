@@ -19,6 +19,7 @@
                     var data = {
                         username: model.username || null,
                         password: model.password || null,
+                        email: model.email || null,
                         estadoUsuarioDto: model.estadoUsuarioDto || null,
                         tipoUsuarioDto: model.tipoUsuarioDto || null
                     };
@@ -109,13 +110,12 @@
                 function promise(resolve, reject) {
 
                     var url = API_USUARIO + 'update';
-
-                    console.log(model);
                     
                     var data = {
                             id: model.id || null,
                             username: model.username || null,
                             password: model.password || null,
+                            email: model.email || null,
                             estadoUsuarioDto: model.estadoUsuarioDto || null,
                             tipoUsuarioDto: model.tipoUsuarioDto || null
                     };                    

@@ -18,7 +18,6 @@
             saveModel: saveModel
         };
 
-
         vm.init();
 
         //Functions
@@ -43,12 +42,11 @@
 
     function CLIENTE(model) {
         this.id = model.id || null;
+        this.codigoCliente = model.codigoCliente || null;
         this.descripcionCompleta = model.descripcionCompleta || null;
         this.descripcionCorta = model.descripcionCorta || null;
-        this.direccionFisica = model.direccionFisica || null;
-        this.fechAlta = model.fechAlta || null;
+        this.fechaAlta = model.fechaAlta || null;
         this.fechaInicio = model.fechaInicio || null;
-        this.horarios = model.horarios || null;
         this.nombreCompleto = model.nombreCompleto || null;
         this.nombreCorto = model.nombreCorto || null;
     }

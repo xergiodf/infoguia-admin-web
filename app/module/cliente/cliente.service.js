@@ -20,17 +20,17 @@
                     var data = {
                         descripcionCompleta: model.descripcionCompleta || null,
                         descripcionCorta: model.descripcionCorta || null,
-                        direccionFisica: model.direccionFisica || null,
-                        fechAlta: model.fechAlta || null,
+                        fechaAlta: model.fechaAlta || null,
                         fechaInicio: model.fechaInicio || null,
                         nombreCompleto: model.nombreCompleto || null,
-                        nombreCorto: model.nombreCorto || null
+                        nombreCorto: model.nombreCorto || null,
+                        codigoCliente: model.codigoCliente || null
                     };
 
                     $http({
                         method: 'POST',
                         url: url,
-                        data: data
+                        data: model
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -67,10 +67,10 @@
 
                     $http({
                         method: "GET",
-                        url: url,
-                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                        url: url
+                        /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
                             return doTransform(value);
-                        })
+                        })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -98,7 +98,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new CLIENTE(response.data));
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {
@@ -143,17 +143,13 @@
                         url: url,
                         data: {
                             id: model.id,
-                            coordenadas: model.coordenadas,
                             descripcionCompleta: model.descripcionCompleta,
                             descripcionCorta: model.descripcionCorta,
-                            direccionFisica: model.direccionFisica,
-                            fechAlta: model.fechAlta,
+                            fechaAlta: model.fechaAlta,
                             fechaInicio: model.fechaInicio,
-                            horarios: model.horarios,
                             nombreCompleto: model.nombreCompleto,
                             nombreCorto: model.nombreCorto,
-                            nombreSucursal: model.nombreSucursal,
-                            telefono: model.telefono
+                            codigoCliente: model.codigoCliente
                         }
                     }).then(successResponse, errorResponse);
 
@@ -302,12 +298,11 @@
 
                 function promise(resolve, reject) {
 
-                    var url = API_MODEL + 'delete';
+                    var url = API_MODEL + 'delete/' + model.clienteDto.id + '/' + model.categoriaDto.id;
 
                     $http({
                         method: 'DELETE',
-                        url: url,
-                        data: model
+                        url: url
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -325,12 +320,11 @@
 
                 function promise(resolve, reject) {
 
-                    service.getByClienteId(id)
-                            .then(function (data) {
-                                return $q(function (res, rej) {
-                                    res(data);
-                                });
-                            }).then(function (data) {
+                    service.getByClienteId(id).then(function (data) {
+                        return $q(function (res, rej) {
+                            res(data);
+                        });
+                    }).then(function (data) {
 
                         CategoriaSvc.query().then(function (rcategories) {
                             var categories = rcategories;
@@ -343,7 +337,7 @@
                                 var found = false;
                                 var cat = categories[i];
 
-                                for (var j = 0; i < ccliente.length; i++) {
+                                for (var j = 0; j < ccliente.length; j++) {
                                     var catCliente = ccliente[j];
 
                                     var catClienteID = catCliente['categoriaDto']['id'];
@@ -352,7 +346,7 @@
                                     if (catClienteID === catID)
                                         found = true;
                                 }
-                                
+
                                 if (!found) {
                                     arrCategories.push(cat);
                                 }
@@ -375,17 +369,19 @@
 
     }
 
+    //---MODEL CLIENTE
     function CLIENTE(model) {
         this.id = model.id || null;
         this.descripcionCompleta = model.descripcionCompleta || null;
         this.descripcionCorta = model.descripcionCorta || null;
-        this.direccionFisica = model.direccionFisica || null;
-        this.fechAlta = model.fechAlta || null;
+        this.fechaAlta = model.fechaAlta || null;
         this.fechaInicio = model.fechaInicio || null;
         this.nombreCompleto = model.nombreCompleto || null;
         this.nombreCorto = model.nombreCorto || null;
+        this.codigoCliente = model.codigoCliente || null;
     }
 
+    //---MODEL CLIENTE_CATEGORIA
     function CLIENTE_CATEGORIA(model) {
         this.categoriaDto = model.categoriaDto || {};
         this.clienteDto = model.clienteDto || {};

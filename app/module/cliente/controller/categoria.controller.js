@@ -38,7 +38,7 @@
             if (!clienteID)
                 return;
 
-            ClienteCategoriaSvc.getByClienteIdResume(clienteID).then(function (data) {
+            ClienteCategoriaSvc.getByClienteIdResume(clienteID).then(function (data) {                
                vm.data.clienteCategorias = data.clienteCategorias;
                vm.data.categorias = data.categorias;
             }, function (err) {
@@ -56,7 +56,7 @@
 
         function goToDelete(id) {
             var msg = confirm("Esta seguro que desea eliminar esta categoría de cliente?");
-            if (!msg)
+            if (!msg || !id)
                 return;
 
             vm.fn.deleteModel(id);
@@ -78,19 +78,16 @@
             };
             
             ClienteCategoriaSvc.create(data).then(function (result) {
-                console.log(result);
+                vm.init();
             }, function (err) {
                 console.log(err);
             });
         }
 
         function deleteCategoriaCliente(item) {
-            console.log(item);   
             
-            return;
-           
             ClienteCategoriaSvc.delete(item).then(function (data) {
-                console.log(data);
+                vm.init();
             }, function (err) {
                 console.log(err);
             });            

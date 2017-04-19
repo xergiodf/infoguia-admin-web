@@ -57,7 +57,9 @@
                 nombreSucursal: '',
                 direccionFisica: '',
                 coordenadas: '',
-                clienteDto: {}
+                clienteDto: {},
+                telefonos:'',
+                emails:''
             };
 
             AppGeoPositionSvc.getCurrentPosition().then(function (response) {

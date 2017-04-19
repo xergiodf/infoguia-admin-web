@@ -46,7 +46,6 @@
                 return;
 
             SucursalSvc.get(modelID).then(function (data) {
-                console.log(data);
                 vm.sucursal = data;
             }, function (err) {
                 alert(err);
@@ -58,7 +57,9 @@
                 nombreSucursal: '',
                 direccionFisica: '',
                 coordenadas: '',
-                clienteDto: {}
+                clienteDto: {},
+                telefonos:'',
+                emails:''
             };
         }
 

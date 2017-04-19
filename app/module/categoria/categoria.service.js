@@ -15,9 +15,13 @@
         }
 
         function doTransform(value) {
-            return value.map(function (item) {
-                return new CATEGORIA(item);
-            });
+            if (value) {
+                return value.map(function (item) {
+                    return new CATEGORIA(item);
+                });
+            } else {
+                return value;
+            }
         }
 
         var service = {
@@ -26,7 +30,6 @@
                 function promise(resolve, reject) {
 
                     var url = API_MODEL_URL + 'add';
-
                     $http({
                         method: 'POST',
                         url: url,
@@ -59,6 +62,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
+                        console.log(response);
                         resolve(response.data);
                     }
 
@@ -145,6 +149,7 @@
     function CATEGORIA(model) {
         this.id = model.id || null;
         this.descripcion = model.descripcion || null;
+        this.grupoCategoriaDto = model.grupoCategoriaDto || {};
     }
 
 })();

@@ -1,14 +1,23 @@
 <mcui-box data-box-title="Categoría">
-   
-<div class="row">
-    <div class="col-sm-6">
-        <mcui-form-input 
-            ng-model="vm.model.descripcion" 
-            data-label="Nombre" 
-            data-input="{'required':'required', placeholder:'Nombre Categoría'}">                
-        </mcui-form-input>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <mcui-form-input 
+                ng-model="vm.model.descripcion" 
+                data-label="Nombre" 
+                data-input="{'required':'required', placeholder:'Nombre Categoría'}">                
+            </mcui-form-input>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Grupo</label>
+                <select name="grupoCategoria" id="grupoCategoria" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.grupoCategorias track by option.id"
+                        ng-model="vm.model.grupoCategoriaDto">
+                </select>                
+            </div>
+        </div>    
     </div>
-</div>
 
     <mcui-box-footer-slot>
         <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>

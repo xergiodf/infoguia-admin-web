@@ -14,6 +14,15 @@
 
                 <div class="row">
 
+
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.cliente.codigoCliente" 
+                            data-label="Código" 
+                            data-input="{placeholder:'Código cliente'}">                
+                        </mcui-form-input>
+                    </div>                     
+
                     <div class="col-sm-4">
                         <mcui-form-input 
                             ng-model="vm.cliente.nombreCompleto" 
@@ -91,14 +100,18 @@
                             <th>COD</th>
                             <th>Nombre</th>
                             <th>Dirección física</th>
+                            <th>Teléfonos</th>
+                            <th>Emails</th>
                             <th style="width:140px; text-align: center">Operaciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in vm.data.sucursales| filter:vm.filter.search">
                             <td>{{ item.id}}</td>
-                            <td>{{ item.nombreSucursal}}</td>
-                            <td>{{ item.direccionFisica}}</td>
+                            <td>{{ item.nombreSucursal }}</td>
+                            <td>{{ item.direccionFisica }}</td>
+                            <td>{{ item.telefonos }}</td>
+                            <td>{{ item.emails }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEditSucursal(item.id)"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToViewSucursal(item.id)"><i class="fa fa-eye"></i></button>

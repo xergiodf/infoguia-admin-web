@@ -61,62 +61,6 @@
 
                 return $q(promise);
 
-            },
-            getNomenclador: function (pnomenclador, id) {
-
-                //------- NOMENCLADORES ----- 
-                //  
-                //  => TIPO_PUBLICACION 
-                //  => ESTADO_PUBLICACION
-
-                var pid = id || null;
-
-                function NOMENCLADOR(model) {
-                    this.id = model.id || null;
-                    this.descripcion = model.descripcion || null;
-                }
-
-                var tipoPublicacion = [
-                    new NOMENCLADOR({id: 1, descripcion: "Promociones"}),
-                    new NOMENCLADOR({id: 2, descripcion: "Novedades"})
-                ];
-
-                var estadoPublicacion = [
-                    new NOMENCLADOR({id: 1, descripcion: "ACTIVO"}),
-                    new NOMENCLADOR({id: 2, descripcion: "INACTIVO"})
-                ];
-
-
-                function promise(resolve, reject) {
-
-                    var collection = [];
-
-                    switch (pnomenclador) {
-                        case 'TIPO_PUBLICACION':
-                            collection = tipoPublicacion;
-                            break;
-                        case 'ESTADO_PUBLICACION':
-                            collection = estadoPublicacion;
-                            break;
-                        default:
-                            collection = [];
-                    }
-                    
-                    if (!pnomenclador) {
-                        reject('Debe indicar el parámetro "pnomenclador" de la función');
-                    }
-                    else if (pid !== null) {
-                        var result = $filter('filter')(collection, {id: pid});
-                        if (result !== null && result.length > 0)
-                            resolve(result[0]);
-                        else
-                            reject("No se encuentra " + pnomenclador + " => ID:" + pid);
-                    } else {
-                        resolve(collection);
-                    }
-                }
-
-                return $q(promise);
             }
         };
 
@@ -135,6 +79,7 @@
                 //  => ESTADO_PUBLICACION
                 //  => TIPO_USUARIO
                 //  => ESTADO_USUARIO
+                //  => GRUPO_CATEGORIA
 
                 var pid = id || null;
 
@@ -163,7 +108,17 @@
                     new NOMENCLADOR({id: 1, descripcion: "Activo"}),
                     new NOMENCLADOR({id: 2, descripcion: "Inactivo"}),
                     new NOMENCLADOR({id: 3, descripcion: "Pendiente de activación"})
-                ];                
+                ];
+                
+                var grupoCategoria = [
+                    new NOMENCLADOR({id: 1, descripcion: "Informaciones"}),
+                    new NOMENCLADOR({id: 2, descripcion: "Servicios"}),
+                    new NOMENCLADOR({id: 3, descripcion: "Negocios"}),
+                    new NOMENCLADOR({id: 4, descripcion: "Turismo"}),
+                    new NOMENCLADOR({id: 5, descripcion: "Ocio"}),
+                    new NOMENCLADOR({id: 6, descripcion: "Novedades"}),
+                    new NOMENCLADOR({id: 7, descripcion: "Promocionales"})
+                ];                  
 
                 function promise(resolve, reject) {
 
@@ -181,7 +136,10 @@
                             break;
                         case 'ESTADO_USUARIO':
                             collection = estadoUsuario;
-                            break;                            
+                            break;  
+                        case 'GRUPO_CATEGORIA':
+                            collection = grupoCategoria;
+                            break;                        
                         default:
                             collection = [];
                     }

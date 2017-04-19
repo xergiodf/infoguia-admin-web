@@ -44,7 +44,7 @@
             if(!id)
                 return;
             
-            ClienteSvc.get(id).then(function(data){
+            ClienteSvc.getById(id).then(function(data){
                 vm.cliente = data;
             },
             function(err){

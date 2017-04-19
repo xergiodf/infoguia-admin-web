@@ -6,7 +6,7 @@
             .controller('CategoriaEditController', CategoriaEditController);
 
     /*@ngInject*/
-    function CategoriaEditController($scope, $state, $stateParams, CategoriaSvc) {
+    function CategoriaEditController($scope, $state, $stateParams, CategoriaSvc, AppNomenclatorSvc) {
 
         var vm = this;
 
@@ -17,12 +17,24 @@
         };
 
         vm.model = {};
+        
+        vm.data = {
+            grupoCategorias:[]
+        };
 
         vm.init();
 
         //Functions
 
         function Init() {
+            
+            AppNomenclatorSvc.getNomenclador('GRUPO_CATEGORIA').then(function(data){                
+                vm.data.grupoCategorias = data;    
+                console.log(data);
+            }, function(err){
+                console.log(err);
+            })            
+            
             CategoriaSvc.getById($stateParams.id).then(function (data) {
                 vm.model = data;
             }, function (err) {
