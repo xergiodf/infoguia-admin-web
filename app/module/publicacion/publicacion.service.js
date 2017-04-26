@@ -27,8 +27,6 @@
         var service = {
             create: function (model) {
 
-                console.log(model);
-                
                 function promise(resolve, reject) {
 
                     var url = API_PUBLICACION + 'add';
@@ -60,7 +58,7 @@
 
                     $http({
                         method: "GET",
-                        url: url,   //'data/cliente_publicaciones.json',
+                        url: url, //'data/cliente_publicaciones.json',
                         transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
                             return doTransform(value);
                         })
@@ -91,7 +89,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new PUBLICACION(response.data));
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {

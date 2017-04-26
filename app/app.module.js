@@ -22,6 +22,7 @@ angular
             'ngMap',
             'ngTagsInput',
             'LocalStorageModule',
+            'ngFileUpload',
             'app.auth',
             'cliente.module',
             'sucursal.module',

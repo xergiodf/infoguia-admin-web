@@ -108,10 +108,10 @@
                     <tbody>
                         <tr ng-repeat="item in vm.data.sucursales| filter:vm.filter.search">
                             <td>{{ item.id}}</td>
-                            <td>{{ item.nombreSucursal }}</td>
-                            <td>{{ item.direccionFisica }}</td>
-                            <td>{{ item.telefonos }}</td>
-                            <td>{{ item.emails }}</td>
+                            <td>{{ item.nombreSucursal}}</td>
+                            <td>{{ item.direccionFisica}}</td>
+                            <td>{{ item.telefonos}}</td>
+                            <td>{{ item.emails}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEditSucursal(item.id)"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToViewSucursal(item.id)"><i class="fa fa-eye"></i></button>
@@ -143,19 +143,23 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Imagen</th>
+                            <th class="th-img-thumb">Imagen</th>
                             <th>Título</th>
                             <th>Descripción</th>
                             <th style="width:120px">Fecha Creación</th>
-                            <th style="width:140px; text-align: center">Operaciones</th>
+                            <th class="th-acciones-140">Operaciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in vm.data.list| filter:vm.filter.search">
-                            <td><img ng-src="{{ item.dirImagen}}" alt="{{ item.titulo}}" /></td>
+                            <td>
+                                <div class="thumbnail">
+                                    <img ng-src="{{ item.dirImagen}}" alt="{{ item.titulo}}" class="img-responsive" />
+                                </div>
+                            </td>
                             <td>{{ item.titulo}}</td>                
                             <td>{{ item.descripcionCorta}}</td>
-                            <td>{{ item.fechaCreacion}}</td>
+                            <td>{{ item.fechaCreacion | date }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i></button>

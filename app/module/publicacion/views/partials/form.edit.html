@@ -1,121 +1,57 @@
-<div class="nav-tabs-custom">
-    <ul class="nav nav-tabs pull-right">
-        <li><a href="#tab_sucursales" data-toggle="tab">Sucursales</a></li>
-        <li class="active"><a href="#tab_data" data-toggle="tab">Cliente</a></li>
-        <li class="pull-left header"><i class="fa fa-inbox"></i> Datos de Cliente</li>        
-    </ul>
-    <div class="tab-content no-padding">
-        <!-- TAB CLIENTE-->
-        <div class="tab-pane active" id="tab_data">
-            <mcui-box data-box-title="Cliente">
+<mcui-box data-box-title="Publicación">
 
-                <div class="row">
+    <mcui-box-footer-slot>
+        <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
+    </mcui-box-footer-slot>       
 
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.nombre_completo" 
-                            data-label="Nombre completo" 
-                            data-input="{placeholder:'Nombre completo'}">                
-                        </mcui-form-input>
-                    </div>
+    <div class="row">
 
-                    <div class="col-sm-4">
-                        <div data-mcui-form-input 
-                             ng-model="vm.cliente.nombre_corto" 
-                             data-label="Nombre Corto" 
-                             data-input="{placeholder:'Nombre corto'}">                 
-                        </div>
-                    </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label>Imagen</label>
+                <so-single-image-picker 
+                    file="vm.publicacion.imagen" 
+                    data-source="{{ vm.model.dirImagen || 'app/assets/img/no-thumbnail.jpg'}}">
+                </so-single-image-picker>               
+                <input type="text" class="form-control" ng-model="vm.model.dirImagen"/>
+            </div>            
+        </div>  
 
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.descripcion_completa" 
-                            data-label="Descripción completa" 
-                            data-input="{placeholder:'Descripción completa'}">
-                        </mcui-form-input>
-                    </div>
+        <div class="col-sm-9">
+            <div class="row-fluid">
 
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.descripcion_corta" 
-                            data-label="Descripción corta" 
-                            data-input="{placeholder:'Descripción corta'}">
-                        </mcui-form-input>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.fecha_alta" 
-                            data-label="Fecha alta" 
-                            data-input="{placeholder:'Facha alta'}">            
-                        </mcui-form-input>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.fecha_inicio" 
-                            data-label="Fecha inicio" 
-                            data-input="{placeholder:'Facha inicio'}">            
-                        </mcui-form-input>
-                    </div>  
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.publicacion.dirImagen" 
-                            data-label="Imagen" 
-                            data-input="{placeholder:'Imagen (URL)'}">            
-                        </mcui-form-input>
-                    </div>                     
-
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" class="form-control" ng-model="vm.model.titulo"/>
                 </div> 
 
-                <mcui-box-footer-slot>
-                    <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
-                </mcui-box-footer-slot>    
-            </mcui-box>
+                <div class="form-group">
+                    <label>Descripción corta</label>
+                    <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
+                </div>             
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Fecha creación</label>
+                            <input type="date" class="form-control" ng-model="vm.model.fechaCreacion"/>
+                        </div>            
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Fecha desde</label>
+                            <input type="date" class="form-control" ng-model="vm.model.fechaDesde" />
+                        </div>                    
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Fecha hasta</label>
+                            <input type="date" class="form-control" ng-model="vm.model.fechaHasta" />
+                        </div>                    
+                    </div>                  
+                </div>
+
+            </div>            
         </div>
-        <!-- /TAB-CLIENTE -->
-
-        <!-- TAB-SUCURSALES -->
-        <div class="tab-pane" id="tab_sucursales" ng-controller="ClienteSucursalController as vm">
-            <!-- LIST SUCURSAL-->
-            <mcui-box data-box-title="Sucursales" data-box-body-class="table-responsive no-padding">
-
-                <mcui-box-tool-slot>
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search">
-                    </div>        
-                </mcui-box-tool-slot>  
-
-                <mcui-box-footer-slot>
-                    <a href="#" class="btn btn-flat btn-default" ng-click="vm.fn.goToCreateSucursal(vm.cliente.id)">Nueva Sucursal</a>       
-                </mcui-box-footer-slot>                 
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>COD</th>
-                            <th>Nombre</th>
-                            <th>Dirección física</th>
-                            <th style="width:280px; text-align: center">Operaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in vm.data.sucursales| filter:vm.filter.search">
-                            <td>{{ item.id}}</td>
-                            <td>{{ item.nombreSucursal}}</td>
-                            <td>{{ item.direccionFisica}}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEditSucursal(item.id)"><i class="fa fa-pencil"></i> Editar</button>
-                                <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToViewSucursal(item.id)"><i class="fa fa-eye"></i> Detalle</button>
-                                <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDeleteSucursal(item.id)"><i class="fa fa-trash"></i> Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>                
-            </mcui-box>
-            <!-- /LIST SUCURSAL-->
-        </div>    
-        <!--/TAB-SUCURSALES-->
-    </div>
-</div>
+    </div>  
+</mcui-box>

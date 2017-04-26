@@ -1,0 +1,175 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8/04/2017, 08:32:43 AM
+    Author     : wonder
+*/
+
+.btn-action-image{
+    position: absolute; top:5px; left:50%; margin-left:-50px; z-index: 999; opacity: .5
+}
+.btn-action-image:hover{
+    opacity: 1
+}
+.box.no-border{
+    border-top:none;
+}
+
+/*NO PADDING*/
+.no-padding-right{
+    padding-right: 0;
+}
+.no-padding-left{
+    padding-left: 0;
+}
+
+/*MARGIN TOP*/
+.mt10{
+    margin-top: 10px;
+}
+.mt15{
+    margin-top: 15px;
+}
+.mt20{
+    margin-top: 20px;
+}
+
+/*MARGIN BOTTOM*/
+.no-margin{
+    margin-top:0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.no-margin-right{
+    margin-right: 0;
+}
+.no-margin-left{
+    margin-left: 0;
+}
+.no-margin-top{
+    margin-top: 0;
+}
+.no-margin-bottom{
+    margin-bottom: 0;
+}
+
+.mb0{
+    margin-bottom: 0px;
+}
+.mb5{
+    margin-bottom: 5px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.mb15{
+    margin-bottom: 15px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+
+/*PADDING*/
+.pb0{
+    margin-bottom: 0px;
+}
+.pb5{
+    margin-bottom: 5px;
+}
+.pb10{
+    margin-bottom: 10px;
+}
+.pb15{
+    margin-bottom: 15px;
+}
+.pb20{
+    margin-bottom: 20px;
+}
+
+/*HEIGH*/
+
+.h150{
+   height: 150px; overflow-y: scroll; 
+}
+
+.h200{
+   height: 200px; overflow-y: scroll; 
+}
+
+.h250{
+   height: 250px; overflow-y: scroll; 
+}
+
+.h300{
+   height: 300px; overflow-y: scroll; 
+}
+.h350{
+   height: 350px; overflow-y: scroll; 
+}
+
+.h500{
+   height: 500px; overflow-y: scroll; 
+}
+
+/*WIDTH*/
+.th-operation{
+    width:140px;
+    text-align: center;
+}
+
+.th-operation-1{
+    width:50px;
+    text-align: center;
+}
+
+.th-img-thumb{
+    width:150px;    
+}
+
+/*DIALOG*/
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+    padding: 0;
+}
+
+/*LOGIN BOX*/
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px)  { 
+
+}
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px)  { 
+
+}
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px)  { 
+
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:961px)  {  }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+/*COMMON*/
+.th-acciones{
+    width:120px; text-align: center
+}
+
+.th-acciones-140{
+    width:140px; text-align: center
+}
+
+.td-acciones{
+    text-align: center;
+}
+
+.th50{
+    width: 50px;
+}
+
+/*SO-SINGLE IMAGE PICKER*/

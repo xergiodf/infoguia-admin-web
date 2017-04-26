@@ -8,7 +8,8 @@
             .directive('mcuiBoxFooterSlot', McuiBoxFooterSlot)
             .directive('mcuiBoxToolSlot', McuiBoxToolSlot)
             .directive('mcuiBtnSearch', McuiBtnSearch)
-            .directive('mcuiShowHiddenPassword', McuiShowHiddenPassword);
+            .directive('mcuiShowHiddenPassword', McuiShowHiddenPassword)
+            .directive('soSingleImagePicker', SoSingleImagePicker);
     
     /*@ngInject*/
     function A() {
@@ -150,5 +151,75 @@
         
         return directive;
     }
+    
+    /*@ngInject*/
+    function SoSingleImagePicker($timeout) {
+
+        /*@ngInject*/
+        function SingleImagePickerController($scope) {
+            var vm = this;
+            vm.fn = {
+                changeFilesSelect: changeFilesSelect,
+                resetFile: resetFile
+            };
+            vm.init = Init;
+
+            Init();
+
+            function Init() {
+            }
+
+            function changeFilesSelect($file) {
+                if (angular.isUndefined($file) || !$file)
+                    return;
+
+                $scope.file = $file;
+            }
+
+            function resetFile($e) {
+                $e.preventDefault();
+                $e.stopPropagation();
+                $scope.$broadcast('sip:reset', {source: $scope.source});
+            }
+        }
+
+        return {
+            restrict: 'EA',
+            link: function(scope, element, attrs) {
+                scope.showFileInput = (attrs.fileInput) ? scope.$eval(attrs.fileInput) : true;
+
+                scope.$on('sip:reset', function(event, message) {
+
+                    if (!scope.file)
+                        return;
+
+                    scope.file = null;
+                    $timeout(function() {
+                        element.find('img')
+                                .prop('src', scope.source);
+                    }, 100);
+                });
+
+                attrs.$observe('source', function() {
+                    if (attrs.source) {
+                        $timeout(function() {
+                            scope.source = attrs.source;
+                            element.find('img')
+                                    .prop('src', scope.source);
+                        }, 100);
+                    }
+                });
+            },
+            templateUrl: function() {
+                return 'app/components/cmp.singleimagepicker.html';
+            },
+            controller: SingleImagePickerController,
+            controllerAs: 'vm',
+            scope: {
+                file: "=",
+                source: "@"
+            }
+        }
+    }    
 
 })(jQuery);    
