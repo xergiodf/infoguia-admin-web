@@ -62,6 +62,7 @@
             });            
             
             UsuarioSvc.getById(id).then(function(data){
+                console.log("USUARIO:", data);
                 vm.usuario = data;
             },
             function(err){

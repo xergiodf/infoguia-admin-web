@@ -2,21 +2,19 @@
 
     <div class="row">
         <div class="col-sm-4">
-            <mcui-form-input 
-                ng-model="vm.usuario.username" 
-                data-label="Nombre de usuario" 
-                data-input="{placeholder:'Nombre de usuario'}">                
-            </mcui-form-input>
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input type="text" class="form-control" ng-model="vm.usuario.username" placeholder="Nombre de usuario" /> 
+            </div>
         </div>
-        
+
         <div class="col-sm-4">
-            <mcui-form-input 
-                ng-model="vm.usuario.email" 
-                data-label="Email" 
-                data-input="{placeholder:'Email', type:'email'}">                
-            </mcui-form-input>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" ng-model="vm.usuario.email" placeholder="Email" /> 
+            </div>
         </div>   
-        
+
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Tipo</label>
@@ -26,7 +24,7 @@
                 </select>                
             </div>
         </div> 
-        
+
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Estado</label>
@@ -44,7 +42,7 @@
                 data-input="{placeholder:'Contraseña', type:'password'}">                
             </mcui-form-input>
         </div>
-        
+
         <div class="col-sm-4">
             <mcui-form-input 
                 ng-model="vm.usuario.password1" 
@@ -52,7 +50,7 @@
                 data-input="{placeholder:'Repita Contraseña', type:'password'}">                
             </mcui-form-input>
         </div>  
-        
+
     </div> 
 
     <mcui-box-footer-slot>

@@ -95,7 +95,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new USUARIO(response.data));
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {
@@ -110,15 +110,15 @@
                 function promise(resolve, reject) {
 
                     var url = API_USUARIO + 'update';
-                    
+
                     var data = {
-                            id: model.id || null,
-                            username: model.username || null,
-                            password: model.password || null,
-                            email: model.email || null,
-                            estadoUsuarioDto: model.estadoUsuarioDto || null,
-                            tipoUsuarioDto: model.tipoUsuarioDto || null
-                    };                    
+                        id: model.id || null,
+                        username: model.username || null,
+                        password: model.password || null,
+                        email: model.email || null,
+                        estadoUsuarioDto: model.estadoUsuarioDto || null,
+                        tipoUsuarioDto: model.tipoUsuarioDto || null
+                    };
 
                     $http({
                         method: 'PUT',
@@ -158,6 +158,16 @@
                 }
 
                 return $q(promise);
+            },
+            perfil: function (id) {
+
+                return $q(function (resolve, reject) {
+                    $http.get('data/Perfil.json').then(function (response) {
+                        resolve(response.data);
+                    }, function (data) {
+                        reject(data);
+                    });
+                })
             }
         };
 

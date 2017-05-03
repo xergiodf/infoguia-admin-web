@@ -38,7 +38,7 @@
                 base: 'app/module/categoria/',
                 views: 'app/module/categoria/views/',
                 layouts: 'app/module/categoria/views/layouts/'
-            });            
+            });
 
     /*@ngInject*/
     function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT, CATEGORIA_ROOT) {
@@ -455,6 +455,36 @@
                         }
                     }
                 })
+                .state('usuario.profile', {
+                    parent: 'usuario',
+                    url: "/perfil/{id}",
+                    data: {
+                        pageTitle: "Perfil de usuario",
+                        pageHeader: "Perfil de usuario",
+                        pageDescription: "Visualizando perfil de usuario."
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "profile.view.html",
+                            controller: "ProfileViewController as vm"
+                        }
+                    }
+                })
+                .state('usuario.profile_edit', {
+                    parent: 'usuario',
+                    url: "/perfil/edit/{id}",
+                    data: {
+                        pageTitle: "Modificar Perfil de usuario",
+                        pageHeader: "Modificar Perfil de usuario",
+                        pageDescription: "Modificando el perfil de usuario."
+                    },
+                    views: {
+                        '': {
+                            templateUrl: USUARIO_ROOT.views + "profile.edit.html",
+                            controller: "ProfileEditController as vm"
+                        }
+                    }
+                })
                 //
                 //CATEGORIA ROUTER
                 //                
@@ -513,7 +543,7 @@
                             controller: "CategoriaEditController as vm"
                         }
                     }
-                });                 
+                });
     }
 
 })();
