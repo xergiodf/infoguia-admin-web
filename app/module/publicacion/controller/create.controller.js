@@ -17,6 +17,7 @@
         };
 
         vm.publicacion = {};
+        vm.model = {};
 
         vm.data = {
             tipoPublicacion: [],
@@ -29,36 +30,6 @@
 
         function Init() {
             loadModel($stateParams.id);
-            loadData();
-        }
-
-        function saveModel(isValid) {
-            if (!isValid) {
-                alert('Revise los datos dle formulario...');
-                return;
-            }
-            
-            PublicacionSvc.create(vm.publicacion).then(function (data) {
-                $state.go('cliente.edit', {id: vm.publicacion.clienteDto.id});
-            }, function (err) {
-                alert(err);
-            });
-        }
-
-        function loadModel(clienteID) {
-            if (!clienteID)
-                return;
-
-            vm.publicacion = new PUBLICACION({});
-
-            ClienteSvc.getById(clienteID).then(function (data) {
-                vm.publicacion['clienteDto'] = data;
-            }, function (err) {
-                console.log("Err (" + err + ")");
-            });
-        }
-
-        function loadData() {
 
             AppNomenclatorSvc.getNomenclador('TIPO_PUBLICACION')
                     .then(function (data) {
@@ -73,6 +44,40 @@
                     }, function (err) {
                         $log.error(err);
                     });
+        }
+
+        function saveModel(isValid) {
+            if (!isValid) {
+                alert('Revise los datos dle formulario...');
+                return;
+            }
+
+            PublicacionSvc.create(vm.model).then(function (data) {
+
+                if (angular.isDefined(vm.publicacion) && vm.publicacion.imagen) {
+                    PublicacionSvc.uploadImage(vm.publicacion.imagen, data.id).then(function (data) {
+                        $state.go('cliente.edit', {id: vm.model.clienteDto.id});
+                    }, function (err) {
+                        console.log(err);
+                    });
+                } else {
+                    $state.go('cliente.edit', {id: vm.model.clienteDto.id});
+                }
+
+            }, function (err) {
+                console.log(err);
+            });
+        }
+
+        function loadModel(clienteID) {
+            if (!clienteID)
+                return;
+
+            ClienteSvc.getById(clienteID).then(function (data) {
+                vm.model['clienteDto'] = data;
+            }, function (err) {
+                console.log("Err (" + err + ")");
+            });
         }
     }
 

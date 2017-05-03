@@ -13,7 +13,6 @@
                     file="vm.publicacion.imagen" 
                     data-source="{{ vm.model.dirImagen || 'app/assets/img/no-thumbnail.jpg'}}">
                 </so-single-image-picker>               
-                <input type="text" class="form-control" ng-model="vm.model.dirImagen"/>
             </div>            
         </div>  
 
@@ -31,6 +30,34 @@
                 </div>             
 
                 <div class="row">
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                                    ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
+                                    ng-model="vm.model.estadoPublicacionDto">
+                            </select>                
+                        </div>
+                    </div>                      
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Tipo publicación</label>
+                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                                    ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
+                                    ng-model="vm.model.tipoPublicacionDto">
+                            </select>                
+                        </div>
+                    </div> 
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Tiempo muestra</label>
+                            <input type="number" class="form-control" ng-model="vm.model.tiempoMuestra" />
+                        </div>
+                    </div>                     
+
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label>Fecha creación</label>

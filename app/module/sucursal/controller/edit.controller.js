@@ -14,10 +14,39 @@
 
         vm.fn = {
             saveModel: saveModel,
-            addMarker: addMarker
+            addMarker: addMarker,
+            removeImage: function (id) {
+                SucursalSvc.removeImage().then(function (data) {
+                    alert(data);
+                }, function (err) {
+                    console.log(err);
+                })
+            },
+            uploadFiles: function ($files) {
+                if ($files && $files.length) {
+                    console.log($files);
+                    var log = [];
+                    angular.forEach($files, function (value, key) {
+                        SucursalSvc.uploadImage(value, vm.sucursal.id).then(function (data) {
+                            vm.data.imagenes.push({id: value.lastModified, url: null, file: data});
+                        }, function (err) {
+                            console.log(err);
+                        })
+                    }, log);
+                }
+            }
         };
 
         vm.sucursal = {};
+
+        vm.data = {
+            imagenes: [
+                {id: 1, url: null},
+                {id: 2, url: null},
+                {id: 3, url: null},
+                {id: 4, url: null}
+            ]
+        };
 
         vm.init();
 
@@ -58,15 +87,15 @@
                 direccionFisica: '',
                 coordenadas: '',
                 clienteDto: {},
-                telefonos:'',
-                emails:''
+                telefonos: '',
+                emails: ''
             };
         }
 
         function addMarker(event) {
             var ll = event.latLng;
-            vm.sucursal.coordenadas = ll.lat() + '|' + ll.lng();            
-        }        
+            vm.sucursal.coordenadas = ll.lat() + '|' + ll.lng();
+        }
     }
 
 })();

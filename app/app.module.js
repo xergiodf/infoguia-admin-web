@@ -46,6 +46,9 @@ function AppRun($rootScope, $filter, $state, $document, $location, $log, AuthSvc
     $rootScope.$location = $location;
     $rootScope.$appGmapref = 'https://maps.googleapis.com/maps/api/js';
     $rootScope.$appUser = AuthSvc.appUser();
+    $rootScope.$settings = {
+      'noImage': 'app/assets/img/no-thumbnail.jpg'  
+    };
 
     var _allow = [
         'auth.login',

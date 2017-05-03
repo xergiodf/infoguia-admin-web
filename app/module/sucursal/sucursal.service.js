@@ -5,7 +5,7 @@
     angular.module('sucursal.module')
             .service('SucursalSvc', SucursalSvc);
 
-    function SucursalSvc($http, $q, API_INFOGUIA) {
+    function SucursalSvc($http, $q, API_INFOGUIA, Upload) {
 
         var API_SUCURSAL = API_INFOGUIA + '/sucursales/';
 
@@ -63,10 +63,10 @@
 
                     $http({
                         method: "GET",
-                        url: url,
-                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })
+                        url: url
+                                /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                                 return doTransform(value);
+                                 })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -112,17 +112,17 @@
 
                     var url = API_SUCURSAL + 'findByCliente/' + modelID;
 
-                    if(!modelID){
+                    if (!modelID) {
                         reject("Id de cliente no establecido...");
                         return;
-                    }                        
+                    }
 
                     $http({
                         method: "GET",
                         url: url,
-                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })
+                        /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                         return doTransform(value);
+                         })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -174,6 +174,62 @@
 
                     function errorResponse(response) {
                         reject("Ha ocurrido un error mientras se eliminaba la sucursal. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            },
+            removeImage: function (id) {
+
+                function promise(resolve, reject) {
+
+                    resolve("Imagen eliminada...");
+                    return;
+
+                    var url = API_SUCURSAL + 'removeimage';
+
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: {id: id}
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se eliminaba la imagen. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            },
+            uploadImage: function (file, pid) {
+
+                var id = pid || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_SUCURSAL + 'upload/' + id;
+
+                    if (file && id !== null) {
+
+                        Upload.upload({
+                            url: url,
+                            data: {fileData: file, id: id}
+                        }).then(function (resp) {
+                            console.log('Success ' + resp.config.data.fileData.name + 'uploaded. Response: ' + resp.data);
+                            resolve(resp.config.data.fileData);
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                            reject('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.fileData.name);
+                        });
+                    } else {
+                        reject("Error intentando subir la image de la sucursal.");
                     }
                 }
 

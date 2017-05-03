@@ -5,7 +5,7 @@
             <div class="box box-widget widget-user-2">
                 <div class="widget-user-header bg-red">
                     <div class="widget-user-image">
-                        <img src="resources/img/160x160.png" class="img-circle" alt="Cliente picture">
+                        <img width="160" height="160" class="img-circle" ng-src="{{ vm.sucursal.imagenURL || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
                     </div>
                     <h3 class="widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
                     <h5 class="widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>

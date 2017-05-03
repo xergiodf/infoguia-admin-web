@@ -62,7 +62,6 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        console.log(response);
                         resolve(response.data);
                     }
 

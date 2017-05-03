@@ -6,13 +6,18 @@
             .controller('PublicacionEditController', PublicacionEditController);
 
     /*@ngInject*/
-    function PublicacionEditController($state, $stateParams, $filter, PublicacionSvc) {
+    function PublicacionEditController($state, $stateParams, $filter, PublicacionSvc, AppNomenclatorSvc, $log) {
 
         var vm = this;
 
         vm.init = Init;
 
         vm.model = {};
+
+        vm.data = {
+            tipoPublicacion: [],
+            estadoPublicacion: []
+        };
 
         vm.fn = {
             saveModel: saveModel
@@ -24,7 +29,22 @@
         //Functions
 
         function Init() {
+            
             loadModel($stateParams.id);
+
+            AppNomenclatorSvc.getNomenclador('TIPO_PUBLICACION')
+                    .then(function (data) {
+                        vm.data.tipoPublicacion = data;
+                    }, function (err) {
+                        $log.error(err);
+                    });
+
+            AppNomenclatorSvc.getNomenclador('ESTADO_PUBLICACION')
+                    .then(function (data) {
+                        vm.data.estadoPublicacion = data;
+                    }, function (err) {
+                        $log.error(err);
+                    });
         }
 
         function saveModel(isValid) {
@@ -33,11 +53,22 @@
                 return;
             }
 
-            PublicacionSvc.update(vm.publicacion).then(function (data) {
-                $state.go('cliente.list');
+            PublicacionSvc.update(vm.model).then(function (data) {
+
+                if (angular.isDefined(vm.publicacion) && vm.publicacion.imagen) {
+
+                    PublicacionSvc.uploadImage(vm.publicacion.imagen, vm.model.id).then(function (data) {
+                        $state.go('cliente.list');
+                    }, function (err) {
+                        console.log(err);
+                    });
+                } else {
+                    $state.go('cliente.list');
+                }
+
             }, function (err) {
                 console.log(err);
-            })
+            });
         }
 
         function loadModel(id) {
@@ -52,7 +83,7 @@
                 vm.model = modelTmp;
             }, function (err) {
                 console.log("Err (" + err + ")");
-            })
+            });
         }
     }
 

@@ -7,51 +7,91 @@
         </mcui-form-input>
     </div>
 
-    <div class="col-sm-4">
-        <mcui-form-input 
-            ng-model="vm.sucursal.direccionFisica" 
-            data-label="Dirección física" 
-            data-input="{'required':'required', placeholder:'Dirección física'}">                
-        </mcui-form-input>
+    <div class="col-sm-8">
+        <label>Dirección física</label>
+        <input class="form-control" type="text" placeholder="Dirección física" ng-required="true" ng-model="vm.sucursal.direccionFisica"  />
     </div> 
 
+    <div class="clearfix"></div>
+
     <div class="col-sm-4">
-        <mcui-form-input 
-            ng-model="vm.sucursal.telefonos" 
-            data-label="Teléfonos" 
-            data-input="{placeholder:'Teléfonos'}">                
-        </mcui-form-input>
+        <label>Teléfonos</label>
+        <input class="form-control" type="text" placeholder="Teléfonos" ng-model="vm.sucursal.telefonos"  />
     </div>
-    
-    <div class="col-sm-4">
+
+    <div class="col-sm-8">
         <mcui-form-input 
             ng-model="vm.sucursal.emails" 
             data-label="Emails" 
             data-input="{placeholder:'Emails'}">                
         </mcui-form-input>
-    </div>      
-    
-    <div class="col-sm-4">
-        <mcui-form-input 
-            ng-model="vm.sucursal.coordenadas" 
-            data-label="Coordenadas" 
-            data-input="{placeholder:'Coordenadas'}">                
-        </mcui-form-input>
+    </div>  
+
+    <div class="clearfix"></div>
+
+    <div class="col-sm-12">
+        <label>Coordenadas</label>
+        <input class="form-control" type="text" placeholder="Coordenadas" ng-model="vm.sucursal.coordenadas"  />        
     </div>    
 
     <!-- -25.2968361, -57.66813 -->
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 mt20 mb20">
         <ng-map center="{{ vm.sucursal.coordenadas | coordFilter  }}" zoom="15" on-click="vm.fn.addMarker()">
             <marker 
                 position="{{ vm.sucursal.coordenadas | coordFilter }}"
-                title="{{ vm.sucursal.nombreSucursal }} {{ vm.sucursal.direccionFisica }}"
+                title="{{ vm.sucursal.nombreSucursal}} {{ vm.sucursal.direccionFisica}}"
                 animation="Animation.BOUNCE"
                 centered="true"
                 draggable="true"
                 on-dragend="vm.fn.addMarker()">                    
             </marker>          
         </ng-map>
+    </div>
+
+    <div class="col-sm-12" ng-if="vm.sucursal.id">
+        <label>Imágenes</label>
+
+        <div 
+            ngf-select="vm.fn.uploadFiles($files)" 
+            multiple
+            ngf-drop="vm.fn.uploadFiles($files)" 
+            ng-model="files" 
+            ngf-model-invalid="invalidFiles" 
+            ngf-model-options="modelOptionsObj" 
+            ngf-multiple="multiple" 
+            ngf-pattern="pattern" 
+            ngf-accept="image/*" 
+            ngf-capture="capture" 
+            ngf-drag-over-class="dragOverClassObj" 
+            ngf-validate="validateObj" 
+            ngf-resize="resizeObj"
+            ngf-resize-if="resizeIfFn($file, $width, $height)" 
+            ngf-dimensions="dimensionsFn($file, $width, $height)" 
+            ngf-duration="durationFn($file, $duration)" 
+            ngf-keep="keepDistinct ? 'distinct' : keep" 
+            ngf-fix-orientation="orientation" 
+            ngf-max-files="maxFiles" 
+            ngf-ignore-invalid="ignoreInvalid" 
+            ngf-run-all-validations="runAllValidations" 
+            ngf-allow-dir="allowDir"             
+            class="drop-box mb10 mt10" 
+            ngf-drop-available="dropAvailable">Seleccione Imágenes
+            <span ng-show="dropAvailable"> o Arrastre las imágenes</span>
+        </div>        
+
+        <div class="h300">
+            <div class="row-fluid">
+                <div class="col-sm-3 mb10" ng-repeat="item in vm.data.imagenes">
+                    <div class="thumbnail image-thumb">
+                        <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
+                        <img ngf-src="item.file" ng-if="item.file" />
+                        
+                        <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
+                    </div>
+                </div>
+            </div>            
+        </div>
     </div>
 
 </div>  
