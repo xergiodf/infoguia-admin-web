@@ -4,8 +4,8 @@
     angular.module('app')
             .service('AppGeoPositionSvc', AppGeoPositionSvc)
             .service('AppNomenclatorSvc', AppNomenclatorSvc);
-    
-    
+
+
     /*@ngInject*/
     function AppGeoPositionSvc($q, $filter) {
 
@@ -66,12 +66,12 @@
 
         return service;
     }
-    
+
     /*@ngInject*/
-    function AppNomenclatorSvc($q, $filter) {
+    function AppNomenclatorSvc($q, $filter, $http, API_INFOGUIA) {
 
         var service = {
-            getNomenclador: function (pnomenclador, id) {
+            getNomenclador: function (pnomenclador, remote, id) {
 
                 //------- NOMENCLADORES ----- 
                 //  
@@ -82,6 +82,7 @@
                 //  => GRUPO_CATEGORIA
 
                 var pid = id || null;
+                var premote = (typeof remote == undefined || remote == null || remote == "") ? false : true;
 
                 function NOMENCLADOR(model) {
                     this.id = model.id || null;
@@ -97,7 +98,7 @@
                     new NOMENCLADOR({id: 1, descripcion: "ACTIVO"}),
                     new NOMENCLADOR({id: 2, descripcion: "INACTIVO"})
                 ];
-                
+
                 var tipoUsuario = [
                     new NOMENCLADOR({id: 1, descripcion: "Administrador"}),
                     new NOMENCLADOR({id: 2, descripcion: "Usuario"}),
@@ -109,7 +110,7 @@
                     new NOMENCLADOR({id: 2, descripcion: "Inactivo"}),
                     new NOMENCLADOR({id: 3, descripcion: "Pendiente de activación"})
                 ];
-                
+
                 var grupoCategoria = [
                     new NOMENCLADOR({id: 1, descripcion: "Informaciones"}),
                     new NOMENCLADOR({id: 2, descripcion: "Servicios"}),
@@ -118,7 +119,7 @@
                     new NOMENCLADOR({id: 5, descripcion: "Ocio"}),
                     new NOMENCLADOR({id: 6, descripcion: "Novedades"}),
                     new NOMENCLADOR({id: 7, descripcion: "Promocionales"})
-                ];                  
+                ];
 
                 function promise(resolve, reject) {
 
@@ -136,14 +137,14 @@
                             break;
                         case 'ESTADO_USUARIO':
                             collection = estadoUsuario;
-                            break;  
+                            break;
                         case 'GRUPO_CATEGORIA':
                             collection = grupoCategoria;
-                            break;                        
+                            break;
                         default:
                             collection = [];
                     }
-                    
+
                     if (!pnomenclador) {
                         reject('Debe indicar el parámetro "pnomenclador" de la función');
                     }
@@ -158,11 +159,47 @@
                     }
                 }
 
-                return $q(promise);
+                function promiseRemote(resolve, reject) {
+
+                    var url = null;
+
+                    switch (pnomenclador) {
+                        case 'TIPO_PUBLICACION':
+                            if (pid == null)
+                                url = API_INFOGUIA + '/tiposPublicaciones/find/all';
+                            else
+                                url = API_INFOGUIA + '/tiposPublicaciones/find/' + pid;
+                            break;
+                        case 'ESTADO_PUBLICACION':
+                            if (pid == null)
+                                url = API_INFOGUIA + '/estadosPublicaciones/find/all';
+                            else
+                                url = API_INFOGUIA + '/estadosPublicaciones/find/' + pid;
+                            break;
+                        default:
+                            url = null;
+                    }
+
+                    if (!pnomenclador || url == null) {
+                        reject('Debe indicar el parámetro "pnomenclador" de la función');
+                    }
+                    else {
+                        $http({
+                            method: 'GET',
+                            url: url
+                        }).then(function (response) {
+                            resolve(response.data);
+                        }, function (response) {
+                            reject("Ha ocurrido un error cargando. " + pnomenclador + " => " + response.statusText);
+                        });
+                    }
+                }
+
+                return !premote ? $q(promise) : $q(promiseRemote);
             }
         };
 
         return service;
-    }    
+    }
 
 })(jQuery);    

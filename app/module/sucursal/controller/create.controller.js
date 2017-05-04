@@ -36,7 +36,6 @@
 
             SucursalSvc.create(vm.sucursal).then(function (data) {
                 $state.go('sucursal.edit', {id: data.id});
-                //$state.go('cliente.edit', {id: vm.sucursal.clienteDto.id});
             }, function (err) {
                 alert(err);
             });

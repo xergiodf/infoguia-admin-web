@@ -24,11 +24,11 @@
             },
             uploadFiles: function ($files) {
                 if ($files && $files.length) {
-                    console.log($files);
+
                     var log = [];
                     angular.forEach($files, function (value, key) {
                         SucursalSvc.uploadImage(value, vm.sucursal.id).then(function (data) {
-                            vm.data.imagenes.push({id: value.lastModified, url: null, file: data});
+                            vm.sucursal.archivos.push(data);
                         }, function (err) {
                             console.log(err);
                         })
@@ -37,23 +37,23 @@
             }
         };
 
-        vm.sucursal = {};
-
-        vm.data = {
-            imagenes: [
-                {id: 1, url: null},
-                {id: 2, url: null},
-                {id: 3, url: null},
-                {id: 4, url: null}
-            ]
+        vm.sucursal = {
+            nombreSucursal: '',
+            direccionFisica: '',
+            coordenadas: '',
+            clienteDto: {},
+            telefonos: '',
+            emails: '',
+            archivos: []
         };
+
+        vm.data = {};
 
         vm.init();
 
         //Functions
 
         function Init() {
-            initSucursal();
             loadModel($stateParams.id);
         }
 
@@ -63,7 +63,10 @@
                 return;
             }
 
-            SucursalSvc.update(vm.sucursal).then(function (data) {
+            var dtoSucursal = angular.copy(vm.sucursal);
+            dtoSucursal['archivos'] = null;
+
+            SucursalSvc.update(dtoSucursal).then(function (data) {
                 $state.go('cliente.edit', {id: vm.sucursal.clienteDto.id})
             }, function (err) {
                 alert(err);
@@ -76,20 +79,10 @@
 
             SucursalSvc.get(modelID).then(function (data) {
                 vm.sucursal = data;
+                vm.sucursal['archivos'] = data.archivos !== null ? data.archivos : [];
             }, function (err) {
                 alert(err);
             })
-        }
-
-        function initSucursal() {
-            vm.sucursal = {
-                nombreSucursal: '',
-                direccionFisica: '',
-                coordenadas: '',
-                clienteDto: {},
-                telefonos: '',
-                emails: ''
-            };
         }
 
         function addMarker(event) {

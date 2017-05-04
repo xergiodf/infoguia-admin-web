@@ -29,17 +29,17 @@
         //Functions
 
         function Init() {
-            
+
             loadModel($stateParams.id);
 
-            AppNomenclatorSvc.getNomenclador('TIPO_PUBLICACION')
+            AppNomenclatorSvc.getNomenclador('TIPO_PUBLICACION', true)
                     .then(function (data) {
                         vm.data.tipoPublicacion = data;
                     }, function (err) {
                         $log.error(err);
                     });
 
-            AppNomenclatorSvc.getNomenclador('ESTADO_PUBLICACION')
+            AppNomenclatorSvc.getNomenclador('ESTADO_PUBLICACION', true)
                     .then(function (data) {
                         vm.data.estadoPublicacion = data;
                     }, function (err) {
@@ -53,11 +53,13 @@
                 return;
             }
 
-            PublicacionSvc.update(vm.model).then(function (data) {
+            var objectDto = angular.copy(vm.model);
+
+            PublicacionSvc.update(objectDto).then(function (data) {
 
                 if (angular.isDefined(vm.publicacion) && vm.publicacion.imagen) {
 
-                    PublicacionSvc.uploadImage(vm.publicacion.imagen, vm.model.id).then(function (data) {
+                    PublicacionSvc.uploadImage(vm.publicacion.imagen, data.id).then(function (archivo) {
                         $state.go('cliente.list');
                     }, function (err) {
                         console.log(err);

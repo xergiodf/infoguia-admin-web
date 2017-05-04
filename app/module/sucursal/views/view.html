@@ -1,63 +1,113 @@
 <!-- VIEW SUCURSAL-->
-<mcui-box data-box-title="Detalle Sucursal" data-box-body-class="table-responsive">
+<div class="row-fluid">
 
-    <fieldset disabled="disabled">
-        <div class="row-fluid">
-            <div class="col-sm-4">
-                <mcui-form-input 
-                    ng-model="vm.sucursal.nombreSucursal" 
-                    data-label="Nombre">                
-                </mcui-form-input>
-            </div>
-
-            <div class="col-sm-4">
-                <mcui-form-input 
-                    ng-model="vm.sucursal.direccionFisica" 
-                    data-label="Dirección física">                
-                </mcui-form-input>
-            </div> 
-
-            <div class="col-sm-4">
-                <mcui-form-input 
-                    ng-model="vm.sucursal.telefonos" 
-                    data-label="Teléfonos">                
-                </mcui-form-input>
-            </div>
-
-            <div class="col-sm-4">
-                <mcui-form-input 
-                    ng-model="vm.sucursal.emails" 
-                    data-label="Emails">                
-                </mcui-form-input>
-            </div>      
-
-            <div class="col-sm-4">
-                <mcui-form-input 
-                    ng-model="vm.sucursal.coordenadas" 
-                    data-label="Coordenadas">                
-                </mcui-form-input>
+    <div class="col-sm-3 no-padding">
+        <mcui-box data-box-title="Datos del Cliente" data-box-body-class="" data-footer-slot="false">
+            <div class="box box-widget widget-user-2">
+                <div class="widget-user-header bg-red">
+                    <div class="widget-user-image">
+                        <img width="160" height="160" class="img-circle" ng-src="{{ vm.sucursal.archivos[0].url || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
+                    </div>
+                    <h3 class="widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
+                    <h5 class="widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">Fecha alta <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaAlta">...</span></a></li>
+                        <li><a href="#">Fecha inicio <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaInicio">...</span></a></li>
+                    </ul>
+                </div>
             </div>  
 
+        </mcui-box>   
+    </div>
 
-            <div class="clear-fix"></div>
+    <div class="col-sm-9">
+        <mcui-box data-box-title="Detalle Sucursal" data-box-body-class="table-responsive">
 
-            <div class="col-sm-12">
-                <ng-map center="{{ vm.sucursal.coordenadas | coordFilter  }}" zoom="15" on-click="vm.fn.addMarker()">
-                    <marker 
-                        position="{{ vm.sucursal.coordenadas | coordFilter }}"
-                        title="{{ vm.sucursal.nombreSucursal}} {{ vm.sucursal.direccionFisica}}"
-                        animation="Animation.BOUNCE"
-                        centered="true">                    
-                    </marker>          
-                </ng-map>
-            </div>            
+            <fieldset disabled="disabled">
 
-        </div>                     
-    </fieldset>
+                <div class="row-fluid">
+                    <div class="col-sm-4">
+                        <mcui-form-input 
+                            ng-model="vm.sucursal.nombreSucursal" 
+                            data-label="Nombre" 
+                            data-input="{'required':'required', placeholder:'Nombre Sucursal'}">                
+                        </mcui-form-input>
+                    </div>
 
-    <mcui-box-footer-slot>
-        <a href="#" data-ui-sref="cliente.edit({id:vm.sucursal.clienteDto.id})" class="btn btn-flat btn-default">Cancelar</a>    
-    </mcui-box-footer-slot>                  
+                    <div class="col-sm-8">
+                        <label>Dirección física</label>
+                        <input class="form-control" type="text" placeholder="Dirección física" ng-required="true" ng-model="vm.sucursal.direccionFisica"  />
+                    </div> 
 
-</mcui-box>
+                    <div class="clearfix"></div>
+
+                    <div class="col-sm-4">
+                        <label>Teléfonos</label>
+                        <input class="form-control" type="text" placeholder="Teléfonos" ng-model="vm.sucursal.telefonos"  />
+                    </div>
+
+                    <div class="col-sm-8">
+                        <mcui-form-input 
+                            ng-model="vm.sucursal.emails" 
+                            data-label="Emails" 
+                            data-input="{placeholder:'Emails'}">                
+                        </mcui-form-input>
+                    </div>  
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-sm-12">
+                        <label>Coordenadas</label>
+                        <input class="form-control" type="text" placeholder="Coordenadas" ng-model="vm.sucursal.coordenadas"  />        
+                    </div>    
+
+                    <!-- -25.2968361, -57.66813 -->
+
+                    <div class="col-sm-12 mt20 mb20">
+                        <ng-map center="{{ vm.sucursal.coordenadas | coordFilter  }}" zoom="15" on-click="vm.fn.addMarker()">
+                            <marker 
+                                position="{{ vm.sucursal.coordenadas | coordFilter }}"
+                                title="{{ vm.sucursal.nombreSucursal}} {{ vm.sucursal.direccionFisica}}"
+                                animation="Animation.BOUNCE"
+                                centered="true">                    
+                            </marker>          
+                        </ng-map>
+                    </div>
+
+                    <div class="col-sm-12">
+
+                        <label>Imágenes</label>
+
+                        <div class="h300 mb10 mt10">
+                            <div class="row-fluid">
+                                <div class="col-xs-6 col-sm-3 mb10" ng-repeat="item in vm.sucursal.archivos">
+                                    <div class="thumbnail image-thumb">
+                                        <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
+                                        <img ng-if="item.file" ngf-src="item.file" />
+
+                                        <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+
+                </div>          
+
+            </fieldset>
+
+            <mcui-box-footer-slot>
+                <a href="#" data-ui-sref="cliente.edit({id:vm.sucursal.clienteDto.id})" class="btn btn-flat btn-default">Cancelar</a>    
+                <a href="#" data-ui-sref="sucursal.edit({id:vm.sucursal.id})" class="btn btn-flat btn-default"><i class="fa fa-pencil"></i> Editar</a>    
+
+            </mcui-box-footer-slot>                  
+
+        </mcui-box>
+    </div>
+
+</div>
+
+
 <!-- /VIEW SUCURSAL-->  

@@ -54,12 +54,11 @@
 
         <div 
             ngf-select="vm.fn.uploadFiles($files)" 
-            multiple
             ngf-drop="vm.fn.uploadFiles($files)" 
             ng-model="files" 
             ngf-model-invalid="invalidFiles" 
             ngf-model-options="modelOptionsObj" 
-            ngf-multiple="multiple" 
+            ngf-multiple="true" 
             ngf-pattern="pattern" 
             ngf-accept="image/*" 
             ngf-capture="capture" 
@@ -76,16 +75,16 @@
             ngf-run-all-validations="runAllValidations" 
             ngf-allow-dir="allowDir"             
             class="drop-box mb10 mt10" 
-            ngf-drop-available="dropAvailable">Seleccione Imágenes
-            <span ng-show="dropAvailable"> o Arrastre las imágenes</span>
+            ngf-drop-available="dropAvailable">Seleccione Imágen
+            <span ng-show="dropAvailable"> o Arrastre la imágen</span>
         </div>        
 
         <div class="h300">
             <div class="row-fluid">
-                <div class="col-sm-3 mb10" ng-repeat="item in vm.data.imagenes">
+                <div class="col-xs-6 col-sm-3 mb10" ng-repeat="item in vm.sucursal.archivos">
                     <div class="thumbnail image-thumb">
                         <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
-                        <img ngf-src="item.file" ng-if="item.file" />
+                        <img ng-if="item.file" ngf-src="item.file" />
                         
                         <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
                     </div>

@@ -94,7 +94,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new SUCURSAL(response.data));
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {
@@ -220,7 +220,7 @@
                             data: {fileData: file, id: id}
                         }).then(function (resp) {
                             console.log('Success ' + resp.config.data.fileData.name + 'uploaded. Response: ' + resp.data);
-                            resolve(resp.config.data.fileData);
+                            resolve(resp.data.archivosDetDto[0]);
                         }, function (resp) {
                             console.log('Error status: ' + resp.status);
                             reject('Error status: ' + resp.status);

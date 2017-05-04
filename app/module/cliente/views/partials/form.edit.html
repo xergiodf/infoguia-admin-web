@@ -111,7 +111,7 @@
                             <tr ng-repeat="item in vm.data.sucursales| filter:vm.filter.search">
                                 <td>
                                     <div class="thumbnail">
-                                        <img ng-src="{{ item.imagenURL || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
+                                        <img ng-src="{{ item.archivos[0].url || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
                                     </div>
                                 </td>
                                 <td>{{ item.id}}</td>
@@ -164,7 +164,10 @@
                             <tr ng-repeat="item in vm.data.list| filter:vm.filter.search">
                                 <td>
                                     <div class="thumbnail">
-                                        <img ng-src="{{ item.dirImagen || $settings.noImage}}" alt="{{ item.titulo}}" class="img-responsive" />
+                                        <img 
+                                            ng-src="{{ item.archivos[item.archivos.length - 1].url || item.dirImagen || $settings.noImage }}" 
+                                            alt="{{ item.titulo}}" 
+                                            class="img-responsive" />
                                     </div>
                                 </td>
                                 <td>{{ item.titulo}}</td>                
@@ -172,7 +175,7 @@
                                 <td>{{ item.fechaCreacion | date }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i></button>
+                                    <button type="button" class="btn btn-flat" data-ng-click="vm.fn.goToView(item.id)" ng-disabled="true"><i class="fa fa-eye"></i></button>
                                     <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

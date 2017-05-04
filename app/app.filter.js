@@ -11,7 +11,8 @@
             
             var splitter = split || '|';
            
-            if (text !== null) {
+            if (text != null && typeof text != undefined) {
+                
                 var splitterText = text.split(splitter);
                 var joinSplitter = splitterText.join(',');
                 return joinSplitter;
