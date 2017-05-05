@@ -75,8 +75,8 @@
         <label>Imágenes</label>
 
         <div 
-            ngf-select="vm.fn.uploadFiles($files)" 
-            ngf-drop="vm.fn.uploadFiles($files)" 
+            ngf-select="vm.fn.uploadFile($files)" 
+            ngf-drop="vm.fn.uploadFile($files)" 
             ng-model="files" 
             ngf-model-invalid="invalidFiles" 
             ngf-model-options="modelOptionsObj" 
@@ -108,7 +108,7 @@
                         <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
                         <img ng-if="item.file" ngf-src="item.file" />
 
-                        <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
+                        <button type="button" data-ng-click="vm.fn.removeFile(item.id, $index)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
                     </div>
                 </div>
             </div>            

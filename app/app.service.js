@@ -3,7 +3,8 @@
     "use strict";
     angular.module('app')
             .service('AppGeoPositionSvc', AppGeoPositionSvc)
-            .service('AppNomenclatorSvc', AppNomenclatorSvc);
+            .service('AppNomenclatorSvc', AppNomenclatorSvc)
+            .service('AppFileSvc', AppFileSvc);
 
 
     /*@ngInject*/
@@ -196,6 +197,38 @@
                 }
 
                 return !premote ? $q(promise) : $q(promiseRemote);
+            }
+        };
+
+        return service;
+    }
+
+    /*@ngInject*/
+    function AppFileSvc($q, $http, $interpolate, API_INFOGUIA) {
+        var service = {
+            remove: function (pid) {
+
+                var id = pid || null;
+                var exp = $interpolate(API_INFOGUIA + '/archivos/delete/{{ id }}');
+                var url = exp({id: id});
+
+                function promise(resolve, reject) {
+
+                    if (id != null) {
+                        $http({
+                            method: 'DELETE',
+                            url: url
+                        }).then(function (response) {
+                            resolve(response.data);
+                        }, function (response) {
+                            reject("Ha ocurrido un error intentando eliminar el archivo. " + pid + " => " + response.statusText);
+                        });
+                    } else {
+                        reject("Identificador de archivo no establecido.");
+                    }
+                }
+
+                return $q(promise);
             }
         };
 

@@ -6,7 +6,7 @@
             .controller('PublicacionEditController', PublicacionEditController);
 
     /*@ngInject*/
-    function PublicacionEditController($state, $stateParams, $filter, PublicacionSvc, AppNomenclatorSvc, $log) {
+    function PublicacionEditController($state, $filter, $stateParams, AppFileSvc, PublicacionSvc, AppNomenclatorSvc, $log) {
 
         var vm = this;
 
@@ -21,14 +21,14 @@
 
         vm.fn = {
             saveModel: saveModel,
-            removeImage: function (id) {
-                PublicacionSvc.removeImage().then(function (data) {
-                    alert(data);
+            removeFile: function (id, index) {
+                AppFileSvc.remove(id).then(function (data) {
+                    vm.model.archivos.splice(index, 1);
                 }, function (err) {
                     console.log(err);
                 })
             },
-            uploadFiles: function ($files) {
+            uploadFile: function ($files) {
                 if ($files && $files.length) {
 
                     var log = [];
