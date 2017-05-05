@@ -49,7 +49,7 @@ and open the template in the editor.
     margin-right: 0;
 }
 .no-margin-left{
-    margin-left: 0;
+    margin-left: 0 !important;
 }
 .no-margin-top{
     margin-top: 0;

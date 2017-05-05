@@ -20,9 +20,28 @@
         };
 
         vm.fn = {
-            saveModel: saveModel
-        };
+            saveModel: saveModel,
+            removeImage: function (id) {
+                PublicacionSvc.removeImage().then(function (data) {
+                    alert(data);
+                }, function (err) {
+                    console.log(err);
+                })
+            },
+            uploadFiles: function ($files) {
+                if ($files && $files.length) {
 
+                    var log = [];
+                    angular.forEach($files, function (value, key) {
+                        PublicacionSvc.uploadImage(value, vm.model.id).then(function (data) {
+                            vm.model.archivos.push(data);
+                        }, function (err) {
+                            console.log(err);
+                        })
+                    }, log);
+                }
+            }
+        };
 
         vm.init();
 
@@ -57,16 +76,7 @@
 
             PublicacionSvc.update(objectDto).then(function (data) {
 
-                if (angular.isDefined(vm.publicacion) && vm.publicacion.imagen) {
-
-                    PublicacionSvc.uploadImage(vm.publicacion.imagen, data.id).then(function (archivo) {
-                        $state.go('cliente.list');
-                    }, function (err) {
-                        console.log(err);
-                    });
-                } else {
-                    $state.go('cliente.list');
-                }
+                $state.go('cliente.list');
 
             }, function (err) {
                 console.log(err);
@@ -82,6 +92,9 @@
                 modelTmp['fechaCreacion'] = new Date(data.fechaCreacion);
                 modelTmp['fechaDesde'] = new Date(data.fechaDesde);
                 modelTmp['fechaHasta'] = new Date(data.fechaHasta);
+                if (data['archivos'] == null)
+                    modelTmp['archivos'] = [];
+
                 vm.model = modelTmp;
             }, function (err) {
                 console.log("Err (" + err + ")");

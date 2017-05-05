@@ -5,81 +5,116 @@
         <a href="#" data-ui-sref="cliente.edit({id: vm.model.clienteDto.id})" class="btn btn-default flat">Cancelar</a>
     </mcui-box-footer-slot>       
 
-    <div class="row">
 
-        <div class="col-sm-3">
+
+
+    <div class="row-fluid">
+
+        <div class="col-sm-12">
             <div class="form-group">
-                <label>Imagen</label>
-                <so-single-image-picker 
-                    file="vm.publicacion.imagen" 
-                    data-source="{{ vm.model.archivos[vm.model.archivos.length - 1].url || $settings.noImage }}">
-                </so-single-image-picker>               
-            </div>            
-        </div>  
+                <label>Título</label>
+                <input type="text" class="form-control" ng-model="vm.model.titulo"/>
+            </div> 
+        </div>   
 
-        <div class="col-sm-9">
-            <div class="row-fluid">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Descripción corta</label>
+                <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
+            </div> 
+        </div>
 
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" class="form-control" ng-model="vm.model.titulo"/>
-                </div> 
 
-                <div class="form-group">
-                    <label>Descripción corta</label>
-                    <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
-                </div>             
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
+                        ng-model="vm.model.estadoPublicacionDto">
+                </select>                
+            </div>
+        </div>                      
 
-                <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tipo publicación</label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
+                        ng-model="vm.model.tipoPublicacionDto">
+                </select>                
+            </div>
+        </div> 
 
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
-                                    ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
-                                    ng-model="vm.model.estadoPublicacionDto">
-                            </select>                
-                        </div>
-                    </div>                      
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tiempo muestra</label>
+                <input type="number" class="form-control" ng-model="vm.model.tiempoMuestra" />
+            </div>
+        </div>                     
 
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Tipo publicación</label>
-                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
-                                    ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
-                                    ng-model="vm.model.tipoPublicacionDto">
-                            </select>                
-                        </div>
-                    </div> 
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Tiempo muestra</label>
-                            <input type="number" class="form-control" ng-model="vm.model.tiempoMuestra" />
-                        </div>
-                    </div>                     
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha creación</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaCreacion"/>
-                        </div>            
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha desde</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaDesde" />
-                        </div>                    
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha hasta</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaHasta" />
-                        </div>                    
-                    </div>                  
-                </div>
-
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha creación</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaCreacion"/>
             </div>            
         </div>
-    </div>  
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha desde</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaDesde" />
+            </div>                    
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha hasta</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaHasta" />
+            </div>                    
+        </div>                  
+
+    <div class="col-sm-12">
+        <label>Imágenes</label>
+
+        <div 
+            ngf-select="vm.fn.uploadFiles($files)" 
+            ngf-drop="vm.fn.uploadFiles($files)" 
+            ng-model="files" 
+            ngf-model-invalid="invalidFiles" 
+            ngf-model-options="modelOptionsObj" 
+            ngf-multiple="true" 
+            ngf-pattern="pattern" 
+            ngf-accept="image/*" 
+            ngf-capture="capture" 
+            ngf-drag-over-class="dragOverClassObj" 
+            ngf-validate="validateObj" 
+            ngf-resize="resizeObj"
+            ngf-resize-if="resizeIfFn($file, $width, $height)" 
+            ngf-dimensions="dimensionsFn($file, $width, $height)" 
+            ngf-duration="durationFn($file, $duration)" 
+            ngf-keep="keepDistinct ? 'distinct' : keep" 
+            ngf-fix-orientation="orientation" 
+            ngf-max-files="maxFiles" 
+            ngf-ignore-invalid="ignoreInvalid" 
+            ngf-run-all-validations="runAllValidations" 
+            ngf-allow-dir="allowDir"             
+            class="drop-box mb10 mt10" 
+            ngf-drop-available="dropAvailable">Seleccione Imágen
+            <span ng-show="dropAvailable"> o Arrastre la imágen</span>
+        </div>        
+
+        <div class="h300">
+            <div class="row-fluid">
+                <div class="col-xs-6 col-sm-3 mb10" ng-repeat="item in vm.model.archivos">
+                    <div class="thumbnail image-thumb">
+                        <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
+                        <img ng-if="item.file" ngf-src="item.file" />
+
+                        <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>        
+
+</div>  
+
 </mcui-box>

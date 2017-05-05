@@ -204,6 +204,32 @@
 
                 return $q(promise);
             },
+            removeImage: function (id) {
+
+                function promise(resolve, reject) {
+
+                    resolve("Imagen eliminada...");
+                    return;
+
+                    var url = API_PUBLICACION + 'removeimage';
+
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: {id: id}
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject("Ha ocurrido un error mientras se eliminaba la imagen. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            },            
             getTipoPublicacion: function () {
 
                 function promise(resolve, reject) {

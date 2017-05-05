@@ -2,24 +2,33 @@
 <div class="row-fluid">
 
     <div class="col-sm-3 no-padding">
-        <mcui-box data-box-title="Datos del Cliente" data-box-body-class="" data-footer-slot="false">
-            <div class="box box-widget widget-user-2">
-                <div class="widget-user-header bg-red">
-                    <div class="widget-user-image">
-                        <img width="160" height="160" class="img-circle" ng-src="{{ vm.sucursal.archivos[0].url || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
-                    </div>
-                    <h3 class="widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
-                    <h5 class="widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
-                </div>
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-                        <li><a href="#">Fecha alta <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaAlta">...</span></a></li>
-                        <li><a href="#">Fecha inicio <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaInicio">...</span></a></li>
-                    </ul>
-                </div>
-            </div>  
 
-        </mcui-box>   
+        <fieldset disabled="disabled">
+            <mcui-box data-box-title="Imagen Sucursal" data-footer-slot="false" data-box-body-class="">
+                <div class="form-group">
+                    <so-single-image-picker 
+                        file="vm.file" 
+                        data-source="{{ vm.sucursal.archivos[vm.sucursal.archivos.length - 1].url || $settings.noImage}}">
+                    </so-single-image-picker> 
+                </div>
+            </mcui-box>          
+
+            <mcui-box data-box-title="Datos del Cliente" data-box-body-class="" data-footer-slot="false">
+                <div class="box box-widget widget-user-2">
+                    <div class="widget-user-header bg-red">
+                        <h3 class="no-margin-left widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
+                        <h5 class="no-margin-left widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
+                    </div>
+                    <div class="box-footer no-padding">
+                        <ul class="nav nav-stacked">
+                            <li><a href="#">Fecha alta <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaAlta">...</span></a></li>
+                            <li><a href="#">Fecha inicio <span class="pull-right" ng-bind="vm.sucursal.clienteDto.fechaInicio">...</span></a></li>
+                        </ul>
+                    </div>
+                </div>  
+
+            </mcui-box> 
+        </fieldset>
     </div>
 
     <div class="col-sm-9">
@@ -75,25 +84,6 @@
                             </marker>          
                         </ng-map>
                     </div>
-
-                    <div class="col-sm-12">
-
-                        <label>Imágenes</label>
-
-                        <div class="h300 mb10 mt10">
-                            <div class="row-fluid">
-                                <div class="col-xs-6 col-sm-3 mb10" ng-repeat="item in vm.sucursal.archivos">
-                                    <div class="thumbnail image-thumb">
-                                        <img ng-if="!item.file" ng-src="{{ item.url || $settings.noImage }}" alt="img" class="img-responsive" />
-                                        <img ng-if="item.file" ngf-src="item.file" />
-
-                                        <button type="button" data-ng-click="vm.fn.removeImage(item.id)" class="btn btn-delete-image"><i class="glyphicon glyphicon-remove"></i></button>
-                                    </div>
-                                </div>
-                            </div>            
-                        </div>
-                    </div>
-
                 </div>          
 
             </fieldset>

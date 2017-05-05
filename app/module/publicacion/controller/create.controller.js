@@ -55,18 +55,7 @@
             var objectDto = angular.copy(vm.model);
 
             PublicacionSvc.create(objectDto).then(function (data) {
-
-                if (angular.isDefined(vm.publicacion) && vm.publicacion.imagen) {
-
-                    PublicacionSvc.uploadImage(vm.publicacion.imagen, data.id).then(function (archivo) {
-                        $state.go('cliente.edit', {id: vm.model.clienteDto.id});
-                    }, function (err) {
-                        console.log(err);
-                    });
-                } else {
-                    $state.go('cliente.edit', {id: vm.model.clienteDto.id});
-                }
-
+                $state.go('publicacion.edit', {id: data.id});
             }, function (err) {
                 console.log(err);
             });

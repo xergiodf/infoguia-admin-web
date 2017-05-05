@@ -14,27 +14,7 @@
 
         vm.fn = {
             saveModel: saveModel,
-            addMarker: addMarker,
-            removeImage: function (id) {
-                SucursalSvc.removeImage().then(function (data) {
-                    alert(data);
-                }, function (err) {
-                    console.log(err);
-                })
-            },
-            uploadFiles: function ($files) {
-                if ($files && $files.length) {
-
-                    var log = [];
-                    angular.forEach($files, function (value, key) {
-                        SucursalSvc.uploadImage(value, vm.sucursal.id).then(function (data) {
-                            vm.sucursal.archivos.push(data);
-                        }, function (err) {
-                            console.log(err);
-                        })
-                    }, log);
-                }
-            }
+            addMarker: addMarker
         };
 
         vm.sucursal = {
@@ -67,7 +47,17 @@
             dtoSucursal['archivos'] = null;
 
             SucursalSvc.update(dtoSucursal).then(function (data) {
-                $state.go('cliente.edit', {id: vm.sucursal.clienteDto.id})
+
+                if (vm.file != null) {
+                    SucursalSvc.uploadImage(vm.file, data.id).then(function (file) {
+                    }, function (err) {
+                        console.log("Ha ocurrido un error intentando guardar la imagen. ", err);
+                    });
+                } else {
+
+                }
+                $state.go('cliente.edit', {id: vm.sucursal.clienteDto.id});
+
             }, function (err) {
                 alert(err);
             })
@@ -79,7 +69,6 @@
 
             SucursalSvc.get(modelID).then(function (data) {
                 vm.sucursal = data;
-                vm.sucursal['archivos'] = data.archivos !== null ? data.archivos : [];
             }, function (err) {
                 alert(err);
             })

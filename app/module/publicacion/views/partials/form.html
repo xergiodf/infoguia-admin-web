@@ -4,81 +4,66 @@
         <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
     </mcui-box-footer-slot>       
 
+
+
+    <div class="form-group">
+        <label>Título</label>
+        <input type="text" class="form-control" ng-model="vm.model.titulo"/>
+    </div> 
+
+    <div class="form-group">
+        <label>Descripción corta</label>
+        <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
+    </div>             
+
     <div class="row">
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label>Imagen</label>
-                <so-single-image-picker 
-                    file="vm.publicacion.imagen" 
-                    data-source="{{ $settings.noImage }}">
-                </so-single-image-picker> 
-            </div>            
-        </div>  
+                <label>Estado</label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
+                        ng-model="vm.model.estadoPublicacionDto">
+                </select>                
+            </div>
+        </div>                      
 
-        <div class="col-sm-9">
-            <div class="row-fluid">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tipo publicación</label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                        ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
+                        ng-model="vm.model.tipoPublicacionDto">
+                </select>                
+            </div>
+        </div> 
 
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" class="form-control" ng-model="vm.model.titulo"/>
-                </div> 
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Tiempo muestra</label>
+                <input type="number" class="form-control" ng-model="vm.model.tiempoMuestra" />
+            </div>
+        </div>                     
 
-                <div class="form-group">
-                    <label>Descripción corta</label>
-                    <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
-                </div>             
-
-                <div class="row">
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
-                                    ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
-                                    ng-model="vm.model.estadoPublicacionDto">
-                            </select>                
-                        </div>
-                    </div>                      
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Tipo publicación</label>
-                            <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
-                                    ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
-                                    ng-model="vm.model.tipoPublicacionDto">
-                            </select>                
-                        </div>
-                    </div> 
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Tiempo muestra</label>
-                            <input type="number" class="form-control" ng-model="vm.model.tiempoMuestra" />
-                        </div>
-                    </div>                     
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha creación</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaCreacion"/>
-                        </div>            
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha desde</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaDesde" />
-                        </div>                    
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Fecha hasta</label>
-                            <input type="date" class="form-control" ng-model="vm.model.fechaHasta" />
-                        </div>                    
-                    </div>                  
-                </div>
-
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha creación</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaCreacion"/>
             </div>            
         </div>
-    </div>  
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha desde</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaDesde" />
+            </div>                    
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha hasta</label>
+                <input type="date" class="form-control" ng-model="vm.model.fechaHasta" />
+            </div>                    
+        </div>                  
+    </div>
+
+
 </mcui-box>

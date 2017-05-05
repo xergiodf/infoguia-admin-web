@@ -35,7 +35,17 @@
             }
 
             SucursalSvc.create(vm.sucursal).then(function (data) {
-                $state.go('sucursal.edit', {id: data.id});
+
+                if (vm.file != null) {
+                    SucursalSvc.uploadImage(vm.file, data.id).then(function (file) {
+                        $state.go('sucursal.edit', {id: data.id});
+                    }, function (err) {
+                        console.log(err);
+                    });
+                } else {
+                    $state.go('sucursal.edit', {id: data.id});
+                }
+
             }, function (err) {
                 alert(err);
             });
@@ -58,8 +68,8 @@
                 direccionFisica: '',
                 coordenadas: '',
                 clienteDto: {},
-                telefonos:'',
-                emails:''
+                telefonos: '',
+                emails: ''
             };
 
             AppGeoPositionSvc.getCurrentPosition().then(function (response) {

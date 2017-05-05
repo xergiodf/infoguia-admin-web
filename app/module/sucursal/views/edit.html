@@ -1,14 +1,21 @@
 <div class="row-fluid">
 
     <div class="col-sm-3 no-padding">
+
+        <mcui-box data-box-title="Imagen Sucursal" data-footer-slot="false" data-box-body-class="">
+            <div class="form-group">
+                <so-single-image-picker 
+                    file="vm.file" 
+                    data-source="{{ vm.sucursal.archivos[vm.sucursal.archivos.length - 1].url || $settings.noImage }}">
+                </so-single-image-picker> 
+            </div>
+        </mcui-box> 
+
         <mcui-box data-box-title="Datos del Cliente" data-box-body-class="">
             <div class="box box-widget widget-user-2">
                 <div class="widget-user-header bg-red">
-                    <div class="widget-user-image">
-                        <img width="160" height="160" class="img-circle" ng-src="{{ vm.sucursal.archivos[0].url || $settings.noImage }}" alt="{{ item.titulo}}" class="img-responsive" />
-                    </div>
-                    <h3 class="widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
-                    <h5 class="widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
+                    <h3 class="no-margin-left widget-user-username" ng-bind="vm.sucursal.clienteDto.nombreCompleto">...</h3>
+                    <h5 class="no-margin-left widget-user-desc" ng-bind="vm.sucursal.clienteDto.nombreCorto">...</h5>
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
