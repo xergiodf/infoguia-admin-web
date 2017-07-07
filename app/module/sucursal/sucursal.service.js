@@ -5,6 +5,7 @@
     angular.module('sucursal.module')
             .service('SucursalSvc', SucursalSvc);
 
+    /*@ngInject*/        
     function SucursalSvc($http, $q, API_INFOGUIA, Upload) {
 
         var API_SUCURSAL = API_INFOGUIA + '/sucursales/';
@@ -234,7 +235,7 @@
                 }
 
                 return $q(promise);
-            }
+            }          
         };
 
         return service;

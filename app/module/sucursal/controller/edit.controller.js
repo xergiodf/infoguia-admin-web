@@ -6,7 +6,7 @@
             .controller('SucursalEditController', SucursalEditController);
 
     /*@ngInject*/
-    function SucursalEditController($scope, $state, $stateParams, SucursalSvc) {
+    function SucursalEditController($scope, $state, $stateParams, SucursalSvc, AppNomenclatorSvc) {
 
         var vm = this;
 
@@ -14,7 +14,8 @@
 
         vm.fn = {
             saveModel: saveModel,
-            addMarker: addMarker
+            addMarker: addMarker,
+            selectDepa: selectDepa
         };
 
         vm.sucursal = {
@@ -27,7 +28,13 @@
             archivos: []
         };
 
-        vm.data = {};
+        vm.data = {
+            departamento: [],
+            ciudad: [],
+            ciudad_copy: []
+        };
+
+        vm.departamentoDto = {};
 
         vm.init();
 
@@ -71,12 +78,30 @@
                 vm.sucursal = data;
             }, function (err) {
                 alert(err);
-            })
+            });
+
+            AppNomenclatorSvc.getNomenclador('DEPARTAMENTO', true).then(function (data) {
+                vm.data.departamento = data;
+            }, function (err) {
+                console.log('departamento:', err);
+            });
+
+            AppNomenclatorSvc.getNomenclador('CIUDAD', true).then(function (data) {
+                console.log(data);
+                vm.data.ciudad = data;
+                vm.data.ciudad_copy = data;
+            }, function (err) {
+                console.log('ciudad:', err);
+            });
         }
 
         function addMarker(event) {
             var ll = event.latLng;
             vm.sucursal.coordenadas = ll.lat() + '|' + ll.lng();
+        }
+
+        function selectDepa(item) {
+            console.log(item);
         }
     }
 

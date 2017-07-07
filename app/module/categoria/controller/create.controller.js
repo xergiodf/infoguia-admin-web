@@ -18,7 +18,7 @@
         
         vm.data = {
             grupoCategorias: []
-        }
+        };
 
         vm.model = {};
 
@@ -37,12 +37,12 @@
         function saveModel(isValid) {
 
             if (!isValid) {
-                alert('Revise los datos dle formulario...');
+                alert('Revise los datos del formulario...');
                 return;
             }
 
             CategoriaSvc.create(vm.model).then(function (data) {
-                $state.go('cliente.list');
+                $state.go('categoria.list');
             }, function (err) {
                 alert(err);
             });

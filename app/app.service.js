@@ -81,6 +81,8 @@
                 //  => TIPO_USUARIO
                 //  => ESTADO_USUARIO
                 //  => GRUPO_CATEGORIA
+                //  => CIUDAD
+                //  => DEPARTAMENTO
 
                 var pid = id || null;
                 var premote = (typeof remote == undefined || remote == null || remote == "") ? false : true;
@@ -116,10 +118,7 @@
                     new NOMENCLADOR({id: 1, descripcion: "Informaciones"}),
                     new NOMENCLADOR({id: 2, descripcion: "Servicios"}),
                     new NOMENCLADOR({id: 3, descripcion: "Negocios"}),
-                    new NOMENCLADOR({id: 4, descripcion: "Turismo"}),
-                    new NOMENCLADOR({id: 5, descripcion: "Ocio"}),
-                    new NOMENCLADOR({id: 6, descripcion: "Novedades"}),
-                    new NOMENCLADOR({id: 7, descripcion: "Promocionales"})
+                    new NOMENCLADOR({id: 8, descripcion: "Turismo & Ocio"})
                 ];
 
                 function promise(resolve, reject) {
@@ -177,6 +176,24 @@
                             else
                                 url = API_INFOGUIA + '/estadosPublicaciones/find/' + pid;
                             break;
+                        case 'GRUPO_CATEGORIA':
+                            if (pid == null)
+                                url = 'data/grupo_categoria.json';
+                            else
+                                url = null;
+                            break;
+                        case 'DEPARTAMENTO':
+                            if (pid == null)
+                                url = API_INFOGUIA + '/departamentos/find/all';
+                            else
+                                url = API_INFOGUIA + '/departamentos/find/' + pid;
+                            break;                             
+                        case 'CIUDAD':
+                            if (pid == null)
+                                url = API_INFOGUIA + '/ciudades/find/all';
+                            else
+                                url = API_INFOGUIA + '/ciudades/find/' + pid;
+                            break;                         
                         default:
                             url = null;
                     }

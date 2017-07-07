@@ -11,70 +11,83 @@
         <!-- TAB CLIENTE-->
         <div class="tab-pane active" id="tab_data">
             <mcui-box data-box-title="Cliente">
+                
+                <mcui-box-footer-slot>
+                    <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary flat">Guardar</button>
+                </mcui-box-footer-slot>                 
 
                 <div class="row">
 
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.codigoCliente" 
-                            data-label="Código" 
-                            data-input="{placeholder:'Código cliente'}">                
-                        </mcui-form-input>
-                    </div>                     
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.nombreCompleto" 
-                            data-label="Nombre completo" 
-                            data-input="{placeholder:'Nombre completo'}">                
-                        </mcui-form-input>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <so-single-image-picker 
+                                file="vm.file" 
+                                data-source="{{ $settings.noImage}}">
+                            </so-single-image-picker> 
+                        </div>                        
                     </div>
 
-                    <div class="col-sm-4">
-                        <div data-mcui-form-input 
-                             ng-model="vm.cliente.nombreCorto" 
-                             data-label="Nombre Corto" 
-                             data-input="{placeholder:'Nombre corto'}">                 
+                    <div class="col-sm-9">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.codigoCliente" 
+                                    data-label="Código" 
+                                    data-input="{placeholder:'Código cliente'}">                
+                                </mcui-form-input>
+                            </div>                     
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.nombreCompleto" 
+                                    data-label="Nombre completo" 
+                                    data-input="{placeholder:'Nombre completo'}">                
+                                </mcui-form-input>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div data-mcui-form-input 
+                                     ng-model="vm.cliente.nombreCorto" 
+                                     data-label="Nombre Corto" 
+                                     data-input="{placeholder:'Nombre corto'}">                 
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.descripcionCompleta" 
+                                    data-label="Descripción completa" 
+                                    data-input="{placeholder:'Descripción completa'}">
+                                </mcui-form-input>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.descripcionCorta" 
+                                    data-label="Descripción corta" 
+                                    data-input="{placeholder:'Descripción corta'}">
+                                </mcui-form-input>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.fechaAlta" 
+                                    data-label="Fecha alta" 
+                                    data-input="{placeholder:'Facha alta'}">            
+                                </mcui-form-input>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <mcui-form-input 
+                                    ng-model="vm.cliente.fechaInicio" 
+                                    data-label="Fecha inicio" 
+                                    data-input="{placeholder:'Facha inicio'}">            
+                                </mcui-form-input>
+                            </div> 
                         </div>
                     </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.descripcionCompleta" 
-                            data-label="Descripción completa" 
-                            data-input="{placeholder:'Descripción completa'}">
-                        </mcui-form-input>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.descripcionCorta" 
-                            data-label="Descripción corta" 
-                            data-input="{placeholder:'Descripción corta'}">
-                        </mcui-form-input>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.fechaAlta" 
-                            data-label="Fecha alta" 
-                            data-input="{placeholder:'Facha alta'}">            
-                        </mcui-form-input>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <mcui-form-input 
-                            ng-model="vm.cliente.fechaInicio" 
-                            data-label="Fecha inicio" 
-                            data-input="{placeholder:'Facha inicio'}">            
-                        </mcui-form-input>
-                    </div>    
-                </div> 
-
-                <mcui-box-footer-slot>
-                    <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary">Guardar</button>
-                </mcui-box-footer-slot>    
+                </div>    
             </mcui-box>
         </div>
         <!-- /TAB-CLIENTE -->
@@ -104,7 +117,7 @@
                                 <th>Dirección física</th>
                                 <th>Teléfonos</th>
                                 <th>Emails</th>
-                                <th style="width:140px; text-align: center">Operaciones</th>
+                                <th class="th-operation">Operaciones</th>
                             </tr>
                         </thead>
                         <tbody>

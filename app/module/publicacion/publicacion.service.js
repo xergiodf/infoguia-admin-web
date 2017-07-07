@@ -57,9 +57,9 @@
                     $http({
                         method: "GET",
                         url: url, //'data/cliente_publicaciones.json',
-                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                        /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
                             return doTransform(value);
-                        })
+                        })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {

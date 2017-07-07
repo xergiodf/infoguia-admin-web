@@ -31,7 +31,7 @@
 
         function Init() {
             PublicacionSvc.query().then(function (data) {
-                vm.list = data;               
+                vm.list = data;   
             }, function (err) {
                 alert(err);
             })
@@ -42,7 +42,7 @@
         }
         
         function goToView(id){
-            
+            alert('not implemented yet');
         }  
         
         function goToDelete(id){

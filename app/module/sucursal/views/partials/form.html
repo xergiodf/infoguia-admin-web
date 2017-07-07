@@ -8,15 +8,19 @@
     </div>
 
     <div class="col-sm-8">
-        <label>Dirección física</label>
-        <input class="form-control" type="text" placeholder="Dirección física" ng-required="true" ng-model="vm.sucursal.direccionFisica"  />
+        <div class="form-group">
+            <label>Dirección física</label>
+            <input class="form-control" type="text" placeholder="Dirección física" ng-required="true" ng-model="vm.sucursal.direccionFisica" />
+        </div>
     </div> 
 
     <div class="clearfix"></div>
 
     <div class="col-sm-4">
-        <label>Teléfonos</label>
-        <input class="form-control" type="text" placeholder="Teléfonos" ng-model="vm.sucursal.telefonos"  />
+        <div class="form-group">
+            <label>Teléfonos</label>
+            <input class="form-control" type="text" placeholder="Teléfonos" ng-model="vm.sucursal.telefonos"  />
+        </div>
     </div>
 
     <div class="col-sm-8">
@@ -28,22 +32,51 @@
     </div>  
 
     <div class="clearfix"></div>
-    
+
     <div class="col-sm-4">
-        <label>Sitio Web</label>
-        <input class="form-control" type="text" placeholder="http://" ng-model="vm.sucursal.sitioWeb"  />
+        <div class="form-group">
+            <label>Sitio Web</label>
+            <input class="form-control" type="text" placeholder="http://" ng-model="vm.sucursal.sitioWeb"  />
+        </div>
+
     </div>
 
     <div class="col-sm-8">
-        <label>Horario de Atencion</label>
-        <input class="form-control" type="text" placeholder="Horario de Atencion" ng-model="vm.sucursal.horarioAtencion"  />
+        <div class="form-group">
+            <label>Horario de Atencion</label>
+            <input class="form-control" type="text" placeholder="Horario de Atencion" ng-model="vm.sucursal.horarioAtencion"  />
+        </div>
     </div>  
+
+    <!--<div class="col-sm-4">
+        <div class="form-group">
+            <label>Departamento</label>
+            <select name="departamento" id="departamento" class="form-control"
+                    ng-change="vm.fn.selectDepa(vm.departamentoDto)"
+                    ng-options="option.descripcion for option in vm.data.departamento track by option.id"
+                    ng-model="vm.departamentoDto">
+            </select> 
+        </div>
+    </div>    
+    
+    <div class="col-sm-8">
+        <div class="form-group">
+            <label>Ciudad</label>
+            <select name="ciudad" id="ciudad" class="form-control"
+                    ng-options="option.descripcion for option in vm.data.ciudad track by option.id"
+                    ng-model="vm.sucursal.ciudadDto">
+            </select> 
+        </div>
+    </div>-->
 
     <div class="clearfix"></div>
 
     <div class="col-sm-12">
-        <label>Coordenadas</label>
-        <input class="form-control" type="text" placeholder="Coordenadas" ng-model="vm.sucursal.coordenadas"  />        
+        <div class="form-group">
+            <label>Coordenadas</label>
+            <input class="form-control" type="text" placeholder="Coordenadas" ng-model="vm.sucursal.coordenadas"  /> 
+        </div>
+
     </div>    
 
     <!-- -25.2968361, -57.66813 -->

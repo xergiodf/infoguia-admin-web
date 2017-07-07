@@ -1,6 +1,4 @@
 <mcui-box data-box-title="Búsqueda personalizada" ng-show="false">
-
-
     <mcui-box-footer-slot>
         <mcui-btn-search></mcui-btn-search>
     </mcui-box-footer-slot>          
@@ -14,24 +12,28 @@
         </div>        
     </mcui-box-tool-slot>  
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre categoría</th>
-                <th style="width:140px; text-align: center">Operaciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in vm.list| filter:vm.filter.search">
-                <td>{{ item.id }}</td>
-                <td>{{ item.descripcion }}</td>
-                <td>
-                    <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
-                    <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="h500">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre categoría</th>
+                    <th>Grupo</th>
+                    <th style="width:140px; text-align: center">Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.list| filter:vm.filter.search">
+                    <td>{{ item.id}}</td>
+                    <td>{{ item.descripcion}}</td>
+                    <td>{{ item.grupoCategoriaDto.descripcion }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i> </button>
+                        <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </mcui-box>

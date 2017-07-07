@@ -5,24 +5,10 @@
     angular.module('categoria.module')
             .service('CategoriaSvc', CategoriaSvc);
 
+    /*@ngInject*/        
     function CategoriaSvc($http, $q, API_INFOGUIA) {
 
         var API_MODEL_URL = API_INFOGUIA + '/categorias/';
-
-        function appendTransform(defaults, transform) {
-            defaults = angular.isArray(defaults) ? defaults : [defaults];
-            return defaults.concat(transform);
-        }
-
-        function doTransform(value) {
-            if (value) {
-                return value.map(function (item) {
-                    return new CATEGORIA(item);
-                });
-            } else {
-                return value;
-            }
-        }
 
         var service = {
             create: function (model) {
@@ -55,10 +41,7 @@
 
                     $http({
                         method: "GET",
-                        url: url,
-                        transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })
+                        url: url
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -86,7 +69,7 @@
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
-                        resolve(new CATEGORIA(response.data));
+                        resolve(response.data);
                     }
 
                     function errorResponse(response) {

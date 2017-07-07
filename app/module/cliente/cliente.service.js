@@ -6,6 +6,7 @@
             .service('ClienteSvc', ClienteSvc)
             .service('ClienteCategoriaSvc', ClienteCategoriaSvc);
 
+    /*@ngInject*/        
     function ClienteSvc($http, $q, API_INFOGUIA) {
 
         var API_CLIENTE = API_INFOGUIA + '/clientes/';
@@ -192,6 +193,7 @@
 
     }
 
+    /*@ngInject*/
     function ClienteCategoriaSvc($http, $q, $filter, API_INFOGUIA, CategoriaSvc) {
 
         var API_MODEL = API_INFOGUIA + '/clienteCategorias/';
