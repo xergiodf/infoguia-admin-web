@@ -11,7 +11,7 @@
         <!-- TAB CLIENTE-->
         <div class="tab-pane active" id="tab_data">
             <mcui-box data-box-title="Cliente">
-                
+
                 <mcui-box-footer-slot>
                     <button type="submit" ng-disabled="modelForm.$invalid" class="btn btn-primary flat">Guardar</button>
                 </mcui-box-footer-slot>                 
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <so-single-image-picker 
                                 file="vm.file" 
-                                data-source="{{ $settings.noImage}}">
+                                data-source="{{ vm.cliente.archivos[vm.cliente.archivos.length - 1].url || $settings.noImage }}">
                             </so-single-image-picker> 
                         </div>                        
                     </div>
@@ -34,7 +34,8 @@
                                 <mcui-form-input 
                                     ng-model="vm.cliente.codigoCliente" 
                                     data-label="Código" 
-                                    data-input="{placeholder:'Código cliente'}">                
+                                    required
+                                    data-placeholder="Código cliente">                
                                 </mcui-form-input>
                             </div>                     
 
@@ -42,7 +43,8 @@
                                 <mcui-form-input 
                                     ng-model="vm.cliente.nombreCompleto" 
                                     data-label="Nombre completo" 
-                                    data-input="{placeholder:'Nombre completo'}">                
+                                    required
+                                    data-placeholder="Nombre completo">                
                                 </mcui-form-input>
                             </div>
 
@@ -50,15 +52,16 @@
                                 <div data-mcui-form-input 
                                      ng-model="vm.cliente.nombreCorto" 
                                      data-label="Nombre Corto" 
-                                     data-input="{placeholder:'Nombre corto'}">                 
+                                     required
+                                     data-placeholder="Nombre corto">                 
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <mcui-form-input 
                                     ng-model="vm.cliente.descripcionCompleta" 
-                                    data-label="Descripción completa" 
-                                    data-input="{placeholder:'Descripción completa'}">
+                                    data-label="Descripción completa"
+                                    data-placeholder="Descripción completa">
                                 </mcui-form-input>
                             </div>
 
@@ -73,7 +76,7 @@
                             <div class="col-sm-4">
                                 <mcui-form-input 
                                     ng-model="vm.cliente.fechaAlta" 
-                                    data-label="Fecha alta" 
+                                    data-label="Fecha alta"
                                     data-input="{placeholder:'Facha alta'}">            
                                 </mcui-form-input>
                             </div>

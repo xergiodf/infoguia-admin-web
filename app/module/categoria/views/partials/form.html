@@ -8,16 +8,17 @@
                 ng-model="vm.model.descripcion"
                 placeholder="Nombre Categoría">                
             </mcui-form-input>
-        </div>
-        <div class="col-sm-6">
+
             <div class="form-group">
                 <label>Grupo *</label>
-                <select name="grupoCategoria" id="grupoCategoria" class="form-control"
+                <select name="grupoCategoria" id="grupoCategoria" class="form-control" ng-required="true"
                         ng-options="option.descripcion for option in vm.data.grupoCategorias track by option.id"
                         ng-model="vm.model.grupoCategoriaDto">
+                    <option ng-selected="true" value="">---</option>
                 </select>                
-            </div>
-        </div>    
+            </div>            
+
+        </div> 
     </div>
 
     <mcui-box-footer-slot>

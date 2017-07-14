@@ -6,8 +6,8 @@
             .service('ClienteSvc', ClienteSvc)
             .service('ClienteCategoriaSvc', ClienteCategoriaSvc);
 
-    /*@ngInject*/        
-    function ClienteSvc($http, $q, API_INFOGUIA) {
+    /*@ngInject*/
+    function ClienteSvc($http, $q, API_INFOGUIA, Upload) {
 
         var API_CLIENTE = API_INFOGUIA + '/clientes/';
 
@@ -69,9 +69,9 @@
                     $http({
                         method: "GET",
                         url: url
-                        /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })*/
+                                /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
+                                 return doTransform(value);
+                                 })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -182,6 +182,36 @@
 
                     function errorResponse(response) {
                         reject("Ha ocurrido un error mientras se eliminaba el cliente. " + response.statusText);
+                    }
+                }
+
+                return $q(promise);
+            },
+            uploadImage: function (file, pid) {
+
+                var id = pid || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_CLIENTE + 'upload/' + id;
+
+                    if (file && id !== null) {
+
+                        Upload.upload({
+                            url: url,
+                            data: {fileData: file, id: id}
+                        }).then(function (resp) {
+                            console.log('Success ' + resp.config.data.fileData.name + 'uploaded. Response: ' + resp.data);
+                            resolve(resp.data.archivosDetDto[0]);
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                            reject('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.fileData.name);
+                        });
+                    } else {
+                        reject("Error intentando subir la image de portada del cliente.");
                     }
                 }
 

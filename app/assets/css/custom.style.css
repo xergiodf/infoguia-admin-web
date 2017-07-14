@@ -203,4 +203,13 @@ and open the template in the editor.
     border: 5px dashed blue;
 }
 
-/*SO-SINGLE IMAGE PICKER*/
+.asterisk-required{
+    font-size: 0.45em;
+    vertical-align: top;
+    padding-top: 2px;
+    padding-left: 3px
+}
+
+.asterisk-required.red{
+    color:red;
+}

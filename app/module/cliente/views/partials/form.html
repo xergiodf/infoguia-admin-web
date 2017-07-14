@@ -1,19 +1,21 @@
 <mcui-box data-box-title="Cliente">
 
     <div class="row">
-        
+
         <div class="col-sm-4">
             <mcui-form-input 
                 ng-model="vm.cliente.codigoCliente" 
                 data-label="Código" 
+                required
                 data-input="{placeholder:'Código cliente'}">                
             </mcui-form-input>
         </div>        
-        
+
         <div class="col-sm-4">
             <mcui-form-input 
                 ng-model="vm.cliente.nombreCompleto" 
                 data-label="Nombre completo" 
+                required
                 data-input="{placeholder:'Nombre completo'}">                
             </mcui-form-input>
         </div>
@@ -22,6 +24,7 @@
             <div data-mcui-form-input 
                  ng-model="vm.cliente.nombreCorto" 
                  data-label="Nombre Corto" 
+                 required
                  data-input="{placeholder:'Nombre corto'}">                 
             </div>
         </div>
@@ -49,7 +52,7 @@
                 data-input="{placeholder:'Facha inicio'}">            
             </mcui-form-input>
         </div> 
-        
+
     </div> 
 
     <mcui-box-footer-slot>

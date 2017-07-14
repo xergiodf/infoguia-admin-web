@@ -3,49 +3,55 @@
         <mcui-form-input 
             ng-model="vm.sucursal.nombreSucursal" 
             data-label="Nombre" 
-            data-input="{'required':'required', placeholder:'Nombre Sucursal'}">                
+            required
+            placeholder="Nombre Sucursal">                
         </mcui-form-input>
     </div>
 
     <div class="col-sm-8">
-        <div class="form-group">
-            <label>Dirección física</label>
-            <input class="form-control" type="text" placeholder="Dirección física" ng-required="true" ng-model="vm.sucursal.direccionFisica" />
-        </div>
+        <mcui-form-input 
+            ng-model="vm.sucursal.direccionFisica" 
+            data-label="Dirección física" 
+            required
+            placeholder="Dirección física">                
+        </mcui-form-input>        
     </div> 
 
     <div class="clearfix"></div>
 
     <div class="col-sm-4">
-        <div class="form-group">
-            <label>Teléfonos</label>
-            <input class="form-control" type="text" placeholder="Teléfonos" ng-model="vm.sucursal.telefonos"  />
-        </div>
+        <mcui-form-input 
+            ng-model="vm.sucursal.telefonos"             
+            data-label="Teléfonos" 
+            placeholder="Teléfonos">                
+        </mcui-form-input> 
     </div>
 
     <div class="col-sm-8">
         <mcui-form-input 
             ng-model="vm.sucursal.emails" 
             data-label="Emails" 
-            data-input="{placeholder:'Emails'}">                
+            data-placeholder="Emails">                
         </mcui-form-input>
     </div>  
 
     <div class="clearfix"></div>
 
     <div class="col-sm-4">
-        <div class="form-group">
-            <label>Sitio Web</label>
-            <input class="form-control" type="text" placeholder="http://" ng-model="vm.sucursal.sitioWeb"  />
-        </div>
-
+        <mcui-form-input 
+            ng-model="vm.sucursal.sitioWeb" 
+            data-label="Sitio Web" 
+            data-placeholder="http://"
+            data-type="url">                
+        </mcui-form-input>        
     </div>
 
     <div class="col-sm-8">
-        <div class="form-group">
-            <label>Horario de Atencion</label>
-            <input class="form-control" type="text" placeholder="Horario de Atencion" ng-model="vm.sucursal.horarioAtencion"  />
-        </div>
+        <mcui-form-input 
+            ng-model="vm.sucursal.horarioAtencion" 
+            data-label="Horario de Atencion" 
+            data-placeholder="Horario de Atencion">                
+        </mcui-form-input>         
     </div>  
 
     <!--<div class="col-sm-4">
@@ -71,12 +77,12 @@
 
     <div class="clearfix"></div>
 
-    <div class="col-sm-12">
-        <div class="form-group">
-            <label>Coordenadas</label>
-            <input class="form-control" type="text" placeholder="Coordenadas" ng-model="vm.sucursal.coordenadas"  /> 
-        </div>
-
+    <div class="col-sm-12">        
+        <mcui-form-input 
+            ng-model="vm.sucursal.coordenadas" 
+            data-label="Coordenadas" 
+            data-placeholder="Coordenadas">                
+        </mcui-form-input>
     </div>    
 
     <!-- -25.2968361, -57.66813 -->

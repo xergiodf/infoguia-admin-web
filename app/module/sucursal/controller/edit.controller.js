@@ -57,6 +57,7 @@
 
                 if (vm.file != null) {
                     SucursalSvc.uploadImage(vm.file, data.id).then(function (file) {
+                       
                     }, function (err) {
                         console.log("Ha ocurrido un error intentando guardar la imagen. ", err);
                     });
