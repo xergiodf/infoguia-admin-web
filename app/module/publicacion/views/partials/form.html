@@ -5,23 +5,42 @@
     </mcui-box-footer-slot>       
 
 
+    <div class="row">
+        <div class="col-sm-4">
+            <mcui-form-input
+                ng-model="vm.model.titulo"
+                data-placeholder="Título"
+                data-label="Título"
+                required>                
+            </mcui-form-input>
+        </div>
 
-    <div class="form-group">
-        <label>Título</label>
-        <input type="text" class="form-control" ng-model="vm.model.titulo"/>
-    </div> 
+        <div class="col-sm-4">
+            <mcui-form-input
+                ng-model="vm.model.descripcionCorta"
+                data-placeholder="Descripción corta"
+                data-label="Descripción corta"
+                required>                
+            </mcui-form-input>
+        </div>
 
-    <div class="form-group">
-        <label>Descripción corta</label>
-        <input type="text" class="form-control" ng-model="vm.model.descripcionCorta"/>
-    </div>             
+        <div class="col-sm-4">
+            <label>Cliente <req></req></label>
+            <select name="cliente" id="cliente" class="form-control" ng-required="true"
+                    ng-options="option.nombreCompleto for option in vm.data.cliente track by option.id"
+                    ng-model="vm.model.clienteDto">
+            </select> 
+        </div>        
+    </div>
+
+
 
     <div class="row">
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label>Estado</label>
-                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                <label>Estado <req></req></label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control" ng-required="true"
                         ng-options="option.descripcion for option in vm.data.estadoPublicacion track by option.id"
                         ng-model="vm.model.estadoPublicacionDto">
                 </select>                
@@ -30,8 +49,8 @@
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label>Tipo publicación</label>
-                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control"
+                <label>Tipo publicación <req></req></label>
+                <select name="tipoPublicacion" id="tipoPublicacion" class="form-control" ng-required="true"
                         ng-options="option.descripcion for option in vm.data.tipoPublicacion track by option.id"
                         ng-model="vm.model.tipoPublicacionDto">
                 </select>                

@@ -351,6 +351,21 @@
                         }
                     }
                 })
+                .state('publicacion.new', {
+                    parent: 'publicacion',
+                    url: "/create",
+                    data: {
+                        pageTitle: "Nueva Publicación",
+                        pageHeader: "Nueva Publicación",
+                        pageDescription: "Formulario de creación de nueva Publicación."
+                    },
+                    views: {
+                        '': {
+                            templateUrl: PUBLICACION_ROOT.views + "create.html",
+                            controller: "PublicacionCreateController as vm"
+                        }
+                    }
+                })                
                 .state('publicacion.edit', {
                     parent: 'publicacion',
                     url: "/edit/{id}",

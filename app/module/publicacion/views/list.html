@@ -1,34 +1,37 @@
-<mcui-box data-box-title="Búsqueda personalizada de Publicación" ng-show="false">
-    <div class="row">
-        <div class="col-sm-3">
-            <mcui-form-input 
-                ng-model="vm.filter.titulo" 
-                data-label="Título" 
-                data-input="{placeholder:'Título'}">                
-            </mcui-form-input>
-        </div>
-
-        <div class="col-sm-3">
-            <div data-mcui-form-input 
-                 ng-model="vm.filter.descripcion" 
-                 data-label="Descripción" 
-                 data-input="{placeholder:'Descripción'}">                 
+<form name="searchForm" id="searchForm" novalidate ng-submit="vm.fn.customSearch()" ng-if="1 != 1">
+    <mcui-box data-box-title="Búsqueda personalizada de Publicación">
+        <div class="row">
+            <div class="col-sm-3">
+                <mcui-form-input 
+                    ng-model="vm.filter.titulo" 
+                    data-label="Título" 
+                    data-input="{placeholder:'Título'}">                
+                </mcui-form-input>
             </div>
-        </div>
 
-        <div class="col-sm-3">
-            <mcui-form-input 
-                ng-model="vm.filter.fecha_creacion" 
-                data-label="Fecha Creación" 
-                data-input="{placeholder:'Fecha creación'}">            
-            </mcui-form-input>
-        </div> 
-    </div>     
+            <div class="col-sm-3">
+                <div data-mcui-form-input 
+                     ng-model="vm.filter.descripcion" 
+                     data-label="Descripción" 
+                     data-input="{placeholder:'Descripción'}">                 
+                </div>
+            </div>
 
-    <mcui-box-footer-slot>
-        <mcui-btn-search></mcui-btn-search>
-    </mcui-box-footer-slot>          
-</mcui-box>
+            <div class="col-sm-3">
+                <mcui-form-input 
+                    ng-model="vm.filter.fecha_creacion" 
+                    data-label="Fecha Creación" 
+                    data-input="{placeholder:'Fecha creación'}">            
+                </mcui-form-input>
+            </div> 
+        </div>     
+
+        <mcui-box-footer-slot>
+            <mcui-btn-search></mcui-btn-search>
+        </mcui-box-footer-slot>          
+    </mcui-box>
+</form>
+
 
 
 
@@ -48,6 +51,7 @@
                     <th>Título</th>
                     <th>Cliente</th>
                     <th>Estado</th>
+                    <th>Código</th>
                     <th style="width:120px">Fecha Creación</th>
                     <th class="th-operation">Operaciones</th>
                 </tr>
@@ -62,7 +66,8 @@
                     </td>
                     <td>{{ item.titulo}}</td> 
                     <td>{{ item.clienteDto.nombreCompleto || item.clienteDto.nombreCorto }}</td>
-                    <td>{{ item.estadoPublicacionDto.descripcion }}</td>
+                    <td>{{ item.estadoPublicacionDto.descripcion}}</td>
+                    <td>{{ item.tipoPublicacionDto.codigo}}</td>
                     <td>{{ item.fechaCreacion | date:'mediumDate'}}</td>
                     <td class="td-acciones">
                         <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToEdit(item.id)"><i class="fa fa-pencil"></i></button>

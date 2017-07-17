@@ -21,7 +21,8 @@
 
         vm.data = {
             tipoPublicacion: [],
-            estadoPublicacion: []
+            estadoPublicacion: [],
+            cliente: []
         };
 
         vm.init();
@@ -44,6 +45,12 @@
                     }, function (err) {
                         $log.error(err);
                     });
+
+            ClienteSvc.query().then(function (data) {
+                vm.data.cliente = data;
+            }, function (err) {
+                alert(err);
+            })
         }
 
         function saveModel(isValid) {
@@ -71,20 +78,6 @@
                 console.log("Err (" + err + ")");
             });
         }
-    }
-
-    function PUBLICACION(model) {
-        this.id = model.id || null;
-        this.titulo = model.titulo || null;
-        this.dirImagen = model.dirImagen || 'http://dummyimage.com/247x214.png/dddddd/000000';
-        this.botonAccion = model.botonAccion || null;
-        this.descripcionCorta = model.descripcionCorta || null;
-        this.fechaCreacion = model.fechaCreacion || null;
-        this.fechaDesde = model.fechaDesde || null;
-        this.fechaHasta = model.fechaHasta || null;
-        this.clienteDto = model.clienteDto || {};
-        this.tipoPublicacionDto = model.tipoPublicacionDto || {};
-        this.estadoPublicacionDto = model.estadoPublicacionDto || {};
     }
 
 })();

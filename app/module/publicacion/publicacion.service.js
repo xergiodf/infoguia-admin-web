@@ -58,8 +58,8 @@
                         method: "GET",
                         url: url, //'data/cliente_publicaciones.json',
                         /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })*/
+                         return doTransform(value);
+                         })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -114,8 +114,8 @@
                         method: "GET",
                         url: url,
                         /*transformResponse: appendTransform($http.defaults.transformResponse, function (value) {
-                            return doTransform(value);
-                        })*/
+                         return doTransform(value);
+                         })*/
                     }).then(successResponse, errorResponse);
 
                     function successResponse(response) {
@@ -189,7 +189,7 @@
                             data: {fileData: file, id: id}
                         }).then(function (resp) {
                             console.log('Success ' + resp.config.data.fileData.name + 'uploaded. Response: ' + resp.data);
-                             resolve(resp.data.archivosDetDto[0]);
+                            resolve(resp.data.archivosDetDto[0]);
                         }, function (resp) {
                             console.log('Error status: ' + resp.status);
                             reject('Error status: ' + resp.status);
@@ -229,7 +229,7 @@
                 }
 
                 return $q(promise);
-            },            
+            },
             getTipoPublicacion: function () {
 
                 function promise(resolve, reject) {
@@ -239,10 +239,10 @@
 
                     resolve[
                             {id: 1, descripcion: 'Publicacion Cliente'},
-                            {id: 2, descripcion: 'Publicidad'},
-                            {id: 2, descripcion: 'Promoción'}
+                    {id: 2, descripcion: 'Publicidad'},
+                    {id: 2, descripcion: 'Promoción'}
                     ];
-                    
+
                     return;
 
                     $http({
@@ -256,6 +256,35 @@
 
                     function errorResponse(response) {
                         reject(response.statusText + " Err obteniendo tipo de publicación publicación...");
+                    }
+                }
+
+                return $q(promise);
+            },
+            findByCodigo: function (codigo) {
+
+                var key = codigo || null;
+
+                function promise(resolve, reject) {
+
+                    var url = API_PUBLICACION + 'findByCodigo/' + key;
+
+                    if (!key) {
+                        reject("Código de tipo publicación no establecido...");
+                        return;
+                    }
+
+                    $http({
+                        method: "GET",
+                        url: url
+                    }).then(successResponse, errorResponse);
+
+                    function successResponse(response) {
+                        resolve(response.data);
+                    }
+
+                    function errorResponse(response) {
+                        reject(response.statusText + " Err obteniendo publicaciones...");
                     }
                 }
 

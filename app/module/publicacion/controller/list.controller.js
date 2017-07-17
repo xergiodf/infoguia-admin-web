@@ -32,6 +32,7 @@
         function Init() {
             PublicacionSvc.query().then(function (data) {
                 vm.list = data;   
+                console.log(data[0]);
             }, function (err) {
                 alert(err);
             })

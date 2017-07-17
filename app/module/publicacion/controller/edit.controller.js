@@ -6,7 +6,7 @@
             .controller('PublicacionEditController', PublicacionEditController);
 
     /*@ngInject*/
-    function PublicacionEditController($state, $filter, $stateParams, AppFileSvc, PublicacionSvc, AppNomenclatorSvc, $log) {
+    function PublicacionEditController($state, $filter, $stateParams, AppFileSvc, PublicacionSvc, AppNomenclatorSvc, $log, ClienteSvc) {
 
         var vm = this;
 
@@ -16,7 +16,8 @@
 
         vm.data = {
             tipoPublicacion: [],
-            estadoPublicacion: []
+            estadoPublicacion: [],
+            cliente: []
         };
 
         vm.fn = {
@@ -64,6 +65,12 @@
                     }, function (err) {
                         $log.error(err);
                     });
+
+            ClienteSvc.query().then(function (data) {
+                vm.data.cliente = data;
+            }, function (err) {
+                alert(err);
+            })
         }
 
         function saveModel(isValid) {
@@ -76,7 +83,7 @@
 
             PublicacionSvc.update(objectDto).then(function (data) {
 
-                $state.go('cliente.list');
+                $state.go('publicacion.list');
 
             }, function (err) {
                 console.log(err);
