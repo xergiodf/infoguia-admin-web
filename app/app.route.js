@@ -292,7 +292,7 @@
                         }
                     }
                 })
-                .state('sucursal.view', {
+                /*.state('sucursal.view', {
                     parent: 'sucursal',
                     url: "/view/{id}",
                     data: {
@@ -306,7 +306,7 @@
                             controller: "SucursalViewController as vm"
                         }
                     }
-                })
+                })*/
                 //
                 //PUBLICACION ROUTER
                 //                

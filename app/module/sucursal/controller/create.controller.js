@@ -6,15 +6,22 @@
             .controller('SucursalClienteCreateController', SucursalClienteCreateController);
 
     /*@ngInject*/
-    function SucursalClienteCreateController($scope, $state, $stateParams, SucursalSvc, ClienteSvc, AppGeoPositionSvc) {
+    function SucursalClienteCreateController($scope, $state, $stateParams, SucursalSvc, ClienteSvc, AppGeoPositionSvc, AppNomenclatorSvc) {
 
         var vm = this;
 
         vm.init = Init;
 
+        vm.data = {
+            departamento: [],
+            ciudad: [],
+            ciudad_copy: []
+        };
+
         vm.fn = {
             saveModel: saveModel,
-            addMarker: addMarker
+            addMarker: addMarker,
+            selectDepa: selectDepa
         };
 
         vm.sucursal = {};
@@ -60,6 +67,19 @@
             }, function (err) {
                 console.log("Err (" + err + ")");
             });
+
+            AppNomenclatorSvc.getNomenclador('DEPARTAMENTO', true).then(function (data) {
+                vm.data.departamento = data;
+            }, function (err) {
+                console.log('departamento:', err);
+            });
+
+            AppNomenclatorSvc.getNomenclador('CIUDAD', true).then(function (data) {
+                vm.data.ciudad = data;
+                vm.data.ciudad_copy = data;
+            }, function (err) {
+                console.log('ciudad:', err);
+            });
         }
 
         function initSucursal() {
@@ -69,7 +89,8 @@
                 coordenadas: '',
                 clienteDto: {},
                 telefonos: '',
-                emails: ''
+                emails: '',
+                ciudadDto: {}
             };
 
             AppGeoPositionSvc.getCurrentPosition().then(function (response) {
@@ -82,6 +103,21 @@
         function addMarker(event) {
             var ll = event.latLng;
             vm.sucursal.coordenadas = ll.lat() + '|' + ll.lng();
+        }
+
+        function selectDepa(item) {
+            vm.sucursal.ciudadDto = null;
+            var depaCiudad = [];
+            if (item && item != null) {
+                if (vm.data.ciudad_copy.length > 0) {
+                    vm.data.ciudad_copy.map(function (it, i) {
+                        if (it['departamentoDto']['id'] == item.id)
+                            depaCiudad.push(it);
+                    })
+                }
+            }
+
+            vm.data.ciudad = depaCiudad;
         }
     }
 

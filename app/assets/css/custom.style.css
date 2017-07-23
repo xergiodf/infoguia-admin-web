@@ -213,3 +213,11 @@ and open the template in the editor.
 .asterisk-required.red{
     color:red;
 }
+
+/*SINGLE IMAGE PICKER*/
+.sip-centered{
+    text-align: center
+}
+.sip-centered img{
+    margin:0 auto;
+}

@@ -57,7 +57,7 @@
 
                 if (vm.file != null) {
                     SucursalSvc.uploadImage(vm.file, data.id).then(function (file) {
-                       
+
                     }, function (err) {
                         console.log("Ha ocurrido un error intentando guardar la imagen. ", err);
                     });
@@ -77,6 +77,8 @@
 
             SucursalSvc.get(modelID).then(function (data) {
                 vm.sucursal = data;
+                if (data && data.ciudadDto != null && data.ciudadDto.departamentoDto != null)
+                    vm.departamentoDto = data.ciudadDto.departamentoDto;
             }, function (err) {
                 alert(err);
             });
@@ -88,7 +90,6 @@
             });
 
             AppNomenclatorSvc.getNomenclador('CIUDAD', true).then(function (data) {
-                console.log(data);
                 vm.data.ciudad = data;
                 vm.data.ciudad_copy = data;
             }, function (err) {
@@ -102,7 +103,18 @@
         }
 
         function selectDepa(item) {
-            console.log(item);
+            vm.sucursal.ciudadDto = null;
+            var depaCiudad = [];
+            if (item && item != null) {
+                if (vm.data.ciudad_copy.length > 0) {
+                    vm.data.ciudad_copy.map(function (it, i) {
+                        if (it['departamentoDto']['id'] == item.id)
+                            depaCiudad.push(it);
+                    })
+                }
+            }
+            
+            vm.data.ciudad = depaCiudad;
         }
     }
 
