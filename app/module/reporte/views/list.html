@@ -1,0 +1,41 @@
+<mcui-box data-box-title="Búsqueda personalizada" ng-show="false">
+    <mcui-box-footer-slot>
+        <mcui-btn-search></mcui-btn-search>
+    </mcui-box-footer-slot>          
+</mcui-box>
+
+<mcui-box data-box-title="Resultados" data-box-body-class="table-responsive no-padding">
+
+    <mcui-box-tool-slot>
+        <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar" ng-model="vm.filter.search">
+        </div>        
+    </mcui-box-tool-slot>  
+
+    <div class="h500">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>COD</th>
+                    <th>Cliente</th>
+                    <th>Sucursal</th>
+                    <th>Fecha</th>
+                    <th style="width:140px; text-align: center">Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.list| filter:vm.filter.search">
+                    <td>{{ item.codigo}}</td>
+                    <td>{{ item.clienteDto.nombre}}</td>
+                    <td>{{ item.sucursalDto.nombre}}</td>
+                    <td>{{ item.fecha}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-ng-click="vm.fn.goToView(item.id)"><i class="fa fa-eye"></i> </button>
+                        <button type="button" class="btn btn-danger" data-ng-click="vm.fn.goToDelete(item.id)"><i class="fa fa-trash"></i> </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</mcui-box>

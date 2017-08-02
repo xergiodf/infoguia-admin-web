@@ -28,7 +28,9 @@ angular
             'sucursal.module',
             'publicacion.module',
             'usuario.module',
-            'categoria.module'
+            'categoria.module',
+            'reporte.module'
+
         ]);
 
 angular.module('app')
@@ -47,7 +49,7 @@ function AppRun($rootScope, $filter, $state, $document, $location, $log, AuthSvc
     $rootScope.$appGmapref = 'https://maps.googleapis.com/maps/api/js';
     $rootScope.$appUser = AuthSvc.appUser();
     $rootScope.$settings = {
-      'noImage': 'app/assets/img/no-thumbnail.jpg'  
+        'noImage': 'app/assets/img/no-thumbnail.jpg'
     };
 
     var _allow = [

@@ -38,10 +38,15 @@
                 base: 'app/module/categoria/',
                 views: 'app/module/categoria/views/',
                 layouts: 'app/module/categoria/views/layouts/'
-            });
+            })
+            .constant('REPORTE_ROOT', {
+                base: 'app/module/reporte/',
+                views: 'app/module/reporte/views/',
+                layouts: 'app/module/reporte/views/layouts/'
+            });            
 
     /*@ngInject*/
-    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT, CATEGORIA_ROOT) {
+    function ConfigRoute($urlRouterProvider, $stateProvider, APP_ROOT, CLIENT_ROOT, AUTH_ROOT, SUCURSAL_ROOT, PUBLICACION_ROOT, USUARIO_ROOT, CATEGORIA_ROOT, REPORTE_ROOT) {
 
         $urlRouterProvider
                 .when("/", "/auth/login")
@@ -558,7 +563,36 @@
                             controller: "CategoriaEditController as vm"
                         }
                     }
-                });
+                })
+                //
+                //REPORTE-USUARIO ROUTER
+                //                
+                .state('reporte', {
+                    abstract: true,
+                    parent: 'site.layout',
+                    url: "/reporte",
+                    data: {pageTitle: "Listado de Reportes"},
+                    views: {
+                        'content@site': {
+                            templateUrl: REPORTE_ROOT.layouts + "main.html"
+                        }
+                    }
+                })
+                .state('reporte.list', {
+                    parent: 'reporte',
+                    url: "/list",
+                    data: {
+                        pageTitle: "Rreportes",
+                        pageHeader: "Reportes",
+                        pageDescription: "Búsqueda personalizada"
+                    },
+                    views: {
+                        '': {
+                            templateUrl: REPORTE_ROOT.views + "list.html",
+                            controller: "ReporteListController as vm"
+                        }
+                    }
+                });                
     }
 
 })();
